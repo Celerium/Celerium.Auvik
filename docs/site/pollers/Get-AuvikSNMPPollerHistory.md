@@ -31,7 +31,7 @@ Get-AuvikSNMPPollerHistory -Tenants <String[]> -FilterFromTime <DateTime> [-Filt
 ```
 
 ## DESCRIPTION
-The Get-AuvikSNMPPolllerHistory cmdlet allows you to view
+The Get-AuvikSNMPPollerHistory cmdlet allows you to view
 historical values of SNMP Poller settings
 
 There are two endpoints available in the SNMP Poller History API
@@ -45,7 +45,7 @@ Read Numeric SNMP Poller Setting History:
 
 ### EXAMPLE 1
 ```powershell
-Get-AuvikSNMPPolllerHistory -FilterFromTime 2023-10-01 -Tenants 123456789
+Get-AuvikSNMPPollerHistory -FilterFromTime 2023-10-01 -Tenants 123456789
 ```
 
 Gets general information about the first 100 historical SNMP
@@ -53,7 +53,7 @@ string poller settings
 
 ### EXAMPLE 2
 ```powershell
-Get-AuvikSNMPPolllerHistory -FilterFromTime 2023-10-01 -Tenants 123456789 -FilterInterval day
+Get-AuvikSNMPPollerHistory -FilterFromTime 2023-10-01 -Tenants 123456789 -FilterInterval day
 ```
 
 Gets general information about the first 100 historical SNMP
@@ -61,7 +61,7 @@ numerical poller settings
 
 ### EXAMPLE 3
 ```powershell
-Get-AuvikSNMPPolllerHistory -FilterFromTime 2023-10-01 -Tenants 123456789 -PageFirst 1000 -AllResults
+Get-AuvikSNMPPollerHistory -FilterFromTime 2023-10-01 -Tenants 123456789 -PageFirst 1000 -AllResults
 ```
 
 Gets general information about all historical SNMP
@@ -281,5 +281,5 @@ N\A
 
 ## RELATED LINKS
 
-[https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPolllerHistory.html](https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPolllerHistory.html)
+[https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPollerHistory.html](https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPollerHistory.html)
 

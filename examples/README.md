@@ -2,7 +2,7 @@
   <br>
   <a href="http://Celerium.org"><img src="https://raw.githubusercontent.com/Celerium/Celerium.Auvik/main/.github/images/Celerium_PoSHGallery_Celerium.Auvik.png" alt="_CeleriumDemo" width="200"></a>
   <br>
-  Celerium_Celerium.Auvik_Examples
+  Celerium.Auvik_Examples
   <br>
 </h1>
 

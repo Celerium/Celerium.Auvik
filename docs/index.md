@@ -1,8 +1,19 @@
+---
+external help file: Celerium.Auvik-help.xml
+Module Name: Celerium.Auvik
+online version: https://github.com/Celerium/Celerium.Auvik
+schema: 2.0.0
+title: Home
+has_children: true
+layout: default
+nav_order: 1
+---
+
 <h1 align="center">
   <br>
   <a href="http://Celerium.org"><img src="https://raw.githubusercontent.com/Celerium/Celerium.Auvik/main/.github/images/Celerium_PoSHGallery_Celerium.Auvik.png" alt="_CeleriumDemo" width="200"></a>
   <br>
-  Celerium_Celerium.Auvik
+  Celerium.Auvik
   <br>
 </h1>
 
@@ -10,7 +21,7 @@
   <br>
   <a href="http://Celerium.org"><img src="https://raw.githubusercontent.com/Celerium/Celerium.Auvik/main/.github/images/Celerium_PoSHGallery_Celerium.Auvik.png" alt="_CeleriumDemo" width="200"></a>
   <br>
-  Celerium_Celerium.Auvik
+  Celerium.Auvik
   <br>
 </h1>
 
@@ -170,11 +181,11 @@ Calling an API resource is as simple as running `Get-Auvik<resourceName>`
 |inventory       |/inventory/network/info                           |-     |Get-AuvikNetwork                     |-     |-                           |
 |inventory       |/inventory/network/info/{id}                      |-     |Get-AuvikNetwork                     |-     |-                           |
 |other           |/authentication/verify                            |-     |Get-AuvikCredential                  |-     |-                           |
-|poolers         |/settings/snmppoller/{snmpPollerSettingId}/devices|-     |Get-AuvikSNMPPollerDevice            |-     |-                           |
-|poolers         |/settings/snmppoller                              |-     |Get-AuvikSNMPPollerSetting           |-     |-                           |
-|poolers         |/settings/snmppoller/{snmpPollerSettingId}        |-     |Get-AuvikSNMPPollerSetting           |-     |-                           |
-|poolers         |/stat/snmppoller/int                              |-     |Get-AuvikSNMPPolllerHistory          |-     |-                           |
-|poolers         |/stat/snmppoller/string                           |-     |Get-AuvikSNMPPolllerHistory          |-     |-                           |
+|pollers         |/settings/snmppoller/{snmpPollerSettingId}/devices|-     |Get-AuvikSNMPPollerDevice            |-     |-                           |
+|pollers         |/settings/snmppoller                              |-     |Get-AuvikSNMPPollerSetting           |-     |-                           |
+|pollers         |/settings/snmppoller/{snmpPollerSettingId}        |-     |Get-AuvikSNMPPollerSetting           |-     |-                           |
+|pollers         |/stat/snmppoller/int                              |-     |Get-AuvikSNMPPollerHistory          |-     |-                           |
+|pollers         |/stat/snmppoller/string                           |-     |Get-AuvikSNMPPollerHistory          |-     |-                           |
 |statistics      |/stat/component/{componentType}/{statId}          |-     |Get-AuvikComponentStatistics         |-     |-                           |
 |statistics      |/stat/deviceAvailability/{statId}                 |-     |Get-AuvikDeviceAvailabilityStatistics|-     |-                           |
 |statistics      |/stat/device/{statId}                             |-     |Get-AuvikDeviceStatistics            |-     |-                           |

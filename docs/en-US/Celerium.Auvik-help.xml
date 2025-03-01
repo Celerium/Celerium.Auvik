@@ -8151,7 +8151,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-AuvikSNMPPolllerHistory cmdlet allows you to view historical values of SNMP Poller settings</maml:para>
+      <maml:para>The Get-AuvikSNMPPollerHistory cmdlet allows you to view historical values of SNMP Poller settings</maml:para>
       <maml:para>There are two endpoints available in the SNMP Poller History API</maml:para>
       <maml:para>Read String SNMP Poller Setting History:     Provides historical values of String SNMP Poller Settings Read Numeric SNMP Poller Setting History:     Provides historical values of Numeric SNMP Poller Settings</maml:para>
     </maml:description>
@@ -8596,21 +8596,21 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-AuvikSNMPPolllerHistory -FilterFromTime 2023-10-01 -Tenants 123456789</dev:code>
+        <dev:code>Get-AuvikSNMPPollerHistory -FilterFromTime 2023-10-01 -Tenants 123456789</dev:code>
         <dev:remarks>
           <maml:para>Gets general information about the first 100 historical SNMP string poller settings</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-AuvikSNMPPolllerHistory -FilterFromTime 2023-10-01 -Tenants 123456789 -FilterInterval day</dev:code>
+        <dev:code>Get-AuvikSNMPPollerHistory -FilterFromTime 2023-10-01 -Tenants 123456789 -FilterInterval day</dev:code>
         <dev:remarks>
           <maml:para>Gets general information about the first 100 historical SNMP numerical poller settings</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Get-AuvikSNMPPolllerHistory -FilterFromTime 2023-10-01 -Tenants 123456789 -PageFirst 1000 -AllResults</dev:code>
+        <dev:code>Get-AuvikSNMPPollerHistory -FilterFromTime 2023-10-01 -Tenants 123456789 -PageFirst 1000 -AllResults</dev:code>
         <dev:remarks>
           <maml:para>Gets general information about all historical SNMP string poller settings</maml:para>
         </dev:remarks>
@@ -8618,12 +8618,8 @@
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/pollers/Get-AuvikSNMPPollerHistory.html</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPolllerHistory.html</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPolllerHistory.html</maml:uri>
+        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPollerHistory.html</maml:linkText>
+        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPollerHistory.html</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
