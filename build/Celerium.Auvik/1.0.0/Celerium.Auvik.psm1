@@ -194,11 +194,6 @@ function Get-AuvikMetaData {
                 ResponsePort            = $Data.BaseResponse.ResponseUri.Port
                 StatusCode              = $Data.StatusCode
                 StatusDescription       = $Data.StatusDescription
-                'Content-Type'          = $Data.headers.'Content-Type'
-                'X-Request-ID'          = $Data.headers.'X-Request-ID'
-                'X-API-Limit-Remaining' = $Data.headers.'X-API-Limit-Remaining'
-                'X-API-Limit-Resets'    = $Data.headers.'X-API-Limit-Resets'
-                'X-API-Limit-Cost'      = $Data.headers.'X-API-Limit-Cost'
                 raw                     = $Data
             }
         }
@@ -207,7 +202,7 @@ function Get-AuvikMetaData {
 
     end {}
 }
-#EndRegion '.\Private\APICalls\Get-AuvikMetaData.ps1' 99
+#EndRegion '.\Private\APICalls\Get-AuvikMetaData.ps1' 94
 #Region '.\Private\APICalls\Invoke-AuvikRequest.ps1' -1
 
 function Invoke-AuvikRequest {
