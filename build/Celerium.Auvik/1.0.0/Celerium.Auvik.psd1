@@ -102,7 +102,7 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags = @('Auvik', 'API', 'SaaS', 'Network Management', 'PowerShell', 'PSEdition_Desktop', 'PSEdition_Core', 'Windows', 'Celerium')
+            Tags = @('Auvik', 'API', 'SaaS', 'PowerShell', 'PSEdition_Desktop', 'PSEdition_Core', 'Windows', 'Celerium')
 
             # A URL to the license for this module.
             LicenseUri = 'https://github.com/Celerium/Celerium.Auvik/blob/main/LICENSE'
