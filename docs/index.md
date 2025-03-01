@@ -17,14 +17,6 @@ nav_order: 1
   <br>
 </h1>
 
-<h1 align="center">
-  <br>
-  <a href="http://Celerium.org"><img src="https://raw.githubusercontent.com/Celerium/Celerium.Auvik/main/.github/images/Celerium_PoSHGallery_Celerium.Auvik.png" alt="_CeleriumDemo" width="200"></a>
-  <br>
-  Celerium.Auvik
-  <br>
-</h1>
-
 [![Az_Pipeline][Az_Pipeline-shield]][Az_Pipeline-url]
 [![GitHub_Pages][GitHub_Pages-shield]][GitHub_Pages-url]
 
