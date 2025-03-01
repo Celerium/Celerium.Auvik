@@ -1,0 +1,254 @@
+---
+external help file: Celerium.Auvik-help.xml
+grand_parent: asm
+Module Name: Celerium.Auvik
+online version: https://celerium.github.io/Celerium.Auvik/site/asm/Get-AuvikASMApplication.html
+parent: GET
+schema: 2.0.0
+title: Get-AuvikASMApplication
+---
+
+# Get-AuvikASMApplication
+
+## SYNOPSIS
+Get Auvik ASM application information
+
+## SYNTAX
+
+```powershell
+Get-AuvikASMApplication [[-FilterClientId] <String>] [[-FilterDateAddedBefore] <DateTime>]
+ [[-FilterDateAddedAfter] <DateTime>] [[-FilterQueryDate] <DateTime>] [[-FilterUserLastUsedAfter] <DateTime>]
+ [[-FilterUserLastUsedBefore] <DateTime>] [[-Include] <String[]>] [[-PageFirst] <Int64>]
+ [[-PageAfter] <String>] [[-PageLast] <Int64>] [[-PageBefore] <String>] [-AllResults] [<CommonParameters>]
+```
+
+## DESCRIPTION
+The Get-AuvikASMApplication cmdlet gets multiple ASM applications' info
+to retrieve the information related to the SaaS applications discovered
+within an ASM client deployment
+
+## EXAMPLES
+
+### EXAMPLE 1
+```powershell
+Get-AuvikASMApplication
+```
+
+Get Auvik ASM application information
+
+### EXAMPLE 2
+```powershell
+Get-AuvikASMApplication -PageFirst 1000 -AllResults
+```
+
+Get Auvik ASM application information for all devices found by Auvik
+
+## PARAMETERS
+
+### -FilterClientId
+Filter by client ID
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -FilterDateAddedBefore
+Return applications added before this date
+
+```yaml
+Type: DateTime
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FilterDateAddedAfter
+Return applications added after this date
+
+```yaml
+Type: DateTime
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FilterQueryDate
+Return associated breaches added after this date
+
+```yaml
+Type: DateTime
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FilterUserLastUsedAfter
+Return associated users added after this date
+
+```yaml
+Type: DateTime
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FilterUserLastUsedBefore
+Return associated users before this date
+
+```yaml
+Type: DateTime
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Include
+Use to include extended details of the application or of its related objects
+
+Allowed values:
+    "all" "breaches" "users" "contracts" "publisher" "accessData"
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PageFirst
+For paginated responses, the first N elements will be returned
+Used in combination with page\[after\]
+
+Default Value: 100
+
+```yaml
+Type: Int64
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PageAfter
+Cursor after which elements will be returned as a page
+The page size is provided by page\[first\]
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PageLast
+For paginated responses, the last N services will be returned
+Used in combination with page\[before\]
+
+Default Value: 100
+
+```yaml
+Type: Int64
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 10
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PageBefore
+Cursor before which elements will be returned as a page
+The page size is provided by page\[last\]
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 11
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AllResults
+Returns all items from an endpoint
+
+Highly recommended to only use with filters to reduce API errors\timeouts
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+## INPUTS
+
+## OUTPUTS
+
+## NOTES
+N\A
+
+## RELATED LINKS
+
+[https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMApplication.html](https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMApplication.html)
+
