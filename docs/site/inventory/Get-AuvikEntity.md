@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: inventory
+grand_parent: Inventory
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/inventory/Get-AuvikEntity.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Inventory/Get-AuvikEntity.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikEntity
@@ -43,10 +43,10 @@ Get-AuvikEntity [-Tenants <String[]>] [-FilterUser <String>] [-FilterCategory <S
 ## DESCRIPTION
 The Get-AuvikEntity cmdlet allows you to view Notes and audit trails associated
 with the entities (devices, networks, and interfaces) that have been discovered
-by Auvik.
+by Auvik
 
 Use the \[ -Audits & -Notes  \] parameters when wanting to target
-specific information.
+specific information
 
 See Get-Help Get-AuvikEntity -Full for more information on associated parameters
 
@@ -81,7 +81,7 @@ Auvik has discovered
 Get-AuvikEntity -PageFirst 1000 -AllResults
 ```
 
-Gets general information for all note entities found by Auvik.
+Gets general information for all note entities found by Auvik
 
 ## PARAMETERS
 

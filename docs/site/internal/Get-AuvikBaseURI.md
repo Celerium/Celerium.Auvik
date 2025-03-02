@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: internal
+grand_parent: Internal
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/internal/Get-AuvikBaseURI.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Internal/Get-AuvikBaseURI.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikBaseURI
@@ -11,7 +11,7 @@ title: Get-AuvikBaseURI
 # Get-AuvikBaseURI
 
 ## SYNOPSIS
-Shows the Auvik base URI global variable.
+Shows the Auvik base URI global variable
 
 ## SYNTAX
 
@@ -20,7 +20,7 @@ Get-AuvikBaseURI [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The Get-AuvikBaseURI cmdlet shows the Auvik base URI global variable value.
+The Get-AuvikBaseURI cmdlet shows the Auvik base URI global variable value
 
 ## EXAMPLES
 
@@ -29,7 +29,7 @@ The Get-AuvikBaseURI cmdlet shows the Auvik base URI global variable value.
 Get-AuvikBaseURI
 ```
 
-Shows the Auvik base URI global variable value.
+Shows the Auvik base URI global variable value
 
 ## PARAMETERS
 

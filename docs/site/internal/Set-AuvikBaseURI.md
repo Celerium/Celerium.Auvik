@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: internal
+grand_parent: Internal
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/internal/Set-AuvikBaseURI.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Internal/Set-AuvikBaseURI.html
 parent: POST
 schema: 2.0.0
 title: Set-AuvikBaseURI
@@ -11,13 +11,13 @@ title: Set-AuvikBaseURI
 # Set-AuvikBaseURI
 
 ## SYNOPSIS
-Sets the base URI for the Auvik API connection.
+Sets the base URI for the Auvik API connection
 
 ## SYNTAX
 
 ## DESCRIPTION
 The Add-AuvikBaseURI cmdlet sets the base URI which is later used
-to construct the full URI for all API calls.
+to construct the full URI for all API calls
 
 ## EXAMPLES
 
@@ -26,21 +26,21 @@ to construct the full URI for all API calls.
 Add-AuvikBaseURI
 ```
 
-The base URI will use https://auvikapi.us1.my.auvik.com/v1 which is Auvik's default URI.
+The base URI will use https://auvikapi.us1.my.auvik.com/v1 which is Auvik's default URI
 
 ### EXAMPLE 2
 ```powershell
 Add-AuvikBaseURI -DataCenter US
 ```
 
-The base URI will use https://auvikapi.us1.my.auvik.com/v1 which is Auvik's US URI.
+The base URI will use https://auvikapi.us1.my.auvik.com/v1 which is Auvik's US URI
 
 ### EXAMPLE 3
 ```powershell
 Add-AuvikBaseURI -BaseUri http://myapi.gateway.celerium.org
 ```
 
-A custom API gateway of http://myapi.gateway.celerium.org will be used for all API calls to Auvik's API.
+A custom API gateway of http://myapi.gateway.celerium.org will be used for all API calls to Auvik's API
 
 ## PARAMETERS
 

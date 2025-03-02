@@ -1,5 +1,5 @@
 ---
 title: PUT
-parent: asm
+parent: SaaSManagement
 has_children: true
 ---

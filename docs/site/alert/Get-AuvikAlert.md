@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: alert
+grand_parent: Alert
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/alert/Get-AuvikAlert.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Alert/Get-AuvikAlert.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikAlert
@@ -11,7 +11,7 @@ title: Get-AuvikAlert
 # Get-AuvikAlert
 
 ## SYNOPSIS
-Get Auvik alert events that have been triggered by your Auvik collector(s).
+Get Auvik alert events that have been triggered by your Auvik collector(s)
 
 ## SYNTAX
 
@@ -30,7 +30,7 @@ Get-AuvikAlert -ID <String> [<CommonParameters>]
 
 ## DESCRIPTION
 The Get-AuvikAlert cmdlet allows you to view the alert events
-that has been triggered by your Auvik collector(s).
+that has been triggered by your Auvik collector(s)
 
 ## EXAMPLES
 
@@ -55,7 +55,7 @@ Auvik has discovered
 Get-AuvikAlert -PageFirst 1000 -AllResults
 ```
 
-Gets general information for all alerts found by Auvik.
+Gets general information for all alerts found by Auvik
 
 ## PARAMETERS
 

@@ -1,9 +1,9 @@
 ---
-title: internal
+title: Internal
 has_children: true
 ---
 
-## internal - endpoint help & documentation
+## Internal - endpoint help & documentation
 
 {: .highlight }
 Some functions will handle more than one endpoint and the numbers below show the total endpoints **not** the total functions

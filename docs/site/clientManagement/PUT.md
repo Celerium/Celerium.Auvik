@@ -1,5 +1,5 @@
 ---
 title: PUT
-parent: clientManagement
+parent: ClientManagement
 has_children: true
 ---

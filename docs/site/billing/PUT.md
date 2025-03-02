@@ -1,5 +1,5 @@
 ---
 title: PUT
-parent: billing
+parent: Billing
 has_children: true
 ---

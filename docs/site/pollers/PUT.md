@@ -1,5 +1,5 @@
 ---
 title: PUT
-parent: pollers
+parent: Pollers
 has_children: true
 ---

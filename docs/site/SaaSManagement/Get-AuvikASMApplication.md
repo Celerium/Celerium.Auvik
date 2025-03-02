@@ -1,28 +1,29 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: asm
+grand_parent: SaaSManagement
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/asm/Get-AuvikASMSecurityLog.html
+online version: https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMApplication.html
 parent: GET
 schema: 2.0.0
-title: Get-AuvikASMSecurityLog
+title: Get-AuvikASMApplication
 ---
 
-# Get-AuvikASMSecurityLog
+# Get-AuvikASMApplication
 
 ## SYNOPSIS
-Get Auvik ASM security log information
+Get Auvik ASM application information
 
 ## SYNTAX
 
 ```powershell
-Get-AuvikASMSecurityLog [[-FilterClientId] <String>] [[-Include] <String[]>] [[-FilterQueryDate] <DateTime>]
- [[-PageFirst] <Int64>] [[-PageAfter] <String>] [[-PageLast] <Int64>] [[-PageBefore] <String>] [-AllResults]
- [<CommonParameters>]
+Get-AuvikASMApplication [[-FilterClientId] <String>] [[-FilterDateAddedBefore] <DateTime>]
+ [[-FilterDateAddedAfter] <DateTime>] [[-FilterQueryDate] <DateTime>] [[-FilterUserLastUsedAfter] <DateTime>]
+ [[-FilterUserLastUsedBefore] <DateTime>] [[-Include] <String[]>] [[-PageFirst] <Int64>]
+ [[-PageAfter] <String>] [[-PageLast] <Int64>] [[-PageBefore] <String>] [-AllResults] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The Get-AuvikASMSecurityLog cmdlet gets multiple ASM security logs' info
+The Get-AuvikASMApplication cmdlet gets multiple ASM applications' info
 to retrieve the information related to the SaaS applications discovered
 within an ASM client deployment
 
@@ -30,17 +31,17 @@ within an ASM client deployment
 
 ### EXAMPLE 1
 ```powershell
-Get-AuvikASMSecurityLog
+Get-AuvikASMApplication
 ```
 
-Get Auvik ASM security log information
+Get Auvik ASM application information
 
 ### EXAMPLE 2
 ```powershell
-Get-AuvikASMSecurityLog -PageFirst 1000 -AllResults
+Get-AuvikASMApplication -PageFirst 1000 -AllResults
 ```
 
-Get Auvik ASM security log information for all devices found by Auvik
+Get Auvik ASM application information for all devices found by Auvik
 
 ## PARAMETERS
 
@@ -59,19 +60,31 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Include
-Use to include extended details of the security log or of its related objects.
-
-Allowed values:
-    "users" "applications"
+### -FilterDateAddedBefore
+Return applications added before this date
 
 ```yaml
-Type: String[]
+Type: DateTime
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FilterDateAddedAfter
+Return applications added after this date
+
+```yaml
+Type: DateTime
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -86,7 +99,55 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FilterUserLastUsedAfter
+Return associated users added after this date
+
+```yaml
+Type: DateTime
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FilterUserLastUsedBefore
+Return associated users before this date
+
+```yaml
+Type: DateTime
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Include
+Use to include extended details of the application or of its related objects
+
+Allowed values:
+    "all" "breaches" "users" "contracts" "publisher" "accessData"
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -104,7 +165,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: 8
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -120,7 +181,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: 9
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -138,7 +199,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
+Position: 10
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -154,7 +215,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 7
+Position: 11
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -189,5 +250,5 @@ N\A
 
 ## RELATED LINKS
 
-[https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMSecurityLog.html](https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMSecurityLog.html)
+[https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMApplication.html](https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMApplication.html)
 

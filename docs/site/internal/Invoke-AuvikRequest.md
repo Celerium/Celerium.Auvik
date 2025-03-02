@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: internal
+grand_parent: Internal
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/internal/Invoke-AuvikRequest.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Internal/Invoke-AuvikRequest.html
 parent: GET
 schema: 2.0.0
 title: Invoke-AuvikRequest
@@ -21,7 +21,7 @@ Invoke-AuvikRequest [[-Method] <String>] [-ResourceUri] <String> [[-UriFilter] <
 ```
 
 ## DESCRIPTION
-The Invoke-AuvikRequest cmdlet invokes an API request to Auvik API.
+The Invoke-AuvikRequest cmdlet invokes an API request to Auvik API
 
 This is an internal function that is used by all public functions
 
@@ -81,7 +81,7 @@ Accept wildcard characters: False
 
 ### -UriFilter
 Used with the internal function \[ ConvertTo-AuvikQueryString \] to combine
-a functions parameters with the ResourceUri parameter.
+a functions parameters with the ResourceUri parameter
 
 This allows for the full uri query to occur
 

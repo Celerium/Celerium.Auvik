@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: inventory
+grand_parent: Inventory
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/inventory/Get-AuvikComponent.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Inventory/Get-AuvikComponent.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikComponent
@@ -29,7 +29,7 @@ Get-AuvikComponent -ID <String> [<CommonParameters>]
 
 ## DESCRIPTION
 The Get-AuvikComponent cmdlet allows you to view an inventory of
-components and other related information discovered by Auvik.
+components and other related information discovered by Auvik
 
 ## EXAMPLES
 
@@ -54,7 +54,7 @@ Auvik has discovered
 Get-AuvikComponent -PageFirst 1000 -AllResults
 ```
 
-Gets general information for all components found by Auvik.
+Gets general information for all components found by Auvik
 
 ## PARAMETERS
 

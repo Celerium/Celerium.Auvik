@@ -1,5 +1,5 @@
 ---
 title: POST
-parent: pollers
+parent: Pollers
 has_children: true
 ---

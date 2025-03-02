@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: internal
+grand_parent: Internal
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/internal/Get-AuvikModuleSetting.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Internal/Get-AuvikModuleSetting.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikModuleSetting
@@ -27,7 +27,7 @@ Get-AuvikModuleSetting [-openConfFile] [<CommonParameters>]
 
 ## DESCRIPTION
 The Get-AuvikModuleSetting cmdlet gets the saved Auvik configuration settings
-from the local system.
+from the local system
 
 By default the configuration file is stored in the following location:
     $env:USERPROFILE\Celerium.Auvik
@@ -58,7 +58,7 @@ The location of the Auvik configuration file in this example is:
 ## PARAMETERS
 
 ### -AuvikConfPath
-Define the location to store the Auvik configuration file.
+Define the location to store the Auvik configuration file
 
 By default the configuration file is stored in the following location:
     $env:USERPROFILE\Celerium.Auvik
@@ -76,7 +76,7 @@ Accept wildcard characters: False
 ```
 
 ### -AuvikConfFile
-Define the name of the Auvik configuration file.
+Define the name of the Auvik configuration file
 
 By default the configuration file is named:
     config.psd1

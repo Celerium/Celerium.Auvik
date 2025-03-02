@@ -1,9 +1,9 @@
 ---
-title: statistics
+title: Statistics
 has_children: true
 ---
 
-## statistics - endpoint help & documentation
+## Statistics - endpoint help & documentation
 
 {: .highlight }
 Some functions will handle more than one endpoint and the numbers below show the total endpoints **not** the total functions

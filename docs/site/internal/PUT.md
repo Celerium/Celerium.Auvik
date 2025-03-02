@@ -1,5 +1,5 @@
 ---
 title: PUT
-parent: internal
+parent: Internal
 has_children: true
 ---

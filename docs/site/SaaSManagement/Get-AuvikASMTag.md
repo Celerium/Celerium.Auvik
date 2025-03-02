@@ -1,29 +1,27 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: asm
+grand_parent: SaaSManagement
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/asm/Get-AuvikASMApplication.html
+online version: https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html
 parent: GET
 schema: 2.0.0
-title: Get-AuvikASMApplication
+title: Get-AuvikASMTag
 ---
 
-# Get-AuvikASMApplication
+# Get-AuvikASMTag
 
 ## SYNOPSIS
-Get Auvik ASM application information
+Get Auvik ASM tag information
 
 ## SYNTAX
 
 ```powershell
-Get-AuvikASMApplication [[-FilterClientId] <String>] [[-FilterDateAddedBefore] <DateTime>]
- [[-FilterDateAddedAfter] <DateTime>] [[-FilterQueryDate] <DateTime>] [[-FilterUserLastUsedAfter] <DateTime>]
- [[-FilterUserLastUsedBefore] <DateTime>] [[-Include] <String[]>] [[-PageFirst] <Int64>]
+Get-AuvikASMTag [[-FilterClientId] <String>] [[-FilterApplicationId] <String>] [[-PageFirst] <Int64>]
  [[-PageAfter] <String>] [[-PageLast] <Int64>] [[-PageBefore] <String>] [-AllResults] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The Get-AuvikASMApplication cmdlet gets multiple ASM applications' info
+The Get-AuvikASMTag cmdlet gets multiple ASM applications' info
 to retrieve the information related to the SaaS applications discovered
 within an ASM client deployment
 
@@ -31,17 +29,17 @@ within an ASM client deployment
 
 ### EXAMPLE 1
 ```powershell
-Get-AuvikASMApplication
+Get-AuvikASMTag
 ```
 
-Get Auvik ASM application information
+Get Auvik ASM tag information
 
 ### EXAMPLE 2
 ```powershell
-Get-AuvikASMApplication -PageFirst 1000 -AllResults
+Get-AuvikASMTag -PageFirst 1000 -AllResults
 ```
 
-Get Auvik ASM application information for all devices found by Auvik
+Get Auvik ASM tag information for all devices found by Auvik
 
 ## PARAMETERS
 
@@ -60,96 +58,18 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -FilterDateAddedBefore
-Return applications added before this date
+### -FilterApplicationId
+Filter by application ID
 
 ```yaml
-Type: DateTime
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 2
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FilterDateAddedAfter
-Return applications added after this date
-
-```yaml
-Type: DateTime
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FilterQueryDate
-Return associated breaches added after this date
-
-```yaml
-Type: DateTime
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FilterUserLastUsedAfter
-Return associated users added after this date
-
-```yaml
-Type: DateTime
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FilterUserLastUsedBefore
-Return associated users before this date
-
-```yaml
-Type: DateTime
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Include
-Use to include extended details of the application or of its related objects
-
-Allowed values:
-    "all" "breaches" "users" "contracts" "publisher" "accessData"
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -165,7 +85,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 8
+Position: 3
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -181,7 +101,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 9
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -199,7 +119,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 10
+Position: 5
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -215,7 +135,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 11
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -250,5 +170,5 @@ N\A
 
 ## RELATED LINKS
 
-[https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMApplication.html](https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMApplication.html)
+[https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html](https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html)
 

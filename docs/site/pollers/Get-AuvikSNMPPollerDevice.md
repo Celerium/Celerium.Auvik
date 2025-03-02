@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: pollers
+grand_parent: Pollers
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/pollers/Get-AuvikSNMPPollerDevice.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPollerDevice.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikSNMPPollerDevice
@@ -12,7 +12,7 @@ title: Get-AuvikSNMPPollerDevice
 
 ## SYNOPSIS
 Provides Details about all the devices associated to a
-specific SNMP Poller Setting.
+specific SNMP Poller Setting
 
 ## SYNTAX
 
@@ -26,7 +26,7 @@ Get-AuvikSNMPPollerDevice [-SNMPPollerSettingId] <String> [-Tenants] <String[]>
 
 ## DESCRIPTION
 The Get-AuvikSNMPPollerDevice cmdlet provides Details about all
-the devices associated to a specific SNMP Poller Setting.
+the devices associated to a specific SNMP Poller Setting
 
 ## EXAMPLES
 
@@ -113,7 +113,7 @@ Accept wildcard characters: False
 
 ### -FilterNotSeenSince
 Filter by the last seen online time, returning entities not
-seen online after the provided value.
+seen online after the provided value
 
 ```yaml
 Type: DateTime

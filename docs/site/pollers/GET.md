@@ -1,5 +1,5 @@
 ---
 title: GET
-parent: pollers
+parent: Pollers
 has_children: true
 ---

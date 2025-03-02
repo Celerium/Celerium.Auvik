@@ -1,5 +1,5 @@
 ---
 title: POST
-parent: billing
+parent: Billing
 has_children: true
 ---

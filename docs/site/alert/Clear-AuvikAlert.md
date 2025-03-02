@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: alert
+grand_parent: Alert
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/alert/Clear-AuvikAlert.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Alert/Clear-AuvikAlert.html
 parent: POST
 schema: 2.0.0
 title: Clear-AuvikAlert
@@ -16,12 +16,12 @@ Clear an Auvik alert
 ## SYNTAX
 
 ```powershell
-Clear-AuvikAlert -ID <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+Clear-AuvikAlert [-ID] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 The Clear-AuvikAlert cmdlet allows you to dismiss an
-alert that Auvik has triggered.
+alert that Auvik has triggered
 
 ## EXAMPLES
 
@@ -43,7 +43,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: True (ByValue)
 Accept wildcard characters: False

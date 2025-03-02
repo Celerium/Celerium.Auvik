@@ -1,9 +1,9 @@
 ---
-title: billing
+title: Billing
 has_children: true
 ---
 
-## billing - endpoint help & documentation
+## Billing - endpoint help & documentation
 
 {: .highlight }
 Some functions will handle more than one endpoint and the numbers below show the total endpoints **not** the total functions

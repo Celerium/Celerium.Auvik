@@ -1,49 +1,53 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: asm
+grand_parent: SaaSManagement
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/asm/Get-AuvikASMUser.html
+online version: https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMClient.html
 parent: GET
 schema: 2.0.0
-title: Get-AuvikASMUser
+title: Get-AuvikASMClient
 ---
 
-# Get-AuvikASMUser
+# Get-AuvikASMClient
 
 ## SYNOPSIS
-Get Auvik ASM user information
+Get Auvik ASM meta client information
 
 ## SYNTAX
 
 ```powershell
-Get-AuvikASMUser [[-FilterClientId] <String>] [[-PageFirst] <Int64>] [[-PageAfter] <String>]
- [[-PageLast] <Int64>] [[-PageBefore] <String>] [-AllResults] [<CommonParameters>]
+Get-AuvikASMClient [[-Include] <String>] [[-FilterQueryDate] <DateTime>] [[-PageFirst] <Int64>]
+ [[-PageAfter] <String>] [[-PageLast] <Int64>] [[-PageBefore] <String>] [-AllResults] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The Get-AuvikASMUser cmdlet gets information about any monitored
-users that exist within a specific Auvik SaaS Management tenant
+The Get-AuvikASMClient cmdlet gets multiple ASM meta clients' info
+to retrieve the information related to the SaaS meta clients discovered
+within an ASM client deployment
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```powershell
-Get-AuvikASMUser
+Get-AuvikASMClient
 ```
 
-Get Auvik ASM user information
+Get Auvik ASM meta client information
 
 ### EXAMPLE 2
 ```powershell
-Get-AuvikASMUser -PageFirst 1000 -AllResults
+Get-AuvikASMClient -PageFirst 1000 -AllResults
 ```
 
-Get Auvik ASM user information for all devices found by Auvik
+Get Auvik ASM meta client information for all devices found by Auvik
 
 ## PARAMETERS
 
-### -FilterClientId
-Filter by client ID
+### -Include
+Use to include extended details of the client
+
+Allowed values:
+    "totals"
 
 ```yaml
 Type: String
@@ -53,7 +57,23 @@ Aliases:
 Required: False
 Position: 1
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FilterQueryDate
+Only count breaches added after this date.
+Only useful when include=totals is set
+
+```yaml
+Type: DateTime
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -69,7 +89,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: 3
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -85,7 +105,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -103,7 +123,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: 5
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -119,7 +139,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -154,5 +174,5 @@ N\A
 
 ## RELATED LINKS
 
-[https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMUser.html](https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMUser.html)
+[https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMClient.html](https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMClient.html)
 

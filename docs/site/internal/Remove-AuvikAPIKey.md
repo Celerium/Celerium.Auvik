@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: internal
+grand_parent: Internal
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/internal/Remove-AuvikAPIKey.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Internal/Remove-AuvikAPIKey.html
 parent: DELETE
 schema: 2.0.0
 title: Remove-AuvikAPIKey

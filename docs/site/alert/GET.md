@@ -1,5 +1,5 @@
 ---
 title: GET
-parent: alert
+parent: Alert
 has_children: true
 ---

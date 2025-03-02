@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: billing
+grand_parent: Billing
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/billing/Get-AuvikBilling.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Billing/Get-AuvikBilling.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikBilling
@@ -41,7 +41,7 @@ Get-AuvikBilling -FilterFromDate 2023-09-01 -FilterThruDate 2023-09-30
 ```
 
 Gets a summary of a client's (and client's children if a multi-client)
-usage for the given time range.
+usage for the given time range
 
 ### EXAMPLE 2
 ```powershell
@@ -49,14 +49,14 @@ Get-AuvikBilling -FilterFromDate 2023-09-01 -FilterThruDate 2023-09-30 -Tenants 
 ```
 
 Gets a summary of the defined client's (and client's children if a multi-client)fromDate
-usage for the given time range.
+usage for the given time range
 
 ### EXAMPLE 3
 ```powershell
 Get-AuvikBilling -FilterFromDate 2023-09-01 -FilterThruDate 2023-09-30 -ID 123456789
 ```
 
-Gets a summary of the define device id's usage for the given time range.
+Gets a summary of the define device id's usage for the given time range
 
 ## PARAMETERS
 
@@ -95,7 +95,7 @@ Accept wildcard characters: False
 ```
 
 ### -Tenants
-Comma delimited list of tenant IDs to request info from.
+Comma delimited list of tenant IDs to request info from
 
 Example: Tenants=199762235015168516,199762235015168004
 

@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: inventory
+grand_parent: Inventory
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/inventory/Get-AuvikDeviceWarranty.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Inventory/Get-AuvikDeviceWarranty.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikDeviceWarranty
@@ -29,7 +29,7 @@ Get-AuvikDeviceWarranty -ID <String> [<CommonParameters>]
 
 ## DESCRIPTION
 The Get-AuvikDeviceWarranty cmdlet allows you to view an inventory of
-devices and other related information discovered by Auvik.
+devices and other related information discovered by Auvik
 
 ## EXAMPLES
 
@@ -54,7 +54,7 @@ Auvik has discovered
 Get-AuvikDeviceWarranty -PageFirst 1000 -AllResults
 ```
 
-Gets general warranty information for all devices found by Auvik.
+Gets general warranty information for all devices found by Auvik
 
 ## PARAMETERS
 

@@ -1,5 +1,5 @@
 ---
 title: POST
-parent: alert
+parent: Alert
 has_children: true
 ---

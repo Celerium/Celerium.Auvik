@@ -1,5 +1,5 @@
 ---
 title: DELETE
-parent: billing
+parent: Billing
 has_children: true
 ---

@@ -1,27 +1,28 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: asm
+grand_parent: SaaSManagement
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/asm/Get-AuvikASMTag.html
+online version: https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMSecurityLog.html
 parent: GET
 schema: 2.0.0
-title: Get-AuvikASMTag
+title: Get-AuvikASMSecurityLog
 ---
 
-# Get-AuvikASMTag
+# Get-AuvikASMSecurityLog
 
 ## SYNOPSIS
-Get Auvik ASM tag information
+Get Auvik ASM security log information
 
 ## SYNTAX
 
 ```powershell
-Get-AuvikASMTag [[-FilterClientId] <String>] [[-FilterApplicationId] <String>] [[-PageFirst] <Int64>]
- [[-PageAfter] <String>] [[-PageLast] <Int64>] [[-PageBefore] <String>] [-AllResults] [<CommonParameters>]
+Get-AuvikASMSecurityLog [[-FilterClientId] <String>] [[-Include] <String[]>] [[-FilterQueryDate] <DateTime>]
+ [[-PageFirst] <Int64>] [[-PageAfter] <String>] [[-PageLast] <Int64>] [[-PageBefore] <String>] [-AllResults]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The Get-AuvikASMTag cmdlet gets multiple ASM applications' info
+The Get-AuvikASMSecurityLog cmdlet gets multiple ASM security logs' info
 to retrieve the information related to the SaaS applications discovered
 within an ASM client deployment
 
@@ -29,17 +30,17 @@ within an ASM client deployment
 
 ### EXAMPLE 1
 ```powershell
-Get-AuvikASMTag
+Get-AuvikASMSecurityLog
 ```
 
-Get Auvik ASM tag information
+Get Auvik ASM security log information
 
 ### EXAMPLE 2
 ```powershell
-Get-AuvikASMTag -PageFirst 1000 -AllResults
+Get-AuvikASMSecurityLog -PageFirst 1000 -AllResults
 ```
 
-Get Auvik ASM tag information for all devices found by Auvik
+Get Auvik ASM security log information for all devices found by Auvik
 
 ## PARAMETERS
 
@@ -58,18 +59,36 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -FilterApplicationId
-Filter by application ID
+### -Include
+Use to include extended details of the security log or of its related objects
+
+Allowed values:
+    "users" "applications"
 
 ```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 2
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FilterQueryDate
+Return associated breaches added after this date
+
+```yaml
+Type: DateTime
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -85,7 +104,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 4
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -101,7 +120,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -119,7 +138,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: 6
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -135,7 +154,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -170,5 +189,5 @@ N\A
 
 ## RELATED LINKS
 
-[https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html](https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html)
+[https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMSecurityLog.html](https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMSecurityLog.html)
 

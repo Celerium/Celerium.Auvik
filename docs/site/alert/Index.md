@@ -1,9 +1,9 @@
 ---
-title: alert
+title: Alert
 has_children: true
 ---
 
-## alert - endpoint help & documentation
+## Alert - endpoint help & documentation
 
 {: .highlight }
 Some functions will handle more than one endpoint and the numbers below show the total endpoints **not** the total functions

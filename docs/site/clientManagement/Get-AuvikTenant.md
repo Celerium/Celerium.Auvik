@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: clientManagement
+grand_parent: ClientManagement
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/clientManagement/Get-AuvikTenant.html
+online version: https://celerium.github.io/Celerium.Auvik/site/ClientManagement/Get-AuvikTenant.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikTenant

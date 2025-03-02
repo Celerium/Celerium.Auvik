@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: internal
+grand_parent: Internal
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/internal/Add-AuvikAPIKey.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Internal/Add-AuvikAPIKey.html
 parent: POST
 schema: 2.0.0
 title: Add-AuvikAPIKey
@@ -52,7 +52,7 @@ username & will then prompt to enter in the secret key
 'Celerium@Celerium.org' | Add-AuvikAPIKey
 ```
 
-The Auvik API will use the string entered as the secret key & will prompt to enter in the public key.
+The Auvik API will use the string entered as the secret key & will prompt to enter in the public key
 
 ### EXAMPLE 3
 ```powershell

@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: inventory
+grand_parent: Inventory
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/inventory/Get-AuvikNetwork.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Inventory/Get-AuvikNetwork.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikNetwork
@@ -43,7 +43,7 @@ Get-AuvikNetwork [-Tenants <String[]>] [-FilterNetworkType <String>] [-FilterSca
 
 ## DESCRIPTION
 The Get-AuvikNetwork cmdlet allows you to view an inventory of
-networks and other related information discovered by Auvik.
+networks and other related information discovered by Auvik
 
 Use the \[ -NetworkDetails & -NetworkInfo  \] parameters when wanting to target
 specific information.
@@ -228,7 +228,7 @@ Accept wildcard characters: False
 
 ### -FieldsNetworkDetail
 Use to limit the attributes that will be returned in the Included detail
-object to only what is specified by this query parameter.
+object to only what is specified by this query parameter
 
 Allowed values:
     "scope", "primaryCollector", "secondaryCollectors", "collectorSelection", "excludedIpAddresses"

@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: inventory
+grand_parent: Inventory
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/inventory/Get-AuvikDeviceLifecycle.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Inventory/Get-AuvikDeviceLifecycle.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikDeviceLifecycle
@@ -30,7 +30,7 @@ Get-AuvikDeviceLifecycle -ID <String> [<CommonParameters>]
 
 ## DESCRIPTION
 The Get-AuvikDeviceLifecycle cmdlet allows you to view an inventory of
-devices and other related information discovered by Auvik.
+devices and other related information discovered by Auvik
 
 ## EXAMPLES
 
@@ -55,7 +55,7 @@ Auvik has discovered
 Get-AuvikDeviceLifecycle -PageFirst 1000 -AllResults
 ```
 
-Gets general lifecycle information for all devices found by Auvik.
+Gets general lifecycle information for all devices found by Auvik
 
 ## PARAMETERS
 

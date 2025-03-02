@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: statistics
+grand_parent: Statistics
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/statistics/Get-AuvikDeviceStatistics.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Statistics/Get-AuvikDeviceStatistics.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikDeviceStatistics

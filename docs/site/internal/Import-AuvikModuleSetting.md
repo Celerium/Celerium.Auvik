@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: internal
+grand_parent: Internal
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/internal/Import-AuvikModuleSetting.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Internal/Import-AuvikModuleSetting.html
 parent: GET
 schema: 2.0.0
 title: Import-AuvikModuleSetting
@@ -11,7 +11,7 @@ title: Import-AuvikModuleSetting
 # Import-AuvikModuleSetting
 
 ## SYNOPSIS
-Imports the Auvik BaseURI, API, & JSON configuration information to the current session.
+Imports the Auvik BaseURI, API, & JSON configuration information to the current session
 
 ## SYNTAX
 
@@ -21,7 +21,7 @@ Import-AuvikModuleSetting [-AuvikConfPath <String>] [-AuvikConfFile <String>] [<
 
 ## DESCRIPTION
 The Import-AuvikModuleSetting cmdlet imports the Auvik BaseURI, API, & JSON configuration
-information stored in the Auvik configuration file to the users current session.
+information stored in the Auvik configuration file to the users current session
 
 By default the configuration file is stored in the following location:
     $env:USERPROFILE\Celerium.Auvik
@@ -34,7 +34,7 @@ Import-AuvikModuleSetting
 ```
 
 Validates that the configuration file created with the Export-AuvikModuleSetting cmdlet exists
-then imports the stored data into the current users session.
+then imports the stored data into the current users session
 
 The default location of the Auvik configuration file is:
     $env:USERPROFILE\Celerium.Auvik\config.psd1
@@ -45,7 +45,7 @@ Import-AuvikModuleSetting -AuvikConfPath C:\Celerium.Auvik -AuvikConfFile MyConf
 ```
 
 Validates that the configuration file created with the Export-AuvikModuleSetting cmdlet exists
-then imports the stored data into the current users session.
+then imports the stored data into the current users session
 
 The location of the Auvik configuration file in this example is:
     C:\Celerium.Auvik\MyConfig.psd1
@@ -53,7 +53,7 @@ The location of the Auvik configuration file in this example is:
 ## PARAMETERS
 
 ### -AuvikConfPath
-Define the location to store the Auvik configuration file.
+Define the location to store the Auvik configuration file
 
 By default the configuration file is stored in the following location:
     $env:USERPROFILE\Celerium.Auvik
@@ -71,7 +71,7 @@ Accept wildcard characters: False
 ```
 
 ### -AuvikConfFile
-Define the name of the Auvik configuration file.
+Define the name of the Auvik configuration file
 
 By default the configuration file is named:
     config.psd1

@@ -1,5 +1,5 @@
 ---
 title: DELETE
-parent: clientManagement
+parent: ClientManagement
 has_children: true
 ---

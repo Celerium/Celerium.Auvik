@@ -1,5 +1,5 @@
 ---
 title: GET
-parent: inventory
+parent: Inventory
 has_children: true
 ---

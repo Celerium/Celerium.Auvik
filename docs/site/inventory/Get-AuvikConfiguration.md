@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: inventory
+grand_parent: Inventory
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/inventory/Get-AuvikConfiguration.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Inventory/Get-AuvikConfiguration.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikConfiguration
@@ -29,7 +29,7 @@ Get-AuvikConfiguration -ID <String> [<CommonParameters>]
 
 ## DESCRIPTION
 The Get-AuvikConfiguration cmdlet allows you to view a history of
-device configurations and other related information discovered by Auvik.
+device configurations and other related information discovered by Auvik
 
 ## EXAMPLES
 
@@ -54,7 +54,7 @@ Auvik has discovered
 Get-AuvikConfiguration -PageFirst 1000 -AllResults
 ```
 
-Gets general information for all configurations found by Auvik.
+Gets general information for all configurations found by Auvik
 
 ## PARAMETERS
 
@@ -119,7 +119,7 @@ Accept wildcard characters: False
 ```
 
 ### -FilterBackupTimeBefore
-Filter by date and time, filtering out configurations backed up after value.
+Filter by date and time, filtering out configurations backed up after value
 
 ```yaml
 Type: DateTime
@@ -135,7 +135,7 @@ Accept wildcard characters: False
 
 ### -FilterIsRunning
 Filter for configurations that are currently running, or filter
-for all configurations which are not currently running.
+for all configurations which are not currently running
 
 As of 2023-10, this does not appear to function correctly on this endpoint
 

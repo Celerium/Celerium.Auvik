@@ -1,9 +1,9 @@
 ---
-title: pollers
+title: Pollers
 has_children: true
 ---
 
-## pollers - endpoint help & documentation
+## Pollers - endpoint help & documentation
 
 {: .highlight }
 Some functions will handle more than one endpoint and the numbers below show the total endpoints **not** the total functions

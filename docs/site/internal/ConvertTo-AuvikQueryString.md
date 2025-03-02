@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: internal
+grand_parent: Internal
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/internal/ConvertTo-AuvikQueryString.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Internal/ConvertTo-AuvikQueryString.html
 parent: PUT
 schema: 2.0.0
 title: ConvertTo-AuvikQueryString
@@ -49,7 +49,7 @@ Example: (From public function)
 
 ### -UriFilter
 Hashtable of values to combine a functions parameters with
-the ResourceUri parameter.
+the ResourceUri parameter
 
 This allows for the full uri query to occur
 

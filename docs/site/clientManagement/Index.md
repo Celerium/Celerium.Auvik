@@ -1,9 +1,9 @@
 ---
-title: clientManagement
+title: ClientManagement
 has_children: true
 ---
 
-## clientManagement - endpoint help & documentation
+## ClientManagement - endpoint help & documentation
 
 {: .highlight }
 Some functions will handle more than one endpoint and the numbers below show the total endpoints **not** the total functions

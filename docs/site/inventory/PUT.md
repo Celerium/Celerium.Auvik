@@ -1,5 +1,5 @@
 ---
 title: PUT
-parent: inventory
+parent: Inventory
 has_children: true
 ---

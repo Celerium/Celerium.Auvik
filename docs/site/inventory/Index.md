@@ -1,9 +1,9 @@
 ---
-title: inventory
+title: Inventory
 has_children: true
 ---
 
-## inventory - endpoint help & documentation
+## Inventory - endpoint help & documentation
 
 {: .highlight }
 Some functions will handle more than one endpoint and the numbers below show the total endpoints **not** the total functions

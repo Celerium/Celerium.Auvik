@@ -1,5 +1,5 @@
 ---
 title: POST
-parent: clientManagement
+parent: ClientManagement
 has_children: true
 ---

@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: inventory
+grand_parent: Inventory
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/inventory/Get-AuvikInterface.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Inventory/Get-AuvikInterface.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikInterface
@@ -30,7 +30,7 @@ Get-AuvikInterface -ID <String> [<CommonParameters>]
 
 ## DESCRIPTION
 The Get-AuvikInterface cmdlet allows you to view an inventory of
-interfaces and other related information discovered by Auvik.
+interfaces and other related information discovered by Auvik
 
 ## EXAMPLES
 
@@ -55,7 +55,7 @@ Auvik has discovered
 Get-AuvikInterface -PageFirst 1000 -AllResults
 ```
 
-Gets general information for all interfaces found by Auvik.
+Gets general information for all interfaces found by Auvik
 
 ## PARAMETERS
 

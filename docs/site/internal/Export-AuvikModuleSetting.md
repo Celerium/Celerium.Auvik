@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: internal
+grand_parent: Internal
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/internal/Export-AuvikModuleSetting.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Internal/Export-AuvikModuleSetting.html
 parent: GET
 schema: 2.0.0
 title: Export-AuvikModuleSetting
@@ -11,7 +11,7 @@ title: Export-AuvikModuleSetting
 # Export-AuvikModuleSetting
 
 ## SYNOPSIS
-Exports the Auvik BaseURI, API, & JSON configuration information to file.
+Exports the Auvik BaseURI, API, & JSON configuration information to file
 
 ## SYNTAX
 
@@ -20,11 +20,11 @@ Export-AuvikModuleSetting [-AuvikConfPath <String>] [-AuvikConfFile <String>] [<
 ```
 
 ## DESCRIPTION
-The Export-AuvikModuleSetting cmdlet exports the Auvik BaseURI, API, & JSON configuration information to file.
+The Export-AuvikModuleSetting cmdlet exports the Auvik BaseURI, API, & JSON configuration information to file
 
 Making use of PowerShell's System.Security.SecureString type, exporting module settings encrypts your API key in a format
-that can only be unencrypted with the your Windows account as this encryption is tied to your user principal.
-This means that you cannot copy your configuration file to another computer or user account and expect it to work.
+that can only be unencrypted with the your Windows account as this encryption is tied to your user principal
+This means that you cannot copy your configuration file to another computer or user account and expect it to work
 
 ## EXAMPLES
 
@@ -49,7 +49,7 @@ to the current user's Auvik configuration file located at:
 ## PARAMETERS
 
 ### -AuvikConfPath
-Define the location to store the Auvik configuration file.
+Define the location to store the Auvik configuration file
 
 By default the configuration file is stored in the following location:
     $env:USERPROFILE\Celerium.Auvik
@@ -67,7 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -AuvikConfFile
-Define the name of the Auvik configuration file.
+Define the name of the Auvik configuration file
 
 By default the configuration file is named:
     config.psd1

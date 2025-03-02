@@ -1,5 +1,5 @@
 ---
 title: PUT
-parent: statistics
+parent: Statistics
 has_children: true
 ---

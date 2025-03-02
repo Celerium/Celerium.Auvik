@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: internal
+grand_parent: Internal
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/internal/Get-AuvikAPIKey.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Internal/Get-AuvikAPIKey.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikAPIKey

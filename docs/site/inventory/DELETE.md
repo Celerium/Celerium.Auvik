@@ -1,5 +1,5 @@
 ---
 title: DELETE
-parent: inventory
+parent: Inventory
 has_children: true
 ---

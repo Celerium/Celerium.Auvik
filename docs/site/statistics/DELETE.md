@@ -1,5 +1,5 @@
 ---
 title: DELETE
-parent: statistics
+parent: Statistics
 has_children: true
 ---

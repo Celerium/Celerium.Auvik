@@ -10,12 +10,12 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Clear-AuvikAlert cmdlet allows you to dismiss an alert that Auvik has triggered.</maml:para>
+      <maml:para>The Clear-AuvikAlert cmdlet allows you to dismiss an alert that Auvik has triggered</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Clear-AuvikAlert</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
           <maml:name>ID</maml:name>
           <maml:description>
             <maml:para>ID of alert</maml:para>
@@ -52,7 +52,7 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
         <maml:name>ID</maml:name>
         <maml:description>
           <maml:para>ID of alert</maml:para>
@@ -118,11 +118,11 @@
       <command:verb>Get</command:verb>
       <command:noun>AuvikAlert</command:noun>
       <maml:description>
-        <maml:para>Get Auvik alert events that have been triggered by your Auvik collector(s).</maml:para>
+        <maml:para>Get Auvik alert events that have been triggered by your Auvik collector(s)</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-AuvikAlert cmdlet allows you to view the alert events that has been triggered by your Auvik collector(s).</maml:para>
+      <maml:para>The Get-AuvikAlert cmdlet allows you to view the alert events that has been triggered by your Auvik collector(s)</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -531,7 +531,7 @@
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
         <dev:code>Get-AuvikAlert -PageFirst 1000 -AllResults</dev:code>
         <dev:remarks>
-          <maml:para>Gets general information for all alerts found by Auvik.</maml:para>
+          <maml:para>Gets general information for all alerts found by Auvik</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -539,1262 +539,6 @@
       <maml:navigationLink>
         <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Alert/Get-AuvikAlert.html</maml:linkText>
         <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Alert/Get-AuvikAlert.html</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Get-AuvikASMApplication</command:name>
-      <command:verb>Get</command:verb>
-      <command:noun>AuvikASMApplication</command:noun>
-      <maml:description>
-        <maml:para>Get Auvik ASM application information</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>The Get-AuvikASMApplication cmdlet gets multiple ASM applications' info to retrieve the information related to the SaaS applications discovered within an ASM client deployment</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-AuvikASMApplication</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
-          <maml:name>FilterClientId</maml:name>
-          <maml:description>
-            <maml:para>Filter by client ID</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="10" aliases="none">
-          <maml:name>PageLast</maml:name>
-          <maml:description>
-            <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
-            <maml:para>Default Value: 100</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-          <dev:type>
-            <maml:name>Int64</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>0</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="11" aliases="none">
-          <maml:name>PageBefore</maml:name>
-          <maml:description>
-            <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>FilterDateAddedBefore</maml:name>
-          <maml:description>
-            <maml:para>Return applications added before this date</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
-          <dev:type>
-            <maml:name>DateTime</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-          <maml:name>FilterDateAddedAfter</maml:name>
-          <maml:description>
-            <maml:para>Return applications added after this date</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
-          <dev:type>
-            <maml:name>DateTime</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>FilterQueryDate</maml:name>
-          <maml:description>
-            <maml:para>Return associated breaches added after this date</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
-          <dev:type>
-            <maml:name>DateTime</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>FilterUserLastUsedAfter</maml:name>
-          <maml:description>
-            <maml:para>Return associated users added after this date</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
-          <dev:type>
-            <maml:name>DateTime</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-          <maml:name>FilterUserLastUsedBefore</maml:name>
-          <maml:description>
-            <maml:para>Return associated users before this date</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
-          <dev:type>
-            <maml:name>DateTime</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-          <maml:name>Include</maml:name>
-          <maml:description>
-            <maml:para>Use to include extended details of the application or of its related objects</maml:para>
-            <maml:para>Allowed values:     "all" "breaches" "users" "contracts" "publisher" "accessData"</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-          <dev:type>
-            <maml:name>String[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
-          <maml:name>PageFirst</maml:name>
-          <maml:description>
-            <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
-            <maml:para>Default Value: 100</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-          <dev:type>
-            <maml:name>Int64</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>0</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
-          <maml:name>PageAfter</maml:name>
-          <maml:description>
-            <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>AllResults</maml:name>
-          <maml:description>
-            <maml:para>Returns all items from an endpoint</maml:para>
-            <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
-        <maml:name>FilterClientId</maml:name>
-        <maml:description>
-          <maml:para>Filter by client ID</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>FilterDateAddedBefore</maml:name>
-        <maml:description>
-          <maml:para>Return applications added before this date</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
-        <dev:type>
-          <maml:name>DateTime</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-        <maml:name>FilterDateAddedAfter</maml:name>
-        <maml:description>
-          <maml:para>Return applications added after this date</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
-        <dev:type>
-          <maml:name>DateTime</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>FilterQueryDate</maml:name>
-        <maml:description>
-          <maml:para>Return associated breaches added after this date</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
-        <dev:type>
-          <maml:name>DateTime</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>FilterUserLastUsedAfter</maml:name>
-        <maml:description>
-          <maml:para>Return associated users added after this date</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
-        <dev:type>
-          <maml:name>DateTime</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-        <maml:name>FilterUserLastUsedBefore</maml:name>
-        <maml:description>
-          <maml:para>Return associated users before this date</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
-        <dev:type>
-          <maml:name>DateTime</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-        <maml:name>Include</maml:name>
-        <maml:description>
-          <maml:para>Use to include extended details of the application or of its related objects</maml:para>
-          <maml:para>Allowed values:     "all" "breaches" "users" "contracts" "publisher" "accessData"</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-        <dev:type>
-          <maml:name>String[]</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
-        <maml:name>PageFirst</maml:name>
-        <maml:description>
-          <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
-          <maml:para>Default Value: 100</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-        <dev:type>
-          <maml:name>Int64</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>0</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
-        <maml:name>PageAfter</maml:name>
-        <maml:description>
-          <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="10" aliases="none">
-        <maml:name>PageLast</maml:name>
-        <maml:description>
-          <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
-          <maml:para>Default Value: 100</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-        <dev:type>
-          <maml:name>Int64</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>0</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="11" aliases="none">
-        <maml:name>PageBefore</maml:name>
-        <maml:description>
-          <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>AllResults</maml:name>
-        <maml:description>
-          <maml:para>Returns all items from an endpoint</maml:para>
-          <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes />
-    <command:returnValues />
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para>N\A</maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-AuvikASMApplication</dev:code>
-        <dev:remarks>
-          <maml:para>Get Auvik ASM application information</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-AuvikASMApplication -PageFirst 1000 -AllResults</dev:code>
-        <dev:remarks>
-          <maml:para>Get Auvik ASM application information for all devices found by Auvik</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/asm/Get-AuvikASMApplication.html</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMApplication.html</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMApplication.html</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Get-AuvikASMClient</command:name>
-      <command:verb>Get</command:verb>
-      <command:noun>AuvikASMClient</command:noun>
-      <maml:description>
-        <maml:para>Get Auvik ASM meta client information</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>The Get-AuvikASMClient cmdlet gets multiple ASM meta clients' info to retrieve the information related to the SaaS meta clients discovered within an ASM client deployment</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-AuvikASMClient</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>Include</maml:name>
-          <maml:description>
-            <maml:para>Use to include extended details of the client</maml:para>
-            <maml:para>Allowed values:     "totals"</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>FilterQueryDate</maml:name>
-          <maml:description>
-            <maml:para>Only count breaches added after this date. Only useful when include=totals is set</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
-          <dev:type>
-            <maml:name>DateTime</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-          <maml:name>PageFirst</maml:name>
-          <maml:description>
-            <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
-            <maml:para>Default Value: 100</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-          <dev:type>
-            <maml:name>Int64</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>0</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>PageAfter</maml:name>
-          <maml:description>
-            <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>PageLast</maml:name>
-          <maml:description>
-            <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
-            <maml:para>Default Value: 100</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-          <dev:type>
-            <maml:name>Int64</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>0</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-          <maml:name>PageBefore</maml:name>
-          <maml:description>
-            <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>AllResults</maml:name>
-          <maml:description>
-            <maml:para>Returns all items from an endpoint</maml:para>
-            <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>Include</maml:name>
-        <maml:description>
-          <maml:para>Use to include extended details of the client</maml:para>
-          <maml:para>Allowed values:     "totals"</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>FilterQueryDate</maml:name>
-        <maml:description>
-          <maml:para>Only count breaches added after this date. Only useful when include=totals is set</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
-        <dev:type>
-          <maml:name>DateTime</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-        <maml:name>PageFirst</maml:name>
-        <maml:description>
-          <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
-          <maml:para>Default Value: 100</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-        <dev:type>
-          <maml:name>Int64</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>0</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>PageAfter</maml:name>
-        <maml:description>
-          <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>PageLast</maml:name>
-        <maml:description>
-          <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
-          <maml:para>Default Value: 100</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-        <dev:type>
-          <maml:name>Int64</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>0</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-        <maml:name>PageBefore</maml:name>
-        <maml:description>
-          <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>AllResults</maml:name>
-        <maml:description>
-          <maml:para>Returns all items from an endpoint</maml:para>
-          <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes />
-    <command:returnValues />
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para>N\A</maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-AuvikASMClient</dev:code>
-        <dev:remarks>
-          <maml:para>Get Auvik ASM meta client information</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-AuvikASMClient -PageFirst 1000 -AllResults</dev:code>
-        <dev:remarks>
-          <maml:para>Get Auvik ASM meta client information for all devices found by Auvik</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/asm/Get-AuvikASMClient.html</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMClient.html</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMClient.html</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Get-AuvikASMSecurityLog</command:name>
-      <command:verb>Get</command:verb>
-      <command:noun>AuvikASMSecurityLog</command:noun>
-      <maml:description>
-        <maml:para>Get Auvik ASM security log information</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>The Get-AuvikASMSecurityLog cmdlet gets multiple ASM security logs' info to retrieve the information related to the SaaS applications discovered within an ASM client deployment</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-AuvikASMSecurityLog</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
-          <maml:name>FilterClientId</maml:name>
-          <maml:description>
-            <maml:para>Filter by client ID</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>Include</maml:name>
-          <maml:description>
-            <maml:para>Use to include extended details of the security log or of its related objects.</maml:para>
-            <maml:para>Allowed values:     "users" "applications"</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-          <dev:type>
-            <maml:name>String[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-          <maml:name>FilterQueryDate</maml:name>
-          <maml:description>
-            <maml:para>Return associated breaches added after this date</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
-          <dev:type>
-            <maml:name>DateTime</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>PageFirst</maml:name>
-          <maml:description>
-            <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
-            <maml:para>Default Value: 100</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-          <dev:type>
-            <maml:name>Int64</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>0</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>PageAfter</maml:name>
-          <maml:description>
-            <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-          <maml:name>PageLast</maml:name>
-          <maml:description>
-            <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
-            <maml:para>Default Value: 100</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-          <dev:type>
-            <maml:name>Int64</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>0</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-          <maml:name>PageBefore</maml:name>
-          <maml:description>
-            <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>AllResults</maml:name>
-          <maml:description>
-            <maml:para>Returns all items from an endpoint</maml:para>
-            <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
-        <maml:name>FilterClientId</maml:name>
-        <maml:description>
-          <maml:para>Filter by client ID</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>Include</maml:name>
-        <maml:description>
-          <maml:para>Use to include extended details of the security log or of its related objects.</maml:para>
-          <maml:para>Allowed values:     "users" "applications"</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-        <dev:type>
-          <maml:name>String[]</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-        <maml:name>FilterQueryDate</maml:name>
-        <maml:description>
-          <maml:para>Return associated breaches added after this date</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
-        <dev:type>
-          <maml:name>DateTime</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>PageFirst</maml:name>
-        <maml:description>
-          <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
-          <maml:para>Default Value: 100</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-        <dev:type>
-          <maml:name>Int64</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>0</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>PageAfter</maml:name>
-        <maml:description>
-          <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-        <maml:name>PageLast</maml:name>
-        <maml:description>
-          <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
-          <maml:para>Default Value: 100</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-        <dev:type>
-          <maml:name>Int64</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>0</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-        <maml:name>PageBefore</maml:name>
-        <maml:description>
-          <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>AllResults</maml:name>
-        <maml:description>
-          <maml:para>Returns all items from an endpoint</maml:para>
-          <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes />
-    <command:returnValues />
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para>N\A</maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-AuvikASMSecurityLog</dev:code>
-        <dev:remarks>
-          <maml:para>Get Auvik ASM security log information</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-AuvikASMSecurityLog -PageFirst 1000 -AllResults</dev:code>
-        <dev:remarks>
-          <maml:para>Get Auvik ASM security log information for all devices found by Auvik</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/asm/Get-AuvikASMSecurityLog.html</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMSecurityLog.html</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMSecurityLog.html</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Get-AuvikASMTag</command:name>
-      <command:verb>Get</command:verb>
-      <command:noun>AuvikASMTag</command:noun>
-      <maml:description>
-        <maml:para>Get Auvik ASM tag information</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>The Get-AuvikASMTag cmdlet gets multiple ASM applications' info to retrieve the information related to the SaaS applications discovered within an ASM client deployment</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-AuvikASMTag</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
-          <maml:name>FilterClientId</maml:name>
-          <maml:description>
-            <maml:para>Filter by client ID</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="2" aliases="none">
-          <maml:name>FilterApplicationId</maml:name>
-          <maml:description>
-            <maml:para>Filter by application ID</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-          <maml:name>PageFirst</maml:name>
-          <maml:description>
-            <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
-            <maml:para>Default Value: 100</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-          <dev:type>
-            <maml:name>Int64</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>0</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>PageAfter</maml:name>
-          <maml:description>
-            <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>PageLast</maml:name>
-          <maml:description>
-            <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
-            <maml:para>Default Value: 100</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-          <dev:type>
-            <maml:name>Int64</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>0</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-          <maml:name>PageBefore</maml:name>
-          <maml:description>
-            <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>AllResults</maml:name>
-          <maml:description>
-            <maml:para>Returns all items from an endpoint</maml:para>
-            <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
-        <maml:name>FilterClientId</maml:name>
-        <maml:description>
-          <maml:para>Filter by client ID</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="2" aliases="none">
-        <maml:name>FilterApplicationId</maml:name>
-        <maml:description>
-          <maml:para>Filter by application ID</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-        <maml:name>PageFirst</maml:name>
-        <maml:description>
-          <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
-          <maml:para>Default Value: 100</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-        <dev:type>
-          <maml:name>Int64</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>0</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>PageAfter</maml:name>
-        <maml:description>
-          <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>PageLast</maml:name>
-        <maml:description>
-          <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
-          <maml:para>Default Value: 100</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-        <dev:type>
-          <maml:name>Int64</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>0</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-        <maml:name>PageBefore</maml:name>
-        <maml:description>
-          <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>AllResults</maml:name>
-        <maml:description>
-          <maml:para>Returns all items from an endpoint</maml:para>
-          <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes />
-    <command:returnValues />
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para>N\A</maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-AuvikASMTag</dev:code>
-        <dev:remarks>
-          <maml:para>Get Auvik ASM tag information</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-AuvikASMTag -PageFirst 1000 -AllResults</dev:code>
-        <dev:remarks>
-          <maml:para>Get Auvik ASM tag information for all devices found by Auvik</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/asm/Get-AuvikASMTag.html</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Get-AuvikASMUser</command:name>
-      <command:verb>Get</command:verb>
-      <command:noun>AuvikASMUser</command:noun>
-      <maml:description>
-        <maml:para>Get Auvik ASM user information</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>The Get-AuvikASMUser cmdlet gets information about any monitored users that exist within a specific Auvik SaaS Management tenant</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-AuvikASMUser</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
-          <maml:name>FilterClientId</maml:name>
-          <maml:description>
-            <maml:para>Filter by client ID</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>PageFirst</maml:name>
-          <maml:description>
-            <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
-            <maml:para>Default Value: 100</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-          <dev:type>
-            <maml:name>Int64</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>0</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-          <maml:name>PageAfter</maml:name>
-          <maml:description>
-            <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>PageLast</maml:name>
-          <maml:description>
-            <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
-            <maml:para>Default Value: 100</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-          <dev:type>
-            <maml:name>Int64</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>0</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>PageBefore</maml:name>
-          <maml:description>
-            <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>AllResults</maml:name>
-          <maml:description>
-            <maml:para>Returns all items from an endpoint</maml:para>
-            <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
-        <maml:name>FilterClientId</maml:name>
-        <maml:description>
-          <maml:para>Filter by client ID</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>PageFirst</maml:name>
-        <maml:description>
-          <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
-          <maml:para>Default Value: 100</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-        <dev:type>
-          <maml:name>Int64</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>0</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-        <maml:name>PageAfter</maml:name>
-        <maml:description>
-          <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>PageLast</maml:name>
-        <maml:description>
-          <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
-          <maml:para>Default Value: 100</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
-        <dev:type>
-          <maml:name>Int64</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>0</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>PageBefore</maml:name>
-        <maml:description>
-          <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>AllResults</maml:name>
-        <maml:description>
-          <maml:para>Returns all items from an endpoint</maml:para>
-          <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes />
-    <command:returnValues />
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para>N\A</maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-AuvikASMUser</dev:code>
-        <dev:remarks>
-          <maml:para>Get Auvik ASM user information</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-AuvikASMUser -PageFirst 1000 -AllResults</dev:code>
-        <dev:remarks>
-          <maml:para>Get Auvik ASM user information for all devices found by Auvik</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/asm/Get-AuvikASMUser.html</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMUser.html</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMUser.html</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1843,7 +587,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
           <maml:name>Tenants</maml:name>
           <maml:description>
-            <maml:para>Comma delimited list of tenant IDs to request info from.</maml:para>
+            <maml:para>Comma delimited list of tenant IDs to request info from</maml:para>
             <maml:para>Example: Tenants=199762235015168516,199762235015168004</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
@@ -1926,7 +670,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
         <maml:name>Tenants</maml:name>
         <maml:description>
-          <maml:para>Comma delimited list of tenant IDs to request info from.</maml:para>
+          <maml:para>Comma delimited list of tenant IDs to request info from</maml:para>
           <maml:para>Example: Tenants=199762235015168516,199762235015168004</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
@@ -1961,21 +705,21 @@
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>Get-AuvikBilling -FilterFromDate 2023-09-01 -FilterThruDate 2023-09-30</dev:code>
         <dev:remarks>
-          <maml:para>Gets a summary of a client's (and client's children if a multi-client) usage for the given time range.</maml:para>
+          <maml:para>Gets a summary of a client's (and client's children if a multi-client) usage for the given time range</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>Get-AuvikBilling -FilterFromDate 2023-09-01 -FilterThruDate 2023-09-30 -Tenants 12345,98765</dev:code>
         <dev:remarks>
-          <maml:para>Gets a summary of the defined client's (and client's children if a multi-client)fromDate usage for the given time range.</maml:para>
+          <maml:para>Gets a summary of the defined client's (and client's children if a multi-client)fromDate usage for the given time range</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
         <dev:code>Get-AuvikBilling -FilterFromDate 2023-09-01 -FilterThruDate 2023-09-30 -ID 123456789</dev:code>
         <dev:remarks>
-          <maml:para>Gets a summary of the define device id's usage for the given time range.</maml:para>
+          <maml:para>Gets a summary of the define device id's usage for the given time range</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2319,7 +1063,7 @@
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>'Celerium@Celerium.org' | Add-AuvikAPIKey</dev:code>
         <dev:remarks>
-          <maml:para>The Auvik API will use the string entered as the secret key &amp; will prompt to enter in the public key.</maml:para>
+          <maml:para>The Auvik API will use the string entered as the secret key &amp; will prompt to enter in the public key</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
@@ -2343,11 +1087,11 @@
       <command:verb>Add</command:verb>
       <command:noun>AuvikBaseURI</command:noun>
       <maml:description>
-        <maml:para>Sets the base URI for the Auvik API connection.</maml:para>
+        <maml:para>Sets the base URI for the Auvik API connection</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Add-AuvikBaseURI cmdlet sets the base URI which is later used to construct the full URI for all API calls.</maml:para>
+      <maml:para>The Add-AuvikBaseURI cmdlet sets the base URI which is later used to construct the full URI for all API calls</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2355,7 +1099,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
           <maml:name>BaseUri</maml:name>
           <maml:description>
-            <maml:para>Define the base URI for the Auvik API connection using Auvik's URI or a custom URI.</maml:para>
+            <maml:para>Define the base URI for the Auvik API connection using Auvik's URI or a custom URI</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2367,7 +1111,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>DataCenter</maml:name>
           <maml:description>
-            <maml:para>Auvik's URI connection point that can be one of the predefined data centers.</maml:para>
+            <maml:para>Auvik's URI connection point that can be one of the predefined data centers</maml:para>
             <maml:para>https://support.auvik.com/hc/en-us/articles/360033412992</maml:para>
             <maml:para>Accepted Values: 'au1', 'ca1', 'eu', 'eu1', 'eu2', 'us', 'us1', 'us2', 'us3', 'us4', 'us5', 'us6'</maml:para>
             <maml:para>Example:     us3 = https://auvikapi.us3.my.auvik.com/v1</maml:para>
@@ -2385,7 +1129,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
         <maml:name>BaseUri</maml:name>
         <maml:description>
-          <maml:para>Define the base URI for the Auvik API connection using Auvik's URI or a custom URI.</maml:para>
+          <maml:para>Define the base URI for the Auvik API connection using Auvik's URI or a custom URI</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2397,7 +1141,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>DataCenter</maml:name>
         <maml:description>
-          <maml:para>Auvik's URI connection point that can be one of the predefined data centers.</maml:para>
+          <maml:para>Auvik's URI connection point that can be one of the predefined data centers</maml:para>
           <maml:para>https://support.auvik.com/hc/en-us/articles/360033412992</maml:para>
           <maml:para>Accepted Values: 'au1', 'ca1', 'eu', 'eu1', 'eu2', 'us', 'us1', 'us2', 'us3', 'us4', 'us5', 'us6'</maml:para>
           <maml:para>Example:     us3 = https://auvikapi.us3.my.auvik.com/v1</maml:para>
@@ -2422,21 +1166,21 @@
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>Add-AuvikBaseURI</dev:code>
         <dev:remarks>
-          <maml:para>The base URI will use https://auvikapi.us1.my.auvik.com/v1 which is Auvik's default URI.</maml:para>
+          <maml:para>The base URI will use https://auvikapi.us1.my.auvik.com/v1 which is Auvik's default URI</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>Add-AuvikBaseURI -DataCenter US</dev:code>
         <dev:remarks>
-          <maml:para>The base URI will use https://auvikapi.us1.my.auvik.com/v1 which is Auvik's US URI.</maml:para>
+          <maml:para>The base URI will use https://auvikapi.us1.my.auvik.com/v1 which is Auvik's US URI</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
         <dev:code>Add-AuvikBaseURI -BaseUri http://myapi.gateway.celerium.org</dev:code>
         <dev:remarks>
-          <maml:para>A custom API gateway of http://myapi.gateway.celerium.org will be used for all API calls to Auvik's API.</maml:para>
+          <maml:para>A custom API gateway of http://myapi.gateway.celerium.org will be used for all API calls to Auvik's API</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2466,7 +1210,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
           <maml:name>UriFilter</maml:name>
           <maml:description>
-            <maml:para>Hashtable of values to combine a functions parameters with the ResourceUri parameter.</maml:para>
+            <maml:para>Hashtable of values to combine a functions parameters with the ResourceUri parameter</maml:para>
             <maml:para>This allows for the full uri query to occur</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
@@ -2494,7 +1238,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
         <maml:name>UriFilter</maml:name>
         <maml:description>
-          <maml:para>Hashtable of values to combine a functions parameters with the ResourceUri parameter.</maml:para>
+          <maml:para>Hashtable of values to combine a functions parameters with the ResourceUri parameter</maml:para>
           <maml:para>This allows for the full uri query to occur</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
@@ -2548,12 +1292,12 @@
       <command:verb>Export</command:verb>
       <command:noun>AuvikModuleSetting</command:noun>
       <maml:description>
-        <maml:para>Exports the Auvik BaseURI, API, &amp; JSON configuration information to file.</maml:para>
+        <maml:para>Exports the Auvik BaseURI, API, &amp; JSON configuration information to file</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Export-AuvikModuleSetting cmdlet exports the Auvik BaseURI, API, &amp; JSON configuration information to file.</maml:para>
-      <maml:para>Making use of PowerShell's System.Security.SecureString type, exporting module settings encrypts your API key in a format that can only be unencrypted with the your Windows account as this encryption is tied to your user principal. This means that you cannot copy your configuration file to another computer or user account and expect it to work.</maml:para>
+      <maml:para>The Export-AuvikModuleSetting cmdlet exports the Auvik BaseURI, API, &amp; JSON configuration information to file</maml:para>
+      <maml:para>Making use of PowerShell's System.Security.SecureString type, exporting module settings encrypts your API key in a format that can only be unencrypted with the your Windows account as this encryption is tied to your user principal This means that you cannot copy your configuration file to another computer or user account and expect it to work</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2561,7 +1305,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AuvikConfPath</maml:name>
           <maml:description>
-            <maml:para>Define the location to store the Auvik configuration file.</maml:para>
+            <maml:para>Define the location to store the Auvik configuration file</maml:para>
             <maml:para>By default the configuration file is stored in the following location:     $env:USERPROFILE\Celerium.Auvik</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -2574,7 +1318,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AuvikConfFile</maml:name>
           <maml:description>
-            <maml:para>Define the name of the Auvik configuration file.</maml:para>
+            <maml:para>Define the name of the Auvik configuration file</maml:para>
             <maml:para>By default the configuration file is named:     config.psd1</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -2590,7 +1334,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AuvikConfPath</maml:name>
         <maml:description>
-          <maml:para>Define the location to store the Auvik configuration file.</maml:para>
+          <maml:para>Define the location to store the Auvik configuration file</maml:para>
           <maml:para>By default the configuration file is stored in the following location:     $env:USERPROFILE\Celerium.Auvik</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -2603,7 +1347,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AuvikConfFile</maml:name>
         <maml:description>
-          <maml:para>Define the name of the Auvik configuration file.</maml:para>
+          <maml:para>Define the name of the Auvik configuration file</maml:para>
           <maml:para>By default the configuration file is named:     config.psd1</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -2722,11 +1466,11 @@
       <command:verb>Get</command:verb>
       <command:noun>AuvikBaseURI</command:noun>
       <maml:description>
-        <maml:para>Shows the Auvik base URI global variable.</maml:para>
+        <maml:para>Shows the Auvik base URI global variable</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-AuvikBaseURI cmdlet shows the Auvik base URI global variable value.</maml:para>
+      <maml:para>The Get-AuvikBaseURI cmdlet shows the Auvik base URI global variable value</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2746,7 +1490,7 @@
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>Get-AuvikBaseURI</dev:code>
         <dev:remarks>
-          <maml:para>Shows the Auvik base URI global variable value.</maml:para>
+          <maml:para>Shows the Auvik base URI global variable value</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2754,83 +1498,6 @@
       <maml:navigationLink>
         <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Internal/Get-AuvikBaseURI.html</maml:linkText>
         <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Internal/Get-AuvikBaseURI.html</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Get-AuvikMetaData</command:name>
-      <command:verb>Get</command:verb>
-      <command:noun>AuvikMetaData</command:noun>
-      <maml:description>
-        <maml:para>Gets various Api metadata values</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>The Get-AuvikMetaData cmdlet gets various Api metadata values from an Invoke-WebRequest to assist in various troubleshooting scenarios such as rate-limiting.</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-AuvikMetaData</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
-          <maml:name>BaseUri</maml:name>
-          <maml:description>
-            <maml:para>Define the base URI for the Auvik API connection using Auvik's URI or a custom URI.</maml:para>
-            <maml:para>The default base URI is https://auvikapi.us1.my.auvik.com/v1</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>$AuvikModuleBaseURI</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
-        <maml:name>BaseUri</maml:name>
-        <maml:description>
-          <maml:para>Define the base URI for the Auvik API connection using Auvik's URI or a custom URI.</maml:para>
-          <maml:para>The default base URI is https://auvikapi.us1.my.auvik.com/v1</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>$AuvikModuleBaseURI</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes />
-    <command:returnValues />
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para>N\A</maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-AuvikMetaData</dev:code>
-        <dev:remarks>
-          <maml:para>Gets various Api metadata values from an Invoke-WebRequest to assist in various troubleshooting scenarios such as rate-limiting.</maml:para>
-          <maml:para>The default full base uri test path is:     https://auvikapi.us1.my.auvik.com/v1</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-AuvikMetaData -BaseUri http://myapi.gateway.celerium.org</dev:code>
-        <dev:remarks>
-          <maml:para>Gets various Api metadata values from an Invoke-WebRequest to assist in various troubleshooting scenarios such as rate-limiting.</maml:para>
-          <maml:para>The full base uri test path in this example is:     http://myapi.gateway.celerium.org/device</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Internal/Get-AuvikMetaData.html</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Internal/Get-AuvikMetaData.html</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2844,7 +1511,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-AuvikModuleSetting cmdlet gets the saved Auvik configuration settings from the local system.</maml:para>
+      <maml:para>The Get-AuvikModuleSetting cmdlet gets the saved Auvik configuration settings from the local system</maml:para>
       <maml:para>By default the configuration file is stored in the following location:     $env:USERPROFILE\Celerium.Auvik</maml:para>
     </maml:description>
     <command:syntax>
@@ -2853,7 +1520,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AuvikConfPath</maml:name>
           <maml:description>
-            <maml:para>Define the location to store the Auvik configuration file.</maml:para>
+            <maml:para>Define the location to store the Auvik configuration file</maml:para>
             <maml:para>By default the configuration file is stored in the following location:     $env:USERPROFILE\Celerium.Auvik</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -2866,7 +1533,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AuvikConfFile</maml:name>
           <maml:description>
-            <maml:para>Define the name of the Auvik configuration file.</maml:para>
+            <maml:para>Define the name of the Auvik configuration file</maml:para>
             <maml:para>By default the configuration file is named:     config.psd1</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -2896,7 +1563,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AuvikConfPath</maml:name>
         <maml:description>
-          <maml:para>Define the location to store the Auvik configuration file.</maml:para>
+          <maml:para>Define the location to store the Auvik configuration file</maml:para>
           <maml:para>By default the configuration file is stored in the following location:     $env:USERPROFILE\Celerium.Auvik</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -2909,7 +1576,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AuvikConfFile</maml:name>
         <maml:description>
-          <maml:para>Define the name of the Auvik configuration file.</maml:para>
+          <maml:para>Define the name of the Auvik configuration file</maml:para>
           <maml:para>By default the configuration file is named:     config.psd1</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -2970,11 +1637,11 @@
       <command:verb>Import</command:verb>
       <command:noun>AuvikModuleSetting</command:noun>
       <maml:description>
-        <maml:para>Imports the Auvik BaseURI, API, &amp; JSON configuration information to the current session.</maml:para>
+        <maml:para>Imports the Auvik BaseURI, API, &amp; JSON configuration information to the current session</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Import-AuvikModuleSetting cmdlet imports the Auvik BaseURI, API, &amp; JSON configuration information stored in the Auvik configuration file to the users current session.</maml:para>
+      <maml:para>The Import-AuvikModuleSetting cmdlet imports the Auvik BaseURI, API, &amp; JSON configuration information stored in the Auvik configuration file to the users current session</maml:para>
       <maml:para>By default the configuration file is stored in the following location:     $env:USERPROFILE\Celerium.Auvik</maml:para>
     </maml:description>
     <command:syntax>
@@ -2983,7 +1650,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AuvikConfPath</maml:name>
           <maml:description>
-            <maml:para>Define the location to store the Auvik configuration file.</maml:para>
+            <maml:para>Define the location to store the Auvik configuration file</maml:para>
             <maml:para>By default the configuration file is stored in the following location:     $env:USERPROFILE\Celerium.Auvik</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -2996,7 +1663,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AuvikConfFile</maml:name>
           <maml:description>
-            <maml:para>Define the name of the Auvik configuration file.</maml:para>
+            <maml:para>Define the name of the Auvik configuration file</maml:para>
             <maml:para>By default the configuration file is named:     config.psd1</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -3012,7 +1679,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AuvikConfPath</maml:name>
         <maml:description>
-          <maml:para>Define the location to store the Auvik configuration file.</maml:para>
+          <maml:para>Define the location to store the Auvik configuration file</maml:para>
           <maml:para>By default the configuration file is stored in the following location:     $env:USERPROFILE\Celerium.Auvik</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -3025,7 +1692,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AuvikConfFile</maml:name>
         <maml:description>
-          <maml:para>Define the name of the Auvik configuration file.</maml:para>
+          <maml:para>Define the name of the Auvik configuration file</maml:para>
           <maml:para>By default the configuration file is named:     config.psd1</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -3048,7 +1715,7 @@
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>Import-AuvikModuleSetting</dev:code>
         <dev:remarks>
-          <maml:para>Validates that the configuration file created with the Export-AuvikModuleSetting cmdlet exists then imports the stored data into the current users session.</maml:para>
+          <maml:para>Validates that the configuration file created with the Export-AuvikModuleSetting cmdlet exists then imports the stored data into the current users session</maml:para>
           <maml:para>The default location of the Auvik configuration file is:     $env:USERPROFILE\Celerium.Auvik\config.psd1</maml:para>
         </dev:remarks>
       </command:example>
@@ -3056,7 +1723,7 @@
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>Import-AuvikModuleSetting -AuvikConfPath C:\Celerium.Auvik -AuvikConfFile MyConfig.psd1</dev:code>
         <dev:remarks>
-          <maml:para>Validates that the configuration file created with the Export-AuvikModuleSetting cmdlet exists then imports the stored data into the current users session.</maml:para>
+          <maml:para>Validates that the configuration file created with the Export-AuvikModuleSetting cmdlet exists then imports the stored data into the current users session</maml:para>
           <maml:para>The location of the Auvik configuration file in this example is:     C:\Celerium.Auvik\MyConfig.psd1</maml:para>
         </dev:remarks>
       </command:example>
@@ -3078,7 +1745,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Invoke-AuvikRequest cmdlet invokes an API request to Auvik API.</maml:para>
+      <maml:para>The Invoke-AuvikRequest cmdlet invokes an API request to Auvik API</maml:para>
       <maml:para>This is an internal function that is used by all public functions</maml:para>
       <maml:para>As of 2023-08 the Auvik v1 API only supports GET requests</maml:para>
     </maml:description>
@@ -3113,7 +1780,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>UriFilter</maml:name>
           <maml:description>
-            <maml:para>Used with the internal function [ ConvertTo-AuvikQueryString ] to combine a functions parameters with the ResourceUri parameter.</maml:para>
+            <maml:para>Used with the internal function [ ConvertTo-AuvikQueryString ] to combine a functions parameters with the ResourceUri parameter</maml:para>
             <maml:para>This allows for the full uri query to occur</maml:para>
             <maml:para>The full resource path is made with the following data $AuvikModuleBaseURI + $ResourceUri + ConvertTo-AuvikQueryString</maml:para>
           </maml:description>
@@ -3179,7 +1846,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>UriFilter</maml:name>
         <maml:description>
-          <maml:para>Used with the internal function [ ConvertTo-AuvikQueryString ] to combine a functions parameters with the ResourceUri parameter.</maml:para>
+          <maml:para>Used with the internal function [ ConvertTo-AuvikQueryString ] to combine a functions parameters with the ResourceUri parameter</maml:para>
           <maml:para>This allows for the full uri query to occur</maml:para>
           <maml:para>The full resource path is made with the following data $AuvikModuleBaseURI + $ResourceUri + ConvertTo-AuvikQueryString</maml:para>
         </maml:description>
@@ -3752,7 +2419,7 @@
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/internal/Set-AuvikAPIKey.html</maml:uri>
+        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Internal/Set-AuvikAPIKey.html</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Internal/New-AuvikAESSecret.html</maml:linkText>
@@ -3770,11 +2437,11 @@
       <command:verb>Set</command:verb>
       <command:noun>AuvikBaseURI</command:noun>
       <maml:description>
-        <maml:para>Sets the base URI for the Auvik API connection.</maml:para>
+        <maml:para>Sets the base URI for the Auvik API connection</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Add-AuvikBaseURI cmdlet sets the base URI which is later used to construct the full URI for all API calls.</maml:para>
+      <maml:para>The Add-AuvikBaseURI cmdlet sets the base URI which is later used to construct the full URI for all API calls</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -3794,28 +2461,28 @@
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>Add-AuvikBaseURI</dev:code>
         <dev:remarks>
-          <maml:para>The base URI will use https://auvikapi.us1.my.auvik.com/v1 which is Auvik's default URI.</maml:para>
+          <maml:para>The base URI will use https://auvikapi.us1.my.auvik.com/v1 which is Auvik's default URI</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>Add-AuvikBaseURI -DataCenter US</dev:code>
         <dev:remarks>
-          <maml:para>The base URI will use https://auvikapi.us1.my.auvik.com/v1 which is Auvik's US URI.</maml:para>
+          <maml:para>The base URI will use https://auvikapi.us1.my.auvik.com/v1 which is Auvik's US URI</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
         <dev:code>Add-AuvikBaseURI -BaseUri http://myapi.gateway.celerium.org</dev:code>
         <dev:remarks>
-          <maml:para>A custom API gateway of http://myapi.gateway.celerium.org will be used for all API calls to Auvik's API.</maml:para>
+          <maml:para>A custom API gateway of http://myapi.gateway.celerium.org will be used for all API calls to Auvik's API</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/internal/Set-AuvikBaseURI.html</maml:uri>
+        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Internal/Set-AuvikBaseURI.html</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Internal/Add-AuvikBaseURI.html</maml:linkText>
@@ -3867,7 +2534,7 @@
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/internal/Test-AuvikAPICredential.html</maml:uri>
+        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Internal/Test-AuvikAPICredential.html</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Other/Get-AuvikCredential.html</maml:linkText>
@@ -3885,7 +2552,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-AuvikComponent cmdlet allows you to view an inventory of components and other related information discovered by Auvik.</maml:para>
+      <maml:para>The Get-AuvikComponent cmdlet allows you to view an inventory of components and other related information discovered by Auvik</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4194,7 +2861,7 @@
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
         <dev:code>Get-AuvikComponent -PageFirst 1000 -AllResults</dev:code>
         <dev:remarks>
-          <maml:para>Gets general information for all components found by Auvik.</maml:para>
+          <maml:para>Gets general information for all components found by Auvik</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -4215,7 +2882,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-AuvikConfiguration cmdlet allows you to view a history of device configurations and other related information discovered by Auvik.</maml:para>
+      <maml:para>The Get-AuvikConfiguration cmdlet allows you to view a history of device configurations and other related information discovered by Auvik</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4274,7 +2941,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>FilterBackupTimeBefore</maml:name>
           <maml:description>
-            <maml:para>Filter by date and time, filtering out configurations backed up after value.</maml:para>
+            <maml:para>Filter by date and time, filtering out configurations backed up after value</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
           <dev:type>
@@ -4286,7 +2953,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>FilterIsRunning</maml:name>
           <maml:description>
-            <maml:para>Filter for configurations that are currently running, or filter for all configurations which are not currently running.</maml:para>
+            <maml:para>Filter for configurations that are currently running, or filter for all configurations which are not currently running</maml:para>
             <maml:para>As of 2023-10, this does not appear to function correctly on this endpoint</maml:para>
           </maml:description>
           <dev:type>
@@ -4411,7 +3078,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>FilterBackupTimeBefore</maml:name>
         <maml:description>
-          <maml:para>Filter by date and time, filtering out configurations backed up after value.</maml:para>
+          <maml:para>Filter by date and time, filtering out configurations backed up after value</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
         <dev:type>
@@ -4423,7 +3090,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>FilterIsRunning</maml:name>
         <maml:description>
-          <maml:para>Filter for configurations that are currently running, or filter for all configurations which are not currently running.</maml:para>
+          <maml:para>Filter for configurations that are currently running, or filter for all configurations which are not currently running</maml:para>
           <maml:para>As of 2023-10, this does not appear to function correctly on this endpoint</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
@@ -4523,7 +3190,7 @@
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
         <dev:code>Get-AuvikConfiguration -PageFirst 1000 -AllResults</dev:code>
         <dev:remarks>
-          <maml:para>Gets general information for all configurations found by Auvik.</maml:para>
+          <maml:para>Gets general information for all configurations found by Auvik</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -4544,13 +3211,13 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-AuvikDevice cmdlet allows you to view an inventory of devices and other related information discovered by Auvik.</maml:para>
-      <maml:para>Use the [ -AgentDetail, -AgentExtended, &amp; -AgentInfo  ] parameters when wanting to target specific information.</maml:para>
+      <maml:para>The Get-AuvikDevice cmdlet allows you to view an inventory of devices and other related information discovered by Auvik</maml:para>
+      <maml:para>Use the [ -AgentDetail, -AgentExtended, &amp; -AgentInfo  ] parameters when wanting to target specific information</maml:para>
       <maml:para>See Get-Help Get-AuvikDevice -Full for more information on associated parameters</maml:para>
-      <maml:para>This function combines 6 endpoints together within the Device API.</maml:para>
-      <maml:para>Read Multiple Devices' Info:     Gets detail about multiple devices discovered on your client's network. Read a Single Device's Info:     Gets detail about a specific device discovered on your client's network.</maml:para>
-      <maml:para>Read Multiple Devices' Details:     Gets details about multiple devices not already Included in the Device Info API. Read a Single Device's Details:     Gets details about a specific device not already Included in the Device Info API.</maml:para>
-      <maml:para>Read Multiple Device's Extended Details:     Gets extended information about multiple devices not already Included in the Device Info API. Read a Single Device's Extended Details:     Gets extended information about a specific device not already Included in the Device Info API.</maml:para>
+      <maml:para>This function combines 6 endpoints together within the Device API</maml:para>
+      <maml:para>Read Multiple Devices' Info:     Gets detail about multiple devices discovered on your client's network Read a Single Device's Info:     Gets detail about a specific device discovered on your client's network</maml:para>
+      <maml:para>Read Multiple Devices' Details:     Gets details about multiple devices not already Included in the Device Info API Read a Single Device's Details:     Gets details about a specific device not already Included in the Device Info API</maml:para>
+      <maml:para>Read Multiple Device's Extended Details:     Gets extended information about multiple devices not already Included in the Device Info API Read a Single Device's Extended Details:     Gets extended information about a specific device not already Included in the Device Info API</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4651,7 +3318,7 @@
           <maml:name>AgentInfo</maml:name>
           <maml:description>
             <maml:para>Target the info agent endpoint</maml:para>
-            <maml:para>Only needed when limiting general search by id, to give the parameter set a unique value.</maml:para>
+            <maml:para>Only needed when limiting general search by id, to give the parameter set a unique value</maml:para>
             <maml:para>/Inventory/device/info &amp; /Inventory/device/info</maml:para>
           </maml:description>
           <dev:type>
@@ -4764,7 +3431,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>FilterStateKnown</maml:name>
           <maml:description>
-            <maml:para>Filter by devices with recently updated data, for more consistent results.</maml:para>
+            <maml:para>Filter by devices with recently updated data, for more consistent results</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -4802,7 +3469,7 @@
           <maml:name>AgentInfo</maml:name>
           <maml:description>
             <maml:para>Target the info agent endpoint</maml:para>
-            <maml:para>Only needed when limiting general search by id, to give the parameter set a unique value.</maml:para>
+            <maml:para>Only needed when limiting general search by id, to give the parameter set a unique value</maml:para>
             <maml:para>/Inventory/device/info &amp; /Inventory/device/info</maml:para>
           </maml:description>
           <dev:type>
@@ -4928,7 +3595,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>FilterStateKnown</maml:name>
           <maml:description>
-            <maml:para>Filter by devices with recently updated data, for more consistent results.</maml:para>
+            <maml:para>Filter by devices with recently updated data, for more consistent results</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -5368,7 +4035,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>FilterStateKnown</maml:name>
         <maml:description>
-          <maml:para>Filter by devices with recently updated data, for more consistent results.</maml:para>
+          <maml:para>Filter by devices with recently updated data, for more consistent results</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -5433,7 +4100,7 @@
         <maml:name>AgentInfo</maml:name>
         <maml:description>
           <maml:para>Target the info agent endpoint</maml:para>
-          <maml:para>Only needed when limiting general search by id, to give the parameter set a unique value.</maml:para>
+          <maml:para>Only needed when limiting general search by id, to give the parameter set a unique value</maml:para>
           <maml:para>/Inventory/device/info &amp; /Inventory/device/info</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
@@ -5561,7 +4228,7 @@
         <maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
         <dev:code>Get-AuvikDevice -PageFirst 1000 -AllResults</dev:code>
         <dev:remarks>
-          <maml:para>Gets general information for all devices found by Auvik.</maml:para>
+          <maml:para>Gets general information for all devices found by Auvik</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -5582,7 +4249,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-AuvikDeviceLifecycle cmdlet allows you to view an inventory of devices and other related information discovered by Auvik.</maml:para>
+      <maml:para>The Get-AuvikDeviceLifecycle cmdlet allows you to view an inventory of devices and other related information discovered by Auvik</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -5897,7 +4564,7 @@
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
         <dev:code>Get-AuvikDeviceLifecycle -PageFirst 1000 -AllResults</dev:code>
         <dev:remarks>
-          <maml:para>Gets general lifecycle information for all devices found by Auvik.</maml:para>
+          <maml:para>Gets general lifecycle information for all devices found by Auvik</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -5918,7 +4585,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-AuvikDeviceWarranty cmdlet allows you to view an inventory of devices and other related information discovered by Auvik.</maml:para>
+      <maml:para>The Get-AuvikDeviceWarranty cmdlet allows you to view an inventory of devices and other related information discovered by Auvik</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -6175,7 +4842,7 @@
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
         <dev:code>Get-AuvikDeviceWarranty -PageFirst 1000 -AllResults</dev:code>
         <dev:remarks>
-          <maml:para>Gets general warranty information for all devices found by Auvik.</maml:para>
+          <maml:para>Gets general warranty information for all devices found by Auvik</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -6196,8 +4863,8 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-AuvikEntity cmdlet allows you to view Notes and audit trails associated with the entities (devices, networks, and interfaces) that have been discovered by Auvik.</maml:para>
-      <maml:para>Use the [ -Audits &amp; -Notes  ] parameters when wanting to target specific information.</maml:para>
+      <maml:para>The Get-AuvikEntity cmdlet allows you to view Notes and audit trails associated with the entities (devices, networks, and interfaces) that have been discovered by Auvik</maml:para>
+      <maml:para>Use the [ -Audits &amp; -Notes  ] parameters when wanting to target specific information</maml:para>
       <maml:para>See Get-Help Get-AuvikEntity -Full for more information on associated parameters</maml:para>
     </maml:description>
     <command:syntax>
@@ -6756,7 +5423,7 @@
         <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
         <dev:code>Get-AuvikEntity -PageFirst 1000 -AllResults</dev:code>
         <dev:remarks>
-          <maml:para>Gets general information for all note entities found by Auvik.</maml:para>
+          <maml:para>Gets general information for all note entities found by Auvik</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -6777,7 +5444,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-AuvikInterface cmdlet allows you to view an inventory of interfaces and other related information discovered by Auvik.</maml:para>
+      <maml:para>The Get-AuvikInterface cmdlet allows you to view an inventory of interfaces and other related information discovered by Auvik</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -7111,7 +5778,7 @@
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
         <dev:code>Get-AuvikInterface -PageFirst 1000 -AllResults</dev:code>
         <dev:remarks>
-          <maml:para>Gets general information for all interfaces found by Auvik.</maml:para>
+          <maml:para>Gets general information for all interfaces found by Auvik</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -7132,7 +5799,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-AuvikNetwork cmdlet allows you to view an inventory of networks and other related information discovered by Auvik.</maml:para>
+      <maml:para>The Get-AuvikNetwork cmdlet allows you to view an inventory of networks and other related information discovered by Auvik</maml:para>
       <maml:para>Use the [ -NetworkDetails &amp; -NetworkInfo  ] parameters when wanting to target specific information. See Get-Help Get-AuvikNetwork -Full for more information on associated parameters</maml:para>
     </maml:description>
     <command:syntax>
@@ -7193,7 +5860,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>FieldsNetworkDetail</maml:name>
           <maml:description>
-            <maml:para>Use to limit the attributes that will be returned in the Included detail object to only what is specified by this query parameter.</maml:para>
+            <maml:para>Use to limit the attributes that will be returned in the Included detail object to only what is specified by this query parameter</maml:para>
             <maml:para>Allowed values:     "scope", "primaryCollector", "secondaryCollectors", "collectorSelection", "excludedIpAddresses"</maml:para>
             <maml:para>Requires Include=networkDetail</maml:para>
           </maml:description>
@@ -7298,7 +5965,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>FieldsNetworkDetail</maml:name>
           <maml:description>
-            <maml:para>Use to limit the attributes that will be returned in the Included detail object to only what is specified by this query parameter.</maml:para>
+            <maml:para>Use to limit the attributes that will be returned in the Included detail object to only what is specified by this query parameter</maml:para>
             <maml:para>Allowed values:     "scope", "primaryCollector", "secondaryCollectors", "collectorSelection", "excludedIpAddresses"</maml:para>
             <maml:para>Requires Include=networkDetail</maml:para>
           </maml:description>
@@ -7619,7 +6286,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>FieldsNetworkDetail</maml:name>
         <maml:description>
-          <maml:para>Use to limit the attributes that will be returned in the Included detail object to only what is specified by this query parameter.</maml:para>
+          <maml:para>Use to limit the attributes that will be returned in the Included detail object to only what is specified by this query parameter</maml:para>
           <maml:para>Allowed values:     "scope", "primaryCollector", "secondaryCollectors", "collectorSelection", "excludedIpAddresses"</maml:para>
           <maml:para>Requires Include=networkDetail</maml:para>
         </maml:description>
@@ -7777,11 +6444,11 @@
       <command:verb>Get</command:verb>
       <command:noun>AuvikSNMPPollerDevice</command:noun>
       <maml:description>
-        <maml:para>Provides Details about all the devices associated to a specific SNMP Poller Setting.</maml:para>
+        <maml:para>Provides Details about all the devices associated to a specific SNMP Poller Setting</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-AuvikSNMPPollerDevice cmdlet provides Details about all the devices associated to a specific SNMP Poller Setting.</maml:para>
+      <maml:para>The Get-AuvikSNMPPollerDevice cmdlet provides Details about all the devices associated to a specific SNMP Poller Setting</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -7875,7 +6542,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
           <maml:name>FilterNotSeenSince</maml:name>
           <maml:description>
-            <maml:para>Filter by the last seen online time, returning entities not seen online after the provided value.</maml:para>
+            <maml:para>Filter by the last seen online time, returning entities not seen online after the provided value</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
           <dev:type>
@@ -8001,7 +6668,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
         <maml:name>FilterNotSeenSince</maml:name>
         <maml:description>
-          <maml:para>Filter by the last seen online time, returning entities not seen online after the provided value.</maml:para>
+          <maml:para>Filter by the last seen online time, returning entities not seen online after the provided value</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
         <dev:type>
@@ -8629,11 +7296,11 @@
       <command:verb>Get</command:verb>
       <command:noun>AuvikSNMPPollerSetting</command:noun>
       <maml:description>
-        <maml:para>Provides Details about one or more SNMP Poller Settings.</maml:para>
+        <maml:para>Provides Details about one or more SNMP Poller Settings</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-AuvikSNMPPollerSetting cmdlet provides Details about one or more SNMP Poller Settings.</maml:para>
+      <maml:para>The Get-AuvikSNMPPollerSetting cmdlet provides Details about one or more SNMP Poller Settings</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -9043,6 +7710,1242 @@
       <maml:navigationLink>
         <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPollerSetting.html</maml:linkText>
         <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPollerSetting.html</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-AuvikASMApplication</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>AuvikASMApplication</command:noun>
+      <maml:description>
+        <maml:para>Get Auvik ASM application information</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-AuvikASMApplication cmdlet gets multiple ASM applications' info to retrieve the information related to the SaaS applications discovered within an ASM client deployment</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-AuvikASMApplication</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+          <maml:name>FilterClientId</maml:name>
+          <maml:description>
+            <maml:para>Filter by client ID</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="10" aliases="none">
+          <maml:name>PageLast</maml:name>
+          <maml:description>
+            <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
+            <maml:para>Default Value: 100</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="11" aliases="none">
+          <maml:name>PageBefore</maml:name>
+          <maml:description>
+            <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>FilterDateAddedBefore</maml:name>
+          <maml:description>
+            <maml:para>Return applications added before this date</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>FilterDateAddedAfter</maml:name>
+          <maml:description>
+            <maml:para>Return applications added after this date</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>FilterQueryDate</maml:name>
+          <maml:description>
+            <maml:para>Return associated breaches added after this date</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+          <maml:name>FilterUserLastUsedAfter</maml:name>
+          <maml:description>
+            <maml:para>Return associated users added after this date</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+          <maml:name>FilterUserLastUsedBefore</maml:name>
+          <maml:description>
+            <maml:para>Return associated users before this date</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+          <maml:name>Include</maml:name>
+          <maml:description>
+            <maml:para>Use to include extended details of the application or of its related objects</maml:para>
+            <maml:para>Allowed values:     "all" "breaches" "users" "contracts" "publisher" "accessData"</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
+          <maml:name>PageFirst</maml:name>
+          <maml:description>
+            <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
+            <maml:para>Default Value: 100</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
+          <maml:name>PageAfter</maml:name>
+          <maml:description>
+            <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AllResults</maml:name>
+          <maml:description>
+            <maml:para>Returns all items from an endpoint</maml:para>
+            <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+        <maml:name>FilterClientId</maml:name>
+        <maml:description>
+          <maml:para>Filter by client ID</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>FilterDateAddedBefore</maml:name>
+        <maml:description>
+          <maml:para>Return applications added before this date</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>FilterDateAddedAfter</maml:name>
+        <maml:description>
+          <maml:para>Return applications added after this date</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <maml:name>FilterQueryDate</maml:name>
+        <maml:description>
+          <maml:para>Return associated breaches added after this date</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <maml:name>FilterUserLastUsedAfter</maml:name>
+        <maml:description>
+          <maml:para>Return associated users added after this date</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+        <maml:name>FilterUserLastUsedBefore</maml:name>
+        <maml:description>
+          <maml:para>Return associated users before this date</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+        <maml:name>Include</maml:name>
+        <maml:description>
+          <maml:para>Use to include extended details of the application or of its related objects</maml:para>
+          <maml:para>Allowed values:     "all" "breaches" "users" "contracts" "publisher" "accessData"</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
+        <maml:name>PageFirst</maml:name>
+        <maml:description>
+          <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
+          <maml:para>Default Value: 100</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
+        <maml:name>PageAfter</maml:name>
+        <maml:description>
+          <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="10" aliases="none">
+        <maml:name>PageLast</maml:name>
+        <maml:description>
+          <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
+          <maml:para>Default Value: 100</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="11" aliases="none">
+        <maml:name>PageBefore</maml:name>
+        <maml:description>
+          <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AllResults</maml:name>
+        <maml:description>
+          <maml:para>Returns all items from an endpoint</maml:para>
+          <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>N\A</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-AuvikASMApplication</dev:code>
+        <dev:remarks>
+          <maml:para>Get Auvik ASM application information</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>Get-AuvikASMApplication -PageFirst 1000 -AllResults</dev:code>
+        <dev:remarks>
+          <maml:para>Get Auvik ASM application information for all devices found by Auvik</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMApplication.html</maml:linkText>
+        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMApplication.html</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-AuvikASMClient</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>AuvikASMClient</command:noun>
+      <maml:description>
+        <maml:para>Get Auvik ASM meta client information</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-AuvikASMClient cmdlet gets multiple ASM meta clients' info to retrieve the information related to the SaaS meta clients discovered within an ASM client deployment</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-AuvikASMClient</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Include</maml:name>
+          <maml:description>
+            <maml:para>Use to include extended details of the client</maml:para>
+            <maml:para>Allowed values:     "totals"</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>FilterQueryDate</maml:name>
+          <maml:description>
+            <maml:para>Only count breaches added after this date. Only useful when include=totals is set</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>PageFirst</maml:name>
+          <maml:description>
+            <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
+            <maml:para>Default Value: 100</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>PageAfter</maml:name>
+          <maml:description>
+            <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+          <maml:name>PageLast</maml:name>
+          <maml:description>
+            <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
+            <maml:para>Default Value: 100</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+          <maml:name>PageBefore</maml:name>
+          <maml:description>
+            <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AllResults</maml:name>
+          <maml:description>
+            <maml:para>Returns all items from an endpoint</maml:para>
+            <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Include</maml:name>
+        <maml:description>
+          <maml:para>Use to include extended details of the client</maml:para>
+          <maml:para>Allowed values:     "totals"</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>FilterQueryDate</maml:name>
+        <maml:description>
+          <maml:para>Only count breaches added after this date. Only useful when include=totals is set</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>PageFirst</maml:name>
+        <maml:description>
+          <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
+          <maml:para>Default Value: 100</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <maml:name>PageAfter</maml:name>
+        <maml:description>
+          <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <maml:name>PageLast</maml:name>
+        <maml:description>
+          <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
+          <maml:para>Default Value: 100</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+        <maml:name>PageBefore</maml:name>
+        <maml:description>
+          <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AllResults</maml:name>
+        <maml:description>
+          <maml:para>Returns all items from an endpoint</maml:para>
+          <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>N\A</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-AuvikASMClient</dev:code>
+        <dev:remarks>
+          <maml:para>Get Auvik ASM meta client information</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>Get-AuvikASMClient -PageFirst 1000 -AllResults</dev:code>
+        <dev:remarks>
+          <maml:para>Get Auvik ASM meta client information for all devices found by Auvik</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMClient.html</maml:linkText>
+        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMClient.html</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-AuvikASMSecurityLog</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>AuvikASMSecurityLog</command:noun>
+      <maml:description>
+        <maml:para>Get Auvik ASM security log information</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-AuvikASMSecurityLog cmdlet gets multiple ASM security logs' info to retrieve the information related to the SaaS applications discovered within an ASM client deployment</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-AuvikASMSecurityLog</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+          <maml:name>FilterClientId</maml:name>
+          <maml:description>
+            <maml:para>Filter by client ID</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>Include</maml:name>
+          <maml:description>
+            <maml:para>Use to include extended details of the security log or of its related objects</maml:para>
+            <maml:para>Allowed values:     "users" "applications"</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>FilterQueryDate</maml:name>
+          <maml:description>
+            <maml:para>Return associated breaches added after this date</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>PageFirst</maml:name>
+          <maml:description>
+            <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
+            <maml:para>Default Value: 100</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+          <maml:name>PageAfter</maml:name>
+          <maml:description>
+            <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+          <maml:name>PageLast</maml:name>
+          <maml:description>
+            <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
+            <maml:para>Default Value: 100</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+          <maml:name>PageBefore</maml:name>
+          <maml:description>
+            <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AllResults</maml:name>
+          <maml:description>
+            <maml:para>Returns all items from an endpoint</maml:para>
+            <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+        <maml:name>FilterClientId</maml:name>
+        <maml:description>
+          <maml:para>Filter by client ID</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>Include</maml:name>
+        <maml:description>
+          <maml:para>Use to include extended details of the security log or of its related objects</maml:para>
+          <maml:para>Allowed values:     "users" "applications"</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>FilterQueryDate</maml:name>
+        <maml:description>
+          <maml:para>Return associated breaches added after this date</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <maml:name>PageFirst</maml:name>
+        <maml:description>
+          <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
+          <maml:para>Default Value: 100</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <maml:name>PageAfter</maml:name>
+        <maml:description>
+          <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+        <maml:name>PageLast</maml:name>
+        <maml:description>
+          <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
+          <maml:para>Default Value: 100</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+        <maml:name>PageBefore</maml:name>
+        <maml:description>
+          <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AllResults</maml:name>
+        <maml:description>
+          <maml:para>Returns all items from an endpoint</maml:para>
+          <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>N\A</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-AuvikASMSecurityLog</dev:code>
+        <dev:remarks>
+          <maml:para>Get Auvik ASM security log information</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>Get-AuvikASMSecurityLog -PageFirst 1000 -AllResults</dev:code>
+        <dev:remarks>
+          <maml:para>Get Auvik ASM security log information for all devices found by Auvik</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMSecurityLog.html</maml:linkText>
+        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMSecurityLog.html</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-AuvikASMTag</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>AuvikASMTag</command:noun>
+      <maml:description>
+        <maml:para>Get Auvik ASM tag information</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-AuvikASMTag cmdlet gets multiple ASM applications' info to retrieve the information related to the SaaS applications discovered within an ASM client deployment</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-AuvikASMTag</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+          <maml:name>FilterClientId</maml:name>
+          <maml:description>
+            <maml:para>Filter by client ID</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="2" aliases="none">
+          <maml:name>FilterApplicationId</maml:name>
+          <maml:description>
+            <maml:para>Filter by application ID</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>PageFirst</maml:name>
+          <maml:description>
+            <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
+            <maml:para>Default Value: 100</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>PageAfter</maml:name>
+          <maml:description>
+            <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+          <maml:name>PageLast</maml:name>
+          <maml:description>
+            <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
+            <maml:para>Default Value: 100</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+          <maml:name>PageBefore</maml:name>
+          <maml:description>
+            <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AllResults</maml:name>
+          <maml:description>
+            <maml:para>Returns all items from an endpoint</maml:para>
+            <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+        <maml:name>FilterClientId</maml:name>
+        <maml:description>
+          <maml:para>Filter by client ID</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="2" aliases="none">
+        <maml:name>FilterApplicationId</maml:name>
+        <maml:description>
+          <maml:para>Filter by application ID</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>PageFirst</maml:name>
+        <maml:description>
+          <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
+          <maml:para>Default Value: 100</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <maml:name>PageAfter</maml:name>
+        <maml:description>
+          <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <maml:name>PageLast</maml:name>
+        <maml:description>
+          <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
+          <maml:para>Default Value: 100</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+        <maml:name>PageBefore</maml:name>
+        <maml:description>
+          <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AllResults</maml:name>
+        <maml:description>
+          <maml:para>Returns all items from an endpoint</maml:para>
+          <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>N\A</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-AuvikASMTag</dev:code>
+        <dev:remarks>
+          <maml:para>Get Auvik ASM tag information</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>Get-AuvikASMTag -PageFirst 1000 -AllResults</dev:code>
+        <dev:remarks>
+          <maml:para>Get Auvik ASM tag information for all devices found by Auvik</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html</maml:linkText>
+        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-AuvikASMUser</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>AuvikASMUser</command:noun>
+      <maml:description>
+        <maml:para>Get Auvik ASM user information</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-AuvikASMUser cmdlet gets information about any monitored users that exist within a specific Auvik SaaS Management tenant</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-AuvikASMUser</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+          <maml:name>FilterClientId</maml:name>
+          <maml:description>
+            <maml:para>Filter by client ID</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>PageFirst</maml:name>
+          <maml:description>
+            <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
+            <maml:para>Default Value: 100</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>PageAfter</maml:name>
+          <maml:description>
+            <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>PageLast</maml:name>
+          <maml:description>
+            <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
+            <maml:para>Default Value: 100</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+          <maml:name>PageBefore</maml:name>
+          <maml:description>
+            <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AllResults</maml:name>
+          <maml:description>
+            <maml:para>Returns all items from an endpoint</maml:para>
+            <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+        <maml:name>FilterClientId</maml:name>
+        <maml:description>
+          <maml:para>Filter by client ID</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>PageFirst</maml:name>
+        <maml:description>
+          <maml:para>For paginated responses, the first N elements will be returned Used in combination with page[after]</maml:para>
+          <maml:para>Default Value: 100</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>PageAfter</maml:name>
+        <maml:description>
+          <maml:para>Cursor after which elements will be returned as a page The page size is provided by page[first]</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <maml:name>PageLast</maml:name>
+        <maml:description>
+          <maml:para>For paginated responses, the last N services will be returned Used in combination with page[before]</maml:para>
+          <maml:para>Default Value: 100</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <maml:name>PageBefore</maml:name>
+        <maml:description>
+          <maml:para>Cursor before which elements will be returned as a page The page size is provided by page[last]</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AllResults</maml:name>
+        <maml:description>
+          <maml:para>Returns all items from an endpoint</maml:para>
+          <maml:para>Highly recommended to only use with filters to reduce API errors\timeouts</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>N\A</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-AuvikASMUser</dev:code>
+        <dev:remarks>
+          <maml:para>Get Auvik ASM user information</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>Get-AuvikASMUser -PageFirst 1000 -AllResults</dev:code>
+        <dev:remarks>
+          <maml:para>Get Auvik ASM user information for all devices found by Auvik</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMUser.html</maml:linkText>
+        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMUser.html</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

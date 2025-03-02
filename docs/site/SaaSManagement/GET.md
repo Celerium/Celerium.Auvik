@@ -1,5 +1,5 @@
 ---
 title: GET
-parent: asm
+parent: SaaSManagement
 has_children: true
 ---

@@ -1,5 +1,5 @@
 ---
 title: POST
-parent: inventory
+parent: Inventory
 has_children: true
 ---

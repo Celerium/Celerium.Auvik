@@ -1,5 +1,5 @@
 ---
 title: POST
-parent: statistics
+parent: Statistics
 has_children: true
 ---

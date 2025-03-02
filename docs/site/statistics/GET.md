@@ -1,5 +1,5 @@
 ---
 title: GET
-parent: statistics
+parent: Statistics
 has_children: true
 ---

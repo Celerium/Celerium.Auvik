@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: pollers
+grand_parent: Pollers
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/pollers/Get-AuvikSNMPPollerHistory.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPollerHistory.html
 parent: GET
 schema: 2.0.0
 title: Get-AuvikSNMPPollerHistory
