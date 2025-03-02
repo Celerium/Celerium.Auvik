@@ -55,5 +55,5 @@ N\A
 
 ## RELATED LINKS
 
-[https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikCredential.html](https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikCredential.html)
+[https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikAPICredential.html](https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikAPICredential.html)
 

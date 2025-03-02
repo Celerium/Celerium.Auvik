@@ -3531,7 +3531,7 @@ function Test-AuvikAPICredential {
         N\A
 
     .LINK
-        https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikCredential.html
+        https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikAPICredential.html
 #>
 
     [CmdletBinding()]

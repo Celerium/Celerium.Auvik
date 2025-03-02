@@ -6429,12 +6429,8 @@
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
+        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikAPICredential.html</maml:linkText>
         <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikAPICredential.html</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikCredential.html</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikCredential.html</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
