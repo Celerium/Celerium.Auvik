@@ -2049,10 +2049,6 @@
         <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Internal/New-AuvikAESSecret.html</maml:linkText>
         <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Internal/New-AuvikAESSecret.html</maml:uri>
       </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>https://github.com/Celerium/Celerium.Auvik</maml:linkText>
-        <maml:uri>https://github.com/Celerium/Celerium.Auvik</maml:uri>
-      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -2386,13 +2382,12 @@
       <command:verb>Set</command:verb>
       <command:noun>AuvikAPIKey</command:noun>
       <maml:description>
-        <maml:para>Creates a AES encrypted API key and decipher key</maml:para>
+        <maml:para>Sets the API username and API key used to authenticate API calls</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The New-AuvikAESSecret cmdlet creates a AES encrypted API key and decipher key</maml:para>
-      <maml:para>This allows the key to be exported for use on other systems without relying on Windows DPAPI</maml:para>
-      <maml:para>Do NOT share the decipher key with anyone as this will allow them to decrypt the encrypted API key</maml:para>
+      <maml:para>The Add-AuvikAPIKey cmdlet sets the API username and API key used to authenticate all API calls made to Auvik</maml:para>
+      <maml:para>The Auvik API username &amp; API keys are generated via the Auvik portal at Admin &gt; Integrations</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2404,15 +2399,29 @@
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>N/A</maml:para>
+        <maml:para>N\A</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>New-AuvikAESSecret</dev:code>
+        <dev:code>Add-AuvikAPIKey -Username 'Celerium@Celerium.org'</dev:code>
         <dev:remarks>
-          <maml:para>Prompts to enter in the API key which will be encrypted using a randomly generated 256-bit AES key</maml:para>
+          <maml:para>The Auvik API will use the string entered into the [ -Username ] parameter as the username &amp; will then prompt to enter in the secret key</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>'Celerium@Celerium.org' | Add-AuvikAPIKey</dev:code>
+        <dev:remarks>
+          <maml:para>The Auvik API will use the string entered as the secret key &amp; will prompt to enter in the public key</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>Add-AuvikAPIKey -EncryptedStandardAPIKeyFilePath 'C:\path\to\encrypted\key.txt' -EncryptedStandardAESKeyPath 'C:\path\to\decipher\key.txt'</dev:code>
+        <dev:remarks>
+          <maml:para>Decrypts the AES API key and stores it in the global variable</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2422,12 +2431,8 @@
         <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Internal/Set-AuvikAPIKey.html</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Internal/New-AuvikAESSecret.html</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Internal/New-AuvikAESSecret.html</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>https://github.com/Celerium/Celerium.Auvik</maml:linkText>
-        <maml:uri>https://github.com/Celerium/Celerium.Auvik</maml:uri>
+        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Internal/Add-AuvikAPIKey.html</maml:linkText>
+        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Internal/Add-AuvikAPIKey.html</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

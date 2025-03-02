@@ -121,5 +121,3 @@ N/A
 
 [https://celerium.github.io/Celerium.Auvik/site/Internal/New-AuvikAESSecret.html](https://celerium.github.io/Celerium.Auvik/site/Internal/New-AuvikAESSecret.html)
 
-[https://github.com/Celerium/Celerium.Auvik](https://github.com/Celerium/Celerium.Auvik)
-

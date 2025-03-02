@@ -555,20 +555,15 @@ function New-AuvikAESSecret {
 
         Prompts to enter in the API key which will be encrypted using a randomly generated 256-bit AES key
 
-
     .NOTES
         N/A
 
     .LINK
         https://celerium.github.io/Celerium.Auvik/site/Internal/New-AuvikAESSecret.html
 
-    .LINK
-        https://github.com/Celerium/Celerium.Auvik
-
 #>
 
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
-    [Alias('Set-AuvikAPIKey')]
     Param (
         [Parameter(Mandatory = $false)]
         [ValidateSet(16, 24, 32)]
@@ -612,7 +607,7 @@ function New-AuvikAESSecret {
     end {}
 
 }
-#EndRegion '.\Private\APIKeys\New-AuvikAESSecret.ps1' 90
+#EndRegion '.\Private\APIKeys\New-AuvikAESSecret.ps1' 85
 #Region '.\Private\APIKeys\Remove-AuvikAPIKey.ps1' -1
 
 function Remove-AuvikAPIKey {

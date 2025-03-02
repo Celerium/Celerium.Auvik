@@ -11,27 +11,39 @@ title: Set-AuvikAPIKey
 # Set-AuvikAPIKey
 
 ## SYNOPSIS
-Creates a AES encrypted API key and decipher key
+Sets the API username and API key used to authenticate API calls
 
 ## SYNTAX
 
 ## DESCRIPTION
-The New-AuvikAESSecret cmdlet creates a AES encrypted API key and decipher key
+The Add-AuvikAPIKey cmdlet sets the API username and API key used to
+authenticate all API calls made to Auvik
 
-This allows the key to be exported for use on other systems without
-relying on Windows DPAPI
-
-Do NOT share the decipher key with anyone as this will allow them to decrypt
-the encrypted API key
+The Auvik API username & API keys are generated via the Auvik portal at Admin \> Integrations
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```powershell
-New-AuvikAESSecret
+Add-AuvikAPIKey -Username 'Celerium@Celerium.org'
 ```
 
-Prompts to enter in the API key which will be encrypted using a randomly generated 256-bit AES key
+The Auvik API will use the string entered into the \[ -Username \] parameter as the
+username & will then prompt to enter in the secret key
+
+### EXAMPLE 2
+```
+'Celerium@Celerium.org' | Add-AuvikAPIKey
+```
+
+The Auvik API will use the string entered as the secret key & will prompt to enter in the public key
+
+### EXAMPLE 3
+```powershell
+Add-AuvikAPIKey -EncryptedStandardAPIKeyFilePath 'C:\path\to\encrypted\key.txt' -EncryptedStandardAESKeyPath 'C:\path\to\decipher\key.txt'
+```
+
+Decrypts the AES API key and stores it in the global variable
 
 ## PARAMETERS
 
@@ -43,11 +55,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-N/A
+N\A
 
 ## RELATED LINKS
 
-[https://celerium.github.io/Celerium.Auvik/site/Internal/New-AuvikAESSecret.html](https://celerium.github.io/Celerium.Auvik/site/Internal/New-AuvikAESSecret.html)
-
-[https://github.com/Celerium/Celerium.Auvik](https://github.com/Celerium/Celerium.Auvik)
+[https://celerium.github.io/Celerium.Auvik/site/Internal/Add-AuvikAPIKey.html](https://celerium.github.io/Celerium.Auvik/site/Internal/Add-AuvikAPIKey.html)
 
