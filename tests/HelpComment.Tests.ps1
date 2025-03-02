@@ -211,14 +211,20 @@ Describe "Testing the [ $buildTarget ] version of [ $moduleName ] with [ $pester
 
             It "[ $functionName ] link should return 200" {
 
-                try {
-                    $Link = Invoke-WebRequest -Uri $help_Function.relatedLinks.navigationLink.uri -UseBasicParsing -ErrorAction SilentlyContinue
-                }
-                catch [System.Net.WebException] {
-                    $Link = $_.Exception.Response.StatusCode.Value__
-                }
+                $FunctionUris = $help_Function.relatedLinks.navigationLink.uri
 
-                $Link.StatusCode | Should -Be '200'
+                foreach ($Uri in $FunctionUris) {
+
+                    try {
+                        $Link = Invoke-WebRequest -Uri $Uri -UseBasicParsing -ErrorAction SilentlyContinue
+                    }
+                    catch [System.Net.WebException] {
+                        Write-Warning "Bad Uri - [ $Uri ]"
+                        $Link = $_.Exception.Response.StatusCode.Value__
+                    }
+
+                    $Link.StatusCode | Should -Be '200'
+                }
 
             }
 
