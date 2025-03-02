@@ -133,7 +133,7 @@ Removes the Auvik base URI global variable
 ### [Remove-AuvikModuleSetting](site/Internal/Remove-AuvikModuleSetting.md)
 Removes the stored Auvik configuration folder
 
-### [Test-AuvikAPICredential](site/Internal/Test-AuvikAPICredential.md)
+### [Test-AuvikAPICredential](site/Other/Test-AuvikAPICredential.md)
 Verify that your credentials are correct before making a call to an endpoint
 
 

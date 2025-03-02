@@ -2492,58 +2492,6 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Test-AuvikAPICredential</command:name>
-      <command:verb>Test</command:verb>
-      <command:noun>AuvikAPICredential</command:noun>
-      <maml:description>
-        <maml:para>Verify that your credentials are correct before making a call to an endpoint</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>The Get-AuvikCredential cmdlet Verifies that your credentials are correct before making a call to an endpoint</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Test-AuvikAPICredential</maml:name>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters />
-    <command:inputTypes />
-    <command:returnValues />
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para>N\A</maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-AuvikCredential</dev:code>
-        <dev:remarks>
-          <maml:para>Gets general information about multiple multi-clients and clients associated with your Auvik user account</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-AuvikCredential</dev:code>
-        <dev:remarks>
-          <maml:para>Verify that your credentials are correct before making a call to an endpoint</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Internal/Test-AuvikAPICredential.html</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Other/Get-AuvikCredential.html</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Other/Get-AuvikCredential.html</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
       <command:name>Get-AuvikComponent</command:name>
       <command:verb>Get</command:verb>
       <command:noun>AuvikComponent</command:noun>
@@ -6435,6 +6383,58 @@
       <maml:navigationLink>
         <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Inventory/Get-AuvikNetwork.html</maml:linkText>
         <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Inventory/Get-AuvikNetwork.html</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Test-AuvikAPICredential</command:name>
+      <command:verb>Test</command:verb>
+      <command:noun>AuvikAPICredential</command:noun>
+      <maml:description>
+        <maml:para>Verify that your credentials are correct before making a call to an endpoint</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-AuvikCredential cmdlet Verifies that your credentials are correct before making a call to an endpoint</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Test-AuvikAPICredential</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>N\A</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-AuvikCredential</dev:code>
+        <dev:remarks>
+          <maml:para>Gets general information about multiple multi-clients and clients associated with your Auvik user account</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>Get-AuvikCredential</dev:code>
+        <dev:remarks>
+          <maml:para>Verify that your credentials are correct before making a call to an endpoint</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikAPICredential.html</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikCredential.html</maml:linkText>
+        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikCredential.html</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

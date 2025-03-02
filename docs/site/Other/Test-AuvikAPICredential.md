@@ -1,8 +1,8 @@
 ---
 external help file: Celerium.Auvik-help.xml
-grand_parent: Internal
+grand_parent: Other
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/Internal/Test-AuvikAPICredential.html
+online version: https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikAPICredential.html
 parent: GET
 schema: 2.0.0
 title: Test-AuvikAPICredential
@@ -55,5 +55,5 @@ N\A
 
 ## RELATED LINKS
 
-[https://celerium.github.io/Celerium.Auvik/site/Other/Get-AuvikCredential.html](https://celerium.github.io/Celerium.Auvik/site/Other/Get-AuvikCredential.html)
+[https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikCredential.html](https://celerium.github.io/Celerium.Auvik/site/Other/Test-AuvikCredential.html)
 
