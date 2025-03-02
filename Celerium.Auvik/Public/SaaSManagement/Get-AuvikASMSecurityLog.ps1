@@ -12,7 +12,7 @@ function Get-AuvikASMSecurityLog {
             Filter by client ID
 
         .PARAMETER Include
-            Use to include extended details of the security log or of its related objects.
+            Use to include extended details of the security log or of its related objects
 
             Allowed values:
                 "users" "applications"

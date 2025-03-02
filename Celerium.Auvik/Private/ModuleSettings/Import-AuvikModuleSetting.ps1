@@ -1,23 +1,23 @@
 function Import-AuvikModuleSetting {
 <#
     .SYNOPSIS
-        Imports the Auvik BaseURI, API, & JSON configuration information to the current session.
+        Imports the Auvik BaseURI, API, & JSON configuration information to the current session
 
     .DESCRIPTION
         The Import-AuvikModuleSetting cmdlet imports the Auvik BaseURI, API, & JSON configuration
-        information stored in the Auvik configuration file to the users current session.
+        information stored in the Auvik configuration file to the users current session
 
         By default the configuration file is stored in the following location:
             $env:USERPROFILE\Celerium.Auvik
 
     .PARAMETER AuvikConfPath
-        Define the location to store the Auvik configuration file.
+        Define the location to store the Auvik configuration file
 
         By default the configuration file is stored in the following location:
             $env:USERPROFILE\Celerium.Auvik
 
     .PARAMETER AuvikConfFile
-        Define the name of the Auvik configuration file.
+        Define the name of the Auvik configuration file
 
         By default the configuration file is named:
             config.psd1
@@ -26,7 +26,7 @@ function Import-AuvikModuleSetting {
         Import-AuvikModuleSetting
 
         Validates that the configuration file created with the Export-AuvikModuleSetting cmdlet exists
-        then imports the stored data into the current users session.
+        then imports the stored data into the current users session
 
         The default location of the Auvik configuration file is:
             $env:USERPROFILE\Celerium.Auvik\config.psd1
@@ -35,7 +35,7 @@ function Import-AuvikModuleSetting {
         Import-AuvikModuleSetting -AuvikConfPath C:\Celerium.Auvik -AuvikConfFile MyConfig.psd1
 
         Validates that the configuration file created with the Export-AuvikModuleSetting cmdlet exists
-        then imports the stored data into the current users session.
+        then imports the stored data into the current users session
 
         The location of the Auvik configuration file in this example is:
             C:\Celerium.Auvik\MyConfig.psd1

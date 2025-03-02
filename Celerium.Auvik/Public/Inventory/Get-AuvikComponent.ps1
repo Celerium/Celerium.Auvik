@@ -5,7 +5,7 @@ function Get-AuvikComponent {
 
     .DESCRIPTION
         The Get-AuvikComponent cmdlet allows you to view an inventory of
-        components and other related information discovered by Auvik.
+        components and other related information discovered by Auvik
 
     .PARAMETER ID
         ID of component
@@ -68,7 +68,7 @@ function Get-AuvikComponent {
     .EXAMPLE
         Get-AuvikComponent -PageFirst 1000 -AllResults
 
-        Gets general information for all components found by Auvik.
+        Gets general information for all components found by Auvik
 
     .NOTES
         N\A

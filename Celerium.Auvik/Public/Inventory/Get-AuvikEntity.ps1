@@ -6,10 +6,10 @@ function Get-AuvikEntity {
     .DESCRIPTION
         The Get-AuvikEntity cmdlet allows you to view Notes and audit trails associated
         with the entities (devices, networks, and interfaces) that have been discovered
-        by Auvik.
+        by Auvik
 
         Use the [ -Audits & -Notes  ] parameters when wanting to target
-        specific information.
+        specific information
 
         See Get-Help Get-AuvikEntity -Full for more information on associated parameters
 
@@ -108,7 +108,7 @@ function Get-AuvikEntity {
     .EXAMPLE
         Get-AuvikEntity -PageFirst 1000 -AllResults
 
-        Gets general information for all note entities found by Auvik.
+        Gets general information for all note entities found by Auvik
 
     .NOTES
         N\A

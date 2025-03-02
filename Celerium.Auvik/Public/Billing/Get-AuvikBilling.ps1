@@ -21,7 +21,7 @@ function Get-AuvikBilling {
         Example: filter[thruDate]=2019-06-30
 
     .PARAMETER Tenants
-        Comma delimited list of tenant IDs to request info from.
+        Comma delimited list of tenant IDs to request info from
 
         Example: Tenants=199762235015168516,199762235015168004
 
@@ -32,18 +32,18 @@ function Get-AuvikBilling {
         Get-AuvikBilling -FilterFromDate 2023-09-01 -FilterThruDate 2023-09-30
 
         Gets a summary of a client's (and client's children if a multi-client)
-        usage for the given time range.
+        usage for the given time range
 
     .EXAMPLE
         Get-AuvikBilling -FilterFromDate 2023-09-01 -FilterThruDate 2023-09-30 -Tenants 12345,98765
 
         Gets a summary of the defined client's (and client's children if a multi-client)fromDate
-        usage for the given time range.
+        usage for the given time range
 
     .EXAMPLE
         Get-AuvikBilling -FilterFromDate 2023-09-01 -FilterThruDate 2023-09-30 -ID 123456789
 
-        Gets a summary of the define device id's usage for the given time range.
+        Gets a summary of the define device id's usage for the given time range
 
     .NOTES
         N\A

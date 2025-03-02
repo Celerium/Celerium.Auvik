@@ -2,11 +2,11 @@ function Get-AuvikSNMPPollerDevice {
 <#
     .SYNOPSIS
         Provides Details about all the devices associated to a
-        specific SNMP Poller Setting.
+        specific SNMP Poller Setting
 
     .DESCRIPTION
         The Get-AuvikSNMPPollerDevice cmdlet provides Details about all
-        the devices associated to a specific SNMP Poller Setting.
+        the devices associated to a specific SNMP Poller Setting
 
     .PARAMETER SNMPPollerSettingId
         ID of the SNMP Poller Setting that the devices apply to
@@ -25,7 +25,7 @@ function Get-AuvikSNMPPollerDevice {
 
     .PARAMETER FilterNotSeenSince
         Filter by the last seen online time, returning entities not
-        seen online after the provided value.
+        seen online after the provided value
 
     .PARAMETER FilterDeviceType
         Filter by device type

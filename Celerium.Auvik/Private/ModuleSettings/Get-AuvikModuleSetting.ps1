@@ -5,19 +5,19 @@ function Get-AuvikModuleSetting {
 
     .DESCRIPTION
         The Get-AuvikModuleSetting cmdlet gets the saved Auvik configuration settings
-        from the local system.
+        from the local system
 
         By default the configuration file is stored in the following location:
             $env:USERPROFILE\Celerium.Auvik
 
     .PARAMETER AuvikConfPath
-        Define the location to store the Auvik configuration file.
+        Define the location to store the Auvik configuration file
 
         By default the configuration file is stored in the following location:
             $env:USERPROFILE\Celerium.Auvik
 
     .PARAMETER AuvikConfFile
-        Define the name of the Auvik configuration file.
+        Define the name of the Auvik configuration file
 
         By default the configuration file is named:
             config.psd1

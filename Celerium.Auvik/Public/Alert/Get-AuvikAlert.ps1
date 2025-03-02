@@ -1,11 +1,11 @@
 function Get-AuvikAlert {
 <#
     .SYNOPSIS
-        Get Auvik alert events that have been triggered by your Auvik collector(s).
+        Get Auvik alert events that have been triggered by your Auvik collector(s)
 
     .DESCRIPTION
         The Get-AuvikAlert cmdlet allows you to view the alert events
-        that has been triggered by your Auvik collector(s).
+        that has been triggered by your Auvik collector(s)
 
     .PARAMETER ID
         ID of alert
@@ -87,7 +87,7 @@ function Get-AuvikAlert {
     .EXAMPLE
         Get-AuvikAlert -PageFirst 1000 -AllResults
 
-        Gets general information for all alerts found by Auvik.
+        Gets general information for all alerts found by Auvik
 
     .NOTES
         N\A

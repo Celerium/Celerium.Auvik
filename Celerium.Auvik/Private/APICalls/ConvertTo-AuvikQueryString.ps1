@@ -13,7 +13,7 @@ function ConvertTo-AuvikQueryString {
 
     .PARAMETER UriFilter
         Hashtable of values to combine a functions parameters with
-        the ResourceUri parameter.
+        the ResourceUri parameter
 
         This allows for the full uri query to occur
 
@@ -93,7 +93,7 @@ param(
 
         }
 
-        # Build the request and load it with the query string.
+        # Build the request and load it with the query string
         $UriRequest        = [System.UriBuilder]($AuvikModuleBaseURI + $ResourceUri)
         $UriRequest.Query  = $QueryString.ToString()
 

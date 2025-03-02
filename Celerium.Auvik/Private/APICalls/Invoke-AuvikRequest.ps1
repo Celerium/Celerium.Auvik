@@ -4,7 +4,7 @@ function Invoke-AuvikRequest {
         Makes an API request
 
     .DESCRIPTION
-        The Invoke-AuvikRequest cmdlet invokes an API request to Auvik API.
+        The Invoke-AuvikRequest cmdlet invokes an API request to Auvik API
 
         This is an internal function that is used by all public functions
 
@@ -21,7 +21,7 @@ function Invoke-AuvikRequest {
 
     .PARAMETER UriFilter
         Used with the internal function [ ConvertTo-AuvikQueryString ] to combine
-        a functions parameters with the ResourceUri parameter.
+        a functions parameters with the ResourceUri parameter
 
         This allows for the full uri query to occur
 

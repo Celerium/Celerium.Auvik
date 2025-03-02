@@ -5,7 +5,7 @@ function Get-AuvikInterface {
 
     .DESCRIPTION
         The Get-AuvikInterface cmdlet allows you to view an inventory of
-        interfaces and other related information discovered by Auvik.
+        interfaces and other related information discovered by Auvik
 
     .PARAMETER ID
         ID of interface
@@ -78,7 +78,7 @@ function Get-AuvikInterface {
     .EXAMPLE
         Get-AuvikInterface -PageFirst 1000 -AllResults
 
-        Gets general information for all interfaces found by Auvik.
+        Gets general information for all interfaces found by Auvik
 
     .NOTES
         N\A

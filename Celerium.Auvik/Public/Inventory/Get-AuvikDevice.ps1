@@ -5,29 +5,29 @@ function Get-AuvikDevice {
 
     .DESCRIPTION
         The Get-AuvikDevice cmdlet allows you to view an inventory of
-        devices and other related information discovered by Auvik.
+        devices and other related information discovered by Auvik
 
         Use the [ -AgentDetail, -AgentExtended, & -AgentInfo  ] parameters
-        when wanting to target specific information.
+        when wanting to target specific information
 
         See Get-Help Get-AuvikDevice -Full for more information on associated parameters
 
-        This function combines 6 endpoints together within the Device API.
+        This function combines 6 endpoints together within the Device API
 
         Read Multiple Devices' Info:
-            Gets detail about multiple devices discovered on your client's network.
+            Gets detail about multiple devices discovered on your client's network
         Read a Single Device's Info:
-            Gets detail about a specific device discovered on your client's network.
+            Gets detail about a specific device discovered on your client's network
 
         Read Multiple Devices' Details:
-            Gets details about multiple devices not already Included in the Device Info API.
+            Gets details about multiple devices not already Included in the Device Info API
         Read a Single Device's Details:
-            Gets details about a specific device not already Included in the Device Info API.
+            Gets details about a specific device not already Included in the Device Info API
 
         Read Multiple Device's Extended Details:
-            Gets extended information about multiple devices not already Included in the Device Info API.
+            Gets extended information about multiple devices not already Included in the Device Info API
         Read a Single Device's Extended Details:
-            Gets extended information about a specific device not already Included in the Device Info API.
+            Gets extended information about a specific device not already Included in the Device Info API
 
     .PARAMETER ID
         ID of device
@@ -102,7 +102,7 @@ function Get-AuvikDevice {
         Filter by the last seen online time, returning entities not seen online after the provided value
 
     .PARAMETER FilterStateKnown
-        Filter by devices with recently updated data, for more consistent results.
+        Filter by devices with recently updated data, for more consistent results
 
     .PARAMETER Include
         Use to Include the full resource objects of the list device relationships
@@ -129,7 +129,7 @@ function Get-AuvikDevice {
         Target the info agent endpoint
 
         Only needed when limiting general search by id, to give the parameter
-        set a unique value.
+        set a unique value
 
         /Inventory/device/info & /Inventory/device/info
 
@@ -197,7 +197,7 @@ function Get-AuvikDevice {
     .EXAMPLE
         Get-AuvikDevice -PageFirst 1000 -AllResults
 
-        Gets general information for all devices found by Auvik.
+        Gets general information for all devices found by Auvik
 
     .NOTES
         N\A

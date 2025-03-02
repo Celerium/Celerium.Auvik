@@ -5,7 +5,7 @@ function Get-AuvikDeviceLifecycle {
 
         .DESCRIPTION
             The Get-AuvikDeviceLifecycle cmdlet allows you to view an inventory of
-            devices and other related information discovered by Auvik.
+            devices and other related information discovered by Auvik
 
         .PARAMETER ID
             ID of device
@@ -78,7 +78,7 @@ function Get-AuvikDeviceLifecycle {
         .EXAMPLE
             Get-AuvikDeviceLifecycle -PageFirst 1000 -AllResults
 
-            Gets general lifecycle information for all devices found by Auvik.
+            Gets general lifecycle information for all devices found by Auvik
 
         .NOTES
         N\A

@@ -36,7 +36,7 @@ function Add-AuvikAPIKey {
     .EXAMPLE
         'Celerium@Celerium.org' | Add-AuvikAPIKey
 
-        The Auvik API will use the string entered as the secret key & will prompt to enter in the public key.
+        The Auvik API will use the string entered as the secret key & will prompt to enter in the public key
 
     .EXAMPLE
         Add-AuvikAPIKey -EncryptedStandardAPIKeyFilePath 'C:\path\to\encrypted\key.txt' -EncryptedStandardAESKeyPath 'C:\path\to\decipher\key.txt'

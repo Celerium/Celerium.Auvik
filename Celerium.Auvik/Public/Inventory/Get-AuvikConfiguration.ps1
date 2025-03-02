@@ -5,7 +5,7 @@ function Get-AuvikConfiguration {
 
     .DESCRIPTION
         The Get-AuvikConfiguration cmdlet allows you to view a history of
-        device configurations and other related information discovered by Auvik.
+        device configurations and other related information discovered by Auvik
 
     .PARAMETER ID
         ID of entity note\audit
@@ -20,11 +20,11 @@ function Get-AuvikConfiguration {
         Filter by date and time, filtering out configurations backed up before value
 
     .PARAMETER FilterBackupTimeBefore
-        Filter by date and time, filtering out configurations backed up after value.
+        Filter by date and time, filtering out configurations backed up after value
 
     .PARAMETER FilterIsRunning
         Filter for configurations that are currently running, or filter
-        for all configurations which are not currently running.
+        for all configurations which are not currently running
 
         As of 2023-10, this does not appear to function correctly on this endpoint
 
@@ -68,7 +68,7 @@ function Get-AuvikConfiguration {
     .EXAMPLE
         Get-AuvikConfiguration -PageFirst 1000 -AllResults
 
-        Gets general information for all configurations found by Auvik.
+        Gets general information for all configurations found by Auvik
 
     .NOTES
         N\A

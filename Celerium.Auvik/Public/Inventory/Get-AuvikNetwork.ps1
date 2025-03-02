@@ -5,7 +5,7 @@ function Get-AuvikNetwork {
 
     .DESCRIPTION
         The Get-AuvikNetwork cmdlet allows you to view an inventory of
-        networks and other related information discovered by Auvik.
+        networks and other related information discovered by Auvik
 
         Use the [ -NetworkDetails & -NetworkInfo  ] parameters when wanting to target
         specific information. See Get-Help Get-AuvikNetwork -Full for
@@ -50,7 +50,7 @@ function Get-AuvikNetwork {
 
     .PARAMETER FieldsNetworkDetail
         Use to limit the attributes that will be returned in the Included detail
-        object to only what is specified by this query parameter.
+        object to only what is specified by this query parameter
 
         Allowed values:
             "scope", "primaryCollector", "secondaryCollectors", "collectorSelection", "excludedIpAddresses"

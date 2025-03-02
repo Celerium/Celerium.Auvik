@@ -1,11 +1,11 @@
 function Get-AuvikSNMPPollerSetting {
 <#
     .SYNOPSIS
-        Provides Details about one or more SNMP Poller Settings.
+        Provides Details about one or more SNMP Poller Settings
 
     .DESCRIPTION
         The Get-AuvikSNMPPollerSetting cmdlet provides Details about
-        one or more SNMP Poller Settings.
+        one or more SNMP Poller Settings
 
     .PARAMETER SNMPPollerSettingId
         ID of the SNMP Poller Setting to retrieve

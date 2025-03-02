@@ -1,15 +1,15 @@
 function Get-AuvikBaseURI {
 <#
     .SYNOPSIS
-        Shows the Auvik base URI global variable.
+        Shows the Auvik base URI global variable
 
     .DESCRIPTION
-        The Get-AuvikBaseURI cmdlet shows the Auvik base URI global variable value.
+        The Get-AuvikBaseURI cmdlet shows the Auvik base URI global variable value
 
     .EXAMPLE
         Get-AuvikBaseURI
 
-        Shows the Auvik base URI global variable value.
+        Shows the Auvik base URI global variable value
 
     .NOTES
         N\A

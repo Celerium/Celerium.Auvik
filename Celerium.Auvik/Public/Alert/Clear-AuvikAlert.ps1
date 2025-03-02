@@ -5,7 +5,7 @@ function Clear-AuvikAlert {
 
     .DESCRIPTION
         The Clear-AuvikAlert cmdlet allows you to dismiss an
-        alert that Auvik has triggered.
+        alert that Auvik has triggered
 
     .PARAMETER ID
         ID of alert
@@ -24,7 +24,7 @@ function Clear-AuvikAlert {
 
     [CmdletBinding(DefaultParameterSetName = 'ClearByAlert', SupportsShouldProcess, ConfirmImpact = 'Low')]
     Param (
-        [Parameter( Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'ClearByAlert' )]
+        [Parameter( Mandatory = $true, ValueFromPipeline = $true )]
         [ValidateNotNullOrEmpty()]
         [string]$ID
     )

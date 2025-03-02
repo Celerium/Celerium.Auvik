@@ -5,7 +5,7 @@ function Get-AuvikDeviceWarranty {
 
         .DESCRIPTION
             The Get-AuvikDeviceWarranty cmdlet allows you to view an inventory of
-            devices and other related information discovered by Auvik.
+            devices and other related information discovered by Auvik
 
         .PARAMETER ID
             ID of device
@@ -60,7 +60,7 @@ function Get-AuvikDeviceWarranty {
         .EXAMPLE
             Get-AuvikDeviceWarranty -PageFirst 1000 -AllResults
 
-            Gets general warranty information for all devices found by Auvik.
+            Gets general warranty information for all devices found by Auvik
 
         .NOTES
         N\A
