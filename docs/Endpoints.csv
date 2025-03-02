@@ -60,8 +60,8 @@ Statistics,/stat/device/{statId},GET,Get-AuvikDeviceStatistics,YES,
 Statistics,/stat/interface/{statId},GET,Get-AuvikInterfaceStatistics,YES,
 Statistics,/stat/oid/{statId},GET,Get-AuvikOIDStatistics,YES,
 Statistics,/stat/service/{statId},GET,Get-AuvikServiceStatistics,YES,
-SaaSManagement,/asm/app/info,GET,Get-AuvikASMApplication,YES,Cannot fully validate
-SaaSManagement,/asm/client/info,GET,Get-AuvikASMClient,YES,Cannot fully validate
-SaaSManagement,/asm/securityLog/info,GET,Get-AuvikASMSecurityLog,YES,Cannot fully validate
-SaaSManagement,/asm/tag/info,GET,Get-AuvikASMTag,YES,Cannot fully validate
-SaaSManagement,/asm/user/info,GET,Get-AuvikASMUser,YES,Cannot fully validate
+SaaSManagement,/asm/app/info,GET,Get-AuvikASMApplication,YES,Cannot fully validate at this time
+SaaSManagement,/asm/client/info,GET,Get-AuvikASMClient,YES,Cannot fully validate at this time
+SaaSManagement,/asm/securityLog/info,GET,Get-AuvikASMSecurityLog,YES,Cannot fully validate at this time
+SaaSManagement,/asm/tag/info,GET,Get-AuvikASMTag,YES,Cannot fully validate at this time
+SaaSManagement,/asm/user/info,GET,Get-AuvikASMUser,YES,Cannot fully validate at this time
