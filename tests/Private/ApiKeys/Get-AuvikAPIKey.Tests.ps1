@@ -155,6 +155,11 @@ Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('A
             (Get-AuvikAPIKey -AsPlainText).APIKey | Should -BeOfType String
         }
 
+        It "Using [ -AsPlainText ] should return the API key entered" {
+            Add-RocketCyberApiKey -ApiKey '12345'
+            Get-RocketCyberApiKey -AsPlainText | Should -Be '12345'
+        }
+
         It "If [ -ApiKey ] is empty it should throw a warning" {
             Remove-AuvikAPIKey
             Get-AuvikAPIKey -WarningAction SilentlyContinue -WarningVariable APIKeyWarning
