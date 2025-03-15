@@ -156,8 +156,8 @@ Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('A
         }
 
         It "Using [ -AsPlainText ] should return the API key entered" {
-            Add-AuvikApiKey -ApiKey '12345'
-            Get-AuvikApiKey -AsPlainText | Should -Be '12345'
+            Add-AuvikApiKey -Username 'Celerium@Celerium.org' -ApiKey '12345'
+            (Get-AuvikApiKey -AsPlainText).ApiKey | Should -Be '12345'
         }
 
         It "If [ -ApiKey ] is empty it should throw a warning" {
