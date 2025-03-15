@@ -18,7 +18,7 @@ function Get-AuvikBaseURI {
         https://celerium.github.io/Celerium.Auvik/site/Internal/Get-AuvikBaseURI.html
 #>
 
-    [cmdletbinding()]
+    [cmdletbinding(DefaultParameterSetName = 'Index')]
     Param ()
 
     begin {}

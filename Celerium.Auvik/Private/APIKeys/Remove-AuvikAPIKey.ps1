@@ -18,26 +18,26 @@ function Remove-AuvikAPIKey {
         https://celerium.github.io/Celerium.Auvik/site/Internal/Remove-AuvikAPIKey.html
 #>
 
-    [cmdletbinding(SupportsShouldProcess, ConfirmImpact = 'None')]
+    [cmdletbinding(DefaultParameterSetName = 'Destroy', SupportsShouldProcess, ConfirmImpact = 'None')]
     Param ()
 
     begin {}
 
     process {
 
-        switch ([bool]$AuvikUserName) {
+        switch ([bool]$AuvikModuleUserName) {
             $true   {
-                if ($PSCmdlet.ShouldProcess('AuvikUserName')) {
-                    Remove-Variable -Name "AuvikUserName" -Scope global -Force
+                if ($PSCmdlet.ShouldProcess('AuvikModuleUserName')) {
+                    Remove-Variable -Name "AuvikModuleUserName" -Scope global -Force
                 }
             }
             $false  { Write-Warning "The Auvik API [ username ] is not set. Nothing to remove" }
         }
 
-        switch ([bool]$AuvikApiKey) {
+        switch ([bool]$AuvikModuleApiKey) {
             $true   {
-                if ($PSCmdlet.ShouldProcess('AuvikApiKey')) {
-                    Remove-Variable -Name "AuvikApiKey" -Scope global -Force
+                if ($PSCmdlet.ShouldProcess('AuvikModuleApiKey')) {
+                    Remove-Variable -Name "AuvikModuleApiKey" -Scope global -Force
                 }
             }
             $false  { Write-Warning "The Auvik API [ API ] key is not set. Nothing to remove" }

@@ -22,7 +22,6 @@ Internal,,DELETE,Remove-AuvikBaseURI,YES,
 Internal,,DELETE,Remove-AuvikModuleSetting,YES,
 Internal,,POST,Set-AuvikAPIKey,YES,Alias of Add-AuvikAPIKey 
 Internal,,POST,Set-AuvikBaseURI,YES,Alias of Add-AuvikBaseUri
-Internal,,POST,New-AuvikAESSecret,YES,
 Inventory,/inventory/component/info,GET,Get-AuvikComponent,YES,
 Inventory,/inventory/component/info/{id},GET,Get-AuvikComponent,YES,
 Inventory,/inventory/configuration,GET,Get-AuvikConfiguration,YES,

@@ -108,7 +108,7 @@ param (
 
     AfterAll{
 
-        Remove-AuvikModuleSetting -AuvikConfPath $exportPath
+        Remove-AuvikModuleSetting -AuvikConfigPath $exportPath
 
         if (Get-Module -Name $moduleName) {
             Remove-Module -Name $moduleName -Force
@@ -135,7 +135,7 @@ Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('m
             Add-AuvikBaseUri
             Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
 
-            Export-AuvikModuleSetting -AuvikConfPath $exportPath -ErrorVariable moduleSettingsError -WarningAction SilentlyContinue
+            Export-AuvikModuleSetting -AuvikConfigPath $exportPath -ErrorVariable moduleSettingsError -WarningAction SilentlyContinue
 
             $moduleSettingsError | Should -BeNullOrEmpty
         }
@@ -144,7 +144,7 @@ Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('m
             Add-AuvikBaseUri
             Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
 
-            Export-AuvikModuleSetting -AuvikConfPath $exportPath -ErrorVariable moduleSettingsError -WarningAction SilentlyContinue
+            Export-AuvikModuleSetting -AuvikConfigPath $exportPath -ErrorVariable moduleSettingsError -WarningAction SilentlyContinue
 
             (Get-Item -Path $exportPath -Force).Attributes | Should -BeLike "*Hidden*"
         }
@@ -153,14 +153,14 @@ Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('m
             Add-AuvikBaseUri
             Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
 
-            Export-AuvikModuleSetting -AuvikConfPath $exportPath -ErrorVariable moduleSettingsError -WarningAction SilentlyContinue
+            Export-AuvikModuleSetting -AuvikConfigPath $exportPath -ErrorVariable moduleSettingsError -WarningAction SilentlyContinue
 
             $configFile = Import-LocalizedData -BaseDirectory $exportPath -FileName "config.psd1"
                 $configFile.Count                       | Should -BeGreaterOrEqual 4
                 $configFile.AuvikModuleBaseURI              | Should -Not -BeNullOrEmpty
                 $configFile.AuvikJSONConversionDepth | Should -Not -BeNullOrEmpty
-                $configFile.AuvikUserName            | Should -Not -BeNullOrEmpty
-                $configFile.AuvikApiKey            | Should -Not -BeNullOrEmpty
+                $configFile.AuvikModuleUserName            | Should -Not -BeNullOrEmpty
+                $configFile.AuvikModuleAPIKey            | Should -Not -BeNullOrEmpty
         }
 
     }

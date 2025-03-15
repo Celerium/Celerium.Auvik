@@ -121,9 +121,6 @@ Imports the Auvik BaseURI, API, & JSON configuration information to the current 
 ### [Invoke-AuvikRequest](site/Internal/Invoke-AuvikRequest.md)
 Makes an API request
 
-### [New-AuvikAESSecret](site/Internal/New-AuvikAESSecret.md)
-Creates a AES encrypted API key and decipher key
-
 ### [Remove-AuvikAPIKey](site/Internal/Remove-AuvikAPIKey.md)
 Removes the Auvik API username & API key global variables
 

@@ -941,45 +941,6 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Add-AuvikAPIKey</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
-          <maml:name>Username</maml:name>
-          <maml:description>
-            <maml:para>Defines your API username</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>EncryptedStandardAPIKeyPath</maml:name>
-          <maml:description>
-            <maml:para>Path to the AES standard encrypted API key file</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>EncryptedStandardAESKeyPath</maml:name>
-          <maml:description>
-            <maml:para>Path to the AES key file</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
@@ -1015,30 +976,6 @@
         <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
         <dev:type>
           <maml:name>SecureString</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>EncryptedStandardAPIKeyPath</maml:name>
-        <maml:description>
-          <maml:para>Path to the AES standard encrypted API key file</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>EncryptedStandardAESKeyPath</maml:name>
-        <maml:description>
-          <maml:para>Path to the AES key file</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -1303,7 +1240,7 @@
       <command:syntaxItem>
         <maml:name>Export-AuvikModuleSetting</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>AuvikConfPath</maml:name>
+          <maml:name>AuvikConfigPath</maml:name>
           <maml:description>
             <maml:para>Define the location to store the Auvik configuration file</maml:para>
             <maml:para>By default the configuration file is stored in the following location:     $env:USERPROFILE\Celerium.Auvik</maml:para>
@@ -1316,7 +1253,7 @@
           <dev:defaultValue>$(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) )</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>AuvikConfFile</maml:name>
+          <maml:name>AuvikConfigFile</maml:name>
           <maml:description>
             <maml:para>Define the name of the Auvik configuration file</maml:para>
             <maml:para>By default the configuration file is named:     config.psd1</maml:para>
@@ -1332,7 +1269,7 @@
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>AuvikConfPath</maml:name>
+        <maml:name>AuvikConfigPath</maml:name>
         <maml:description>
           <maml:para>Define the location to store the Auvik configuration file</maml:para>
           <maml:para>By default the configuration file is stored in the following location:     $env:USERPROFILE\Celerium.Auvik</maml:para>
@@ -1345,7 +1282,7 @@
         <dev:defaultValue>$(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) )</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>AuvikConfFile</maml:name>
+        <maml:name>AuvikConfigFile</maml:name>
         <maml:description>
           <maml:para>Define the name of the Auvik configuration file</maml:para>
           <maml:para>By default the configuration file is named:     config.psd1</maml:para>
@@ -1375,7 +1312,7 @@
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Export-AuvikModuleSetting -AuvikConfPath C:\Celerium.Auvik -AuvikConfFile MyConfig.psd1</dev:code>
+        <dev:code>Export-AuvikModuleSetting -AuvikConfigPath C:\Celerium.Auvik -AuvikConfigFile MyConfig.psd1</dev:code>
         <dev:remarks>
           <maml:para>Validates that the BaseURI, API, and JSON depth are set then exports their values to the current user's Auvik configuration file located at:     C:\Celerium.Auvik\MyConfig.psd1</maml:para>
         </dev:remarks>
@@ -1518,7 +1455,7 @@
       <command:syntaxItem>
         <maml:name>Get-AuvikModuleSetting</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>AuvikConfPath</maml:name>
+          <maml:name>AuvikConfigPath</maml:name>
           <maml:description>
             <maml:para>Define the location to store the Auvik configuration file</maml:para>
             <maml:para>By default the configuration file is stored in the following location:     $env:USERPROFILE\Celerium.Auvik</maml:para>
@@ -1531,7 +1468,7 @@
           <dev:defaultValue>$(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) )</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>AuvikConfFile</maml:name>
+          <maml:name>AuvikConfigFile</maml:name>
           <maml:description>
             <maml:para>Define the name of the Auvik configuration file</maml:para>
             <maml:para>By default the configuration file is named:     config.psd1</maml:para>
@@ -1547,7 +1484,7 @@
       <command:syntaxItem>
         <maml:name>Get-AuvikModuleSetting</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>openConfFile</maml:name>
+          <maml:name>OpenConfigFile</maml:name>
           <maml:description>
             <maml:para>Opens the Auvik configuration file</maml:para>
           </maml:description>
@@ -1561,7 +1498,7 @@
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>AuvikConfPath</maml:name>
+        <maml:name>AuvikConfigPath</maml:name>
         <maml:description>
           <maml:para>Define the location to store the Auvik configuration file</maml:para>
           <maml:para>By default the configuration file is stored in the following location:     $env:USERPROFILE\Celerium.Auvik</maml:para>
@@ -1574,7 +1511,7 @@
         <dev:defaultValue>$(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) )</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>AuvikConfFile</maml:name>
+        <maml:name>AuvikConfigFile</maml:name>
         <maml:description>
           <maml:para>Define the name of the Auvik configuration file</maml:para>
           <maml:para>By default the configuration file is named:     config.psd1</maml:para>
@@ -1587,7 +1524,7 @@
         <dev:defaultValue>Config.psd1</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>openConfFile</maml:name>
+        <maml:name>OpenConfigFile</maml:name>
         <maml:description>
           <maml:para>Opens the Auvik configuration file</maml:para>
         </maml:description>
@@ -1617,7 +1554,7 @@
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-AuvikModuleSetting -AuvikConfPath C:\Celerium.Auvik -AuvikConfFile MyConfig.psd1 -openConfFile</dev:code>
+        <dev:code>Get-AuvikModuleSetting -AuvikConfigPath C:\Celerium.Auvik -AuvikConfigFile MyConfig.psd1 -OpenConfigFile</dev:code>
         <dev:remarks>
           <maml:para>Opens the configuration file from the defined location in the default editor</maml:para>
           <maml:para>The location of the Auvik configuration file in this example is:     C:\Celerium.Auvik\MyConfig.psd1</maml:para>
@@ -1648,7 +1585,7 @@
       <command:syntaxItem>
         <maml:name>Import-AuvikModuleSetting</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>AuvikConfPath</maml:name>
+          <maml:name>AuvikConfigPath</maml:name>
           <maml:description>
             <maml:para>Define the location to store the Auvik configuration file</maml:para>
             <maml:para>By default the configuration file is stored in the following location:     $env:USERPROFILE\Celerium.Auvik</maml:para>
@@ -1661,7 +1598,7 @@
           <dev:defaultValue>$(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) )</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>AuvikConfFile</maml:name>
+          <maml:name>AuvikConfigFile</maml:name>
           <maml:description>
             <maml:para>Define the name of the Auvik configuration file</maml:para>
             <maml:para>By default the configuration file is named:     config.psd1</maml:para>
@@ -1677,7 +1614,7 @@
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>AuvikConfPath</maml:name>
+        <maml:name>AuvikConfigPath</maml:name>
         <maml:description>
           <maml:para>Define the location to store the Auvik configuration file</maml:para>
           <maml:para>By default the configuration file is stored in the following location:     $env:USERPROFILE\Celerium.Auvik</maml:para>
@@ -1690,7 +1627,7 @@
         <dev:defaultValue>$(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) )</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>AuvikConfFile</maml:name>
+        <maml:name>AuvikConfigFile</maml:name>
         <maml:description>
           <maml:para>Define the name of the Auvik configuration file</maml:para>
           <maml:para>By default the configuration file is named:     config.psd1</maml:para>
@@ -1721,7 +1658,7 @@
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Import-AuvikModuleSetting -AuvikConfPath C:\Celerium.Auvik -AuvikConfFile MyConfig.psd1</dev:code>
+        <dev:code>Import-AuvikModuleSetting -AuvikConfigPath C:\Celerium.Auvik -AuvikConfigFile MyConfig.psd1</dev:code>
         <dev:remarks>
           <maml:para>Validates that the configuration file created with the Export-AuvikModuleSetting cmdlet exists then imports the stored data into the current users session</maml:para>
           <maml:para>The location of the Auvik configuration file in this example is:     C:\Celerium.Auvik\MyConfig.psd1</maml:para>
@@ -1904,150 +1841,6 @@
       <maml:navigationLink>
         <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Internal/Invoke-AuvikRequest.html</maml:linkText>
         <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Internal/Invoke-AuvikRequest.html</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>New-AuvikAESSecret</command:name>
-      <command:verb>New</command:verb>
-      <command:noun>AuvikAESSecret</command:noun>
-      <maml:description>
-        <maml:para>Creates a AES encrypted API key and decipher key</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>The New-AuvikAESSecret cmdlet creates a AES encrypted API key and decipher key</maml:para>
-      <maml:para>This allows the key to be exported for use on other systems without relying on Windows DPAPI</maml:para>
-      <maml:para>Do NOT share the decipher key with anyone as this will allow them to decrypt the encrypted API key</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>New-AuvikAESSecret</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>KeyLength</maml:name>
-          <maml:description>
-            <maml:para>The length of the AES key to generate</maml:para>
-            <maml:para>By default a 256-bit key (32) is generated</maml:para>
-            <maml:para>Allowed values: 16, 24, 32</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-          <dev:type>
-            <maml:name>Int32</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>32</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>Path</maml:name>
-          <maml:description>
-            <maml:para>The path to save the encrypted API key and decipher key</maml:para>
-            <maml:para>By default keys are only stored in memory</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>$(Get-Location).Path</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
-          <maml:name>WhatIf</maml:name>
-          <maml:description>
-            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
-          <maml:name>Confirm</maml:name>
-          <maml:description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>KeyLength</maml:name>
-        <maml:description>
-          <maml:para>The length of the AES key to generate</maml:para>
-          <maml:para>By default a 256-bit key (32) is generated</maml:para>
-          <maml:para>Allowed values: 16, 24, 32</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-        <dev:type>
-          <maml:name>Int32</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>32</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>Path</maml:name>
-        <maml:description>
-          <maml:para>The path to save the encrypted API key and decipher key</maml:para>
-          <maml:para>By default keys are only stored in memory</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>$(Get-Location).Path</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
-        <maml:name>WhatIf</maml:name>
-        <maml:description>
-          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
-        <maml:name>Confirm</maml:name>
-        <maml:description>
-          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes />
-    <command:returnValues />
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para>N/A</maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>New-AuvikAESSecret</dev:code>
-        <dev:remarks>
-          <maml:para>Prompts to enter in the API key which will be encrypted using a randomly generated 256-bit AES key</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>https://celerium.github.io/Celerium.Auvik/site/Internal/New-AuvikAESSecret.html</maml:linkText>
-        <maml:uri>https://celerium.github.io/Celerium.Auvik/site/Internal/New-AuvikAESSecret.html</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2244,7 +2037,7 @@
       <command:syntaxItem>
         <maml:name>Remove-AuvikModuleSetting</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>AuvikConfPath</maml:name>
+          <maml:name>AuvikConfigPath</maml:name>
           <maml:description>
             <maml:para>Define the location of the Auvik configuration folder</maml:para>
             <maml:para>By default the configuration folder is located at:     $env:USERPROFILE\Celerium.Auvik</maml:para>
@@ -2257,7 +2050,7 @@
           <dev:defaultValue>$(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) )</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>andVariables</maml:name>
+          <maml:name>AndVariables</maml:name>
           <maml:description>
             <maml:para>Define if sensitive Auvik variables should be removed as well</maml:para>
             <maml:para>By default the variables are not removed</maml:para>
@@ -2294,7 +2087,7 @@
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>AuvikConfPath</maml:name>
+        <maml:name>AuvikConfigPath</maml:name>
         <maml:description>
           <maml:para>Define the location of the Auvik configuration folder</maml:para>
           <maml:para>By default the configuration folder is located at:     $env:USERPROFILE\Celerium.Auvik</maml:para>
@@ -2307,7 +2100,7 @@
         <dev:defaultValue>$(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) )</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>andVariables</maml:name>
+        <maml:name>AndVariables</maml:name>
         <maml:description>
           <maml:para>Define if sensitive Auvik variables should be removed as well</maml:para>
           <maml:para>By default the variables are not removed</maml:para>
@@ -2362,7 +2155,7 @@
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Remove-AuvikModuleSetting -AuvikConfPath C:\Celerium.Auvik -andVariables</dev:code>
+        <dev:code>Remove-AuvikModuleSetting -AuvikConfigPath C:\Celerium.Auvik -AndVariables</dev:code>
         <dev:remarks>
           <maml:para>Checks to see if the defined configuration folder exists and removes it if it does If sensitive Auvik variables exist then they are removed as well</maml:para>
           <maml:para>The location of the Auvik configuration folder in this example is:     C:\Celerium.Auvik</maml:para>

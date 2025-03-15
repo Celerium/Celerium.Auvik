@@ -109,7 +109,7 @@ param (
 
     AfterAll{
 
-        Remove-AuvikModuleSetting -AuvikConfPath $exportPath
+        Remove-AuvikModuleSetting -AuvikConfigPath $exportPath
 
         if (Get-Module -Name $moduleName) {
             Remove-Module -Name $moduleName -Force
@@ -136,7 +136,7 @@ Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('m
             Remove-Module -Name $moduleName -Force
             Import-Module -Name $modulePsd1
 
-            Import-AuvikModuleSetting -AuvikConfPath $invalidPath -AuvikConfFile 'invalid.psd1'
+            Import-AuvikModuleSetting -AuvikConfigPath $invalidPath -AuvikConfigFile 'invalid.psd1'
 
             (Get-Variable -Name AuvikModuleBaseURI).Value | Should -Be $(Get-AuvikBaseURI)
             (Get-Variable -Name AuvikJSONConversionDepth).Value | Should -Not -BeNullOrEmpty
@@ -148,13 +148,13 @@ Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('m
 
             Add-AuvikBaseUri
             Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
-            Export-AuvikModuleSetting -AuvikConfPath $exportPath -WarningAction SilentlyContinue
+            Export-AuvikModuleSetting -AuvikConfigPath $exportPath -WarningAction SilentlyContinue
 
             Import-Module -Name $modulePsd1 -Force
 
             (Get-Variable -Name AuvikModuleBaseURI).Value | Should -Not -BeNullOrEmpty
-            (Get-Variable -Name AuvikUserName).Value | Should -Not -BeNullOrEmpty
-            (Get-Variable -Name AuvikApiKey).Value | Should -Not -BeNullOrEmpty
+            (Get-Variable -Name AuvikModuleUserName).Value | Should -Not -BeNullOrEmpty
+            (Get-Variable -Name AuvikModuleApiKey).Value | Should -Not -BeNullOrEmpty
             (Get-Variable -Name AuvikJSONConversionDepth).Value | Should -Not -BeNullOrEmpty
         }
 

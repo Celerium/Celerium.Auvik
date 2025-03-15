@@ -42,7 +42,7 @@ function ConvertTo-AuvikQueryString {
 
 #>
 
-[CmdletBinding(DefaultParameterSetName = 'ConvertToQueryString')]
+[CmdletBinding(DefaultParameterSetName = 'Convert')]
 param(
     [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
     [hashtable]$UriFilter,

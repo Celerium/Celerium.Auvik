@@ -129,13 +129,13 @@ Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('A
         It "Running [ $commandName ] should remove all APIKey variables" {
             Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
             Remove-AuvikAPIKey
-            $AuvikUserName | Should -BeNullOrEmpty
-            $AuvikApiKey | Should -BeNullOrEmpty
+            $AuvikModuleUserName | Should -BeNullOrEmpty
+            $AuvikModuleApiKey | Should -BeNullOrEmpty
         }
 
-        It "If the [ AuvikUserName ] is already empty a warning should be thrown" {
+        It "If the [ AuvikModuleUserName ] is already empty a warning should be thrown" {
             Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
-            Remove-Variable -Name "AuvikUserName" -Scope global -Force
+            Remove-Variable -Name "AuvikModuleUserName" -Scope global -Force
 
             Remove-AuvikAPIKey -WarningAction SilentlyContinue -WarningVariable APIKeyWarning
             $APIKeyWarning | Should -Be "The Auvik API [ username ] is not set. Nothing to remove"
@@ -143,7 +143,7 @@ Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('A
 
         It "If the [ AuvikApiKey ] is already empty a warning should be thrown" {
             Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
-            Remove-Variable -Name "AuvikApiKey" -Scope global -Force
+            Remove-Variable -Name "AuvikModuleApiKey" -Scope global -Force
 
             Remove-AuvikAPIKey -WarningAction SilentlyContinue -WarningVariable APIKeyWarning
             $APIKeyWarning | Should -Be "The Auvik API [ API ] key is not set. Nothing to remove"

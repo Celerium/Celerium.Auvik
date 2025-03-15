@@ -18,7 +18,7 @@ function Remove-AuvikBaseURI {
         https://celerium.github.io/Celerium.Auvik/site/Internal/Remove-AuvikBaseURI.html
 #>
 
-    [cmdletbinding(SupportsShouldProcess, ConfirmImpact = 'None')]
+    [cmdletbinding(DefaultParameterSetName = 'Destroy', SupportsShouldProcess, ConfirmImpact = 'None')]
     Param ()
 
     begin {}

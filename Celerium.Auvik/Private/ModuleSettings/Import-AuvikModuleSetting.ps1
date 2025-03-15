@@ -10,13 +10,13 @@ function Import-AuvikModuleSetting {
         By default the configuration file is stored in the following location:
             $env:USERPROFILE\Celerium.Auvik
 
-    .PARAMETER AuvikConfPath
+    .PARAMETER AuvikConfigPath
         Define the location to store the Auvik configuration file
 
         By default the configuration file is stored in the following location:
             $env:USERPROFILE\Celerium.Auvik
 
-    .PARAMETER AuvikConfFile
+    .PARAMETER AuvikConfigFile
         Define the name of the Auvik configuration file
 
         By default the configuration file is named:
@@ -32,7 +32,7 @@ function Import-AuvikModuleSetting {
             $env:USERPROFILE\Celerium.Auvik\config.psd1
 
     .EXAMPLE
-        Import-AuvikModuleSetting -AuvikConfPath C:\Celerium.Auvik -AuvikConfFile MyConfig.psd1
+        Import-AuvikModuleSetting -AuvikConfigPath C:\Celerium.Auvik -AuvikConfigFile MyConfig.psd1
 
         Validates that the configuration file created with the Export-AuvikModuleSetting cmdlet exists
         then imports the stored data into the current users session
@@ -50,29 +50,29 @@ function Import-AuvikModuleSetting {
     [CmdletBinding(DefaultParameterSetName = 'Set')]
     Param (
         [Parameter(ParameterSetName = 'Set')]
-        [string]$AuvikConfPath = $(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) ),
+        [string]$AuvikConfigPath = $(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) ),
 
         [Parameter(ParameterSetName = 'Set')]
-        [string]$AuvikConfFile = 'config.psd1'
+        [string]$AuvikConfigFile = 'config.psd1'
     )
 
     begin {
-        $AuvikConfig = Join-Path -Path $AuvikConfPath -ChildPath $AuvikConfFile
+        $AuvikConfig = Join-Path -Path $AuvikConfigPath -ChildPath $AuvikConfigFile
     }
 
     process {
 
         if ( Test-Path $AuvikConfig ) {
-            $TempConfig = Import-LocalizedData -BaseDirectory $AuvikConfPath -FileName $AuvikConfFile
+            $TempConfig = Import-LocalizedData -BaseDirectory $AuvikConfigPath -FileName $AuvikConfigFile
 
             # Send to function to strip potentially superfluous slash (/)
             Add-AuvikBaseURI $TempConfig.AuvikModuleBaseURI
 
-            $TempConfig.AuvikApiKey = ConvertTo-SecureString $TempConfig.AuvikApiKey
+            $TempConfig.AuvikModuleApiKey = ConvertTo-SecureString $TempConfig.AuvikModuleApiKey
 
-            Set-Variable -Name "AuvikUserName" -Value $TempConfig.AuvikUserName -Option ReadOnly -Scope global -Force
+            Set-Variable -Name "AuvikModuleUserName" -Value $TempConfig.AuvikModuleUserName -Option ReadOnly -Scope global -Force
 
-            Set-Variable -Name "AuvikApiKey" -Value $TempConfig.AuvikApiKey -Option ReadOnly -Scope global -Force
+            Set-Variable -Name "AuvikModuleApiKey" -Value $TempConfig.AuvikModuleApiKey -Option ReadOnly -Scope global -Force
 
             Set-Variable -Name "AuvikJSONConversionDepth" -Value $TempConfig.AuvikJSONConversionDepth -Scope global -Force
 
@@ -82,7 +82,7 @@ function Import-AuvikModuleSetting {
             Remove-Variable "TempConfig"
         }
         else {
-            Write-Verbose "No configuration file found at [ $AuvikConfig ] run Add-AuvikAPIKey to get started."
+            Write-Verbose "No configuration file found at [ $AuvikConfig ] run Add-AuvikApiKey to get started."
 
             Add-AuvikBaseURI
 

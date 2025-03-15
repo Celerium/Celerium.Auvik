@@ -10,7 +10,7 @@ function Invoke-AuvikRequest {
 
         As of 2023-08 the Auvik v1 API only supports GET requests
 
-    .PARAMETER method
+    .PARAMETER Method
         Defines the type of API method to use
 
         Allowed values:

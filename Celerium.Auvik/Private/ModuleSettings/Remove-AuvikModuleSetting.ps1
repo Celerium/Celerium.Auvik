@@ -10,13 +10,13 @@ function Remove-AuvikModuleSetting {
         By default configuration files are stored in the following location and will be removed:
             $env:USERPROFILE\Celerium.Auvik
 
-    .PARAMETER AuvikConfPath
+    .PARAMETER AuvikConfigPath
         Define the location of the Auvik configuration folder
 
         By default the configuration folder is located at:
             $env:USERPROFILE\Celerium.Auvik
 
-    .PARAMETER andVariables
+    .PARAMETER AndVariables
         Define if sensitive Auvik variables should be removed as well
 
         By default the variables are not removed
@@ -30,7 +30,7 @@ function Remove-AuvikModuleSetting {
             $env:USERPROFILE\Celerium.Auvik
 
     .EXAMPLE
-        Remove-AuvikModuleSetting -AuvikConfPath C:\Celerium.Auvik -andVariables
+        Remove-AuvikModuleSetting -AuvikConfigPath C:\Celerium.Auvik -AndVariables
 
         Checks to see if the defined configuration folder exists and removes it if it does
         If sensitive Auvik variables exist then they are removed as well
@@ -45,38 +45,38 @@ function Remove-AuvikModuleSetting {
         https://celerium.github.io/Celerium.Auvik/site/Internal/Remove-AuvikModuleSetting.html
 #>
 
-    [CmdletBinding(DefaultParameterSetName = 'Destroy', SupportsShouldProcess)]
+    [CmdletBinding(DefaultParameterSetName = 'Destroy', SupportsShouldProcess, ConfirmImpact = 'None')]
     Param (
         [Parameter(ParameterSetName = 'Destroy')]
-        [string]$AuvikConfPath = $(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) ),
+        [string]$AuvikConfigPath = $(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) ),
 
         [Parameter(ParameterSetName = 'Destroy')]
-        [switch]$andVariables
+        [switch]$AndVariables
     )
 
     begin {}
 
     process {
 
-        if (Test-Path $AuvikConfPath) {
+        if (Test-Path $AuvikConfigPath) {
 
-            Remove-Item -Path $AuvikConfPath -Recurse -Force -WhatIf:$WhatIfPreference
+            Remove-Item -Path $AuvikConfigPath -Recurse -Force -WhatIf:$WhatIfPreference
 
-            If ($andVariables) {
-                Remove-AuvikAPIKey
+            If ($AndVariables) {
+                Remove-AuvikApiKey
                 Remove-AuvikBaseURI
             }
 
-            if (!(Test-Path $AuvikConfPath)) {
-                Write-Output "The Celerium.Auvik configuration folder has been removed successfully from [ $AuvikConfPath ]"
+            if (!(Test-Path $AuvikConfigPath)) {
+                Write-Output "The Celerium.Auvik configuration folder has been removed successfully from [ $AuvikConfigPath ]"
             }
             else {
-                Write-Error "The Celerium.Auvik configuration folder could not be removed from [ $AuvikConfPath ]"
+                Write-Error "The Celerium.Auvik configuration folder could not be removed from [ $AuvikConfigPath ]"
             }
 
         }
         else {
-            Write-Warning "No configuration folder found at [ $AuvikConfPath ]"
+            Write-Warning "No configuration folder found at [ $AuvikConfigPath ]"
         }
 
     }

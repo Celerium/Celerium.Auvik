@@ -109,7 +109,7 @@ param (
 
     AfterAll{
 
-        Remove-AuvikModuleSetting -AuvikConfPath $exportPath
+        Remove-AuvikModuleSetting -AuvikConfigPath $exportPath
 
         if (Get-Module -Name $moduleName) {
             Remove-Module -Name $moduleName -Force
@@ -133,7 +133,7 @@ Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('m
     Context "[ $commandName ] testing function" {
 
         It "No configuration should populate baseline variables" {
-            Import-AuvikModuleSetting -AuvikConfPath $invalidPath -AuvikConfFile 'invalid.psd1'
+            Import-AuvikModuleSetting -AuvikConfigPath $invalidPath -AuvikConfigFile 'invalid.psd1'
 
             (Get-Variable -Name AuvikModuleBaseURI).Value | Should -Be $(Get-AuvikBaseURI)
             (Get-Variable -Name AuvikJSONConversionDepth).Value | Should -Not -BeNullOrEmpty
@@ -143,12 +143,12 @@ Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('m
             Add-AuvikBaseUri
             Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
 
-            Export-AuvikModuleSetting -AuvikConfPath $exportPath -WarningAction SilentlyContinue
-            Import-AuvikModuleSetting -AuvikConfPath $exportPath
+            Export-AuvikModuleSetting -AuvikConfigPath $exportPath -WarningAction SilentlyContinue
+            Import-AuvikModuleSetting -AuvikConfigPath $exportPath
 
             (Get-Variable -Name AuvikModuleBaseURI).Value | Should -Not -BeNullOrEmpty
-            (Get-Variable -Name AuvikUserName).Value | Should -Not -BeNullOrEmpty
-            (Get-Variable -Name AuvikApiKey).Value | Should -Not -BeNullOrEmpty
+            (Get-Variable -Name AuvikModuleUserName).Value | Should -Not -BeNullOrEmpty
+            (Get-Variable -Name AuvikModuleApiKey).Value | Should -Not -BeNullOrEmpty
             (Get-Variable -Name AuvikJSONConversionDepth).Value | Should -Not -BeNullOrEmpty
         }
 
@@ -156,10 +156,10 @@ Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('m
             Add-AuvikBaseUri
             Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
 
-            Export-AuvikModuleSetting -AuvikConfPath $exportPath -WarningAction SilentlyContinue
-            Import-AuvikModuleSetting -AuvikConfPath $exportPath
+            Export-AuvikModuleSetting -AuvikConfigPath $exportPath -WarningAction SilentlyContinue
+            Import-AuvikModuleSetting -AuvikConfigPath $exportPath
 
-            (Get-Variable -Name tmp_config -ErrorAction SilentlyContinue).Value | Should -BeNullOrEmpty
+            (Get-Variable -Name TempConfig -ErrorAction SilentlyContinue).Value | Should -BeNullOrEmpty
         }
 
     }

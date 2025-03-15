@@ -43,7 +43,7 @@ function Add-AuvikBaseURI {
         https://celerium.github.io/Celerium.Auvik/site/Internal/Add-AuvikBaseURI.html
 #>
 
-    [cmdletbinding()]
+    [cmdletbinding(DefaultParameterSetName = 'Set')]
     [alias('Set-AuvikBaseURI')]
     Param (
         [Parameter(Mandatory = $false , ValueFromPipeline = $true)]

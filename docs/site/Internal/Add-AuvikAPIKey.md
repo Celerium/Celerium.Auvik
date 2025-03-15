@@ -15,15 +15,9 @@ Sets the API username and API key used to authenticate API calls
 
 ## SYNTAX
 
-### PlainText (Default)
+### AsPlainText (Default)
 ```powershell
 Add-AuvikAPIKey -Username <String> [-ApiKey <String>] [<CommonParameters>]
-```
-
-### AESEncrypted
-```powershell
-Add-AuvikAPIKey -Username <String> [-EncryptedStandardAPIKeyPath <String>]
- -EncryptedStandardAESKeyPath <String> [<CommonParameters>]
 ```
 
 ### SecureString
@@ -86,7 +80,7 @@ will be stored as a SecureString
 
 ```yaml
 Type: String
-Parameter Sets: PlainText
+Parameter Sets: AsPlainText
 Aliases:
 
 Required: False
@@ -108,36 +102,6 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -EncryptedStandardAPIKeyPath
-Path to the AES standard encrypted API key file
-
-```yaml
-Type: String
-Parameter Sets: AESEncrypted
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -EncryptedStandardAESKeyPath
-Path to the AES key file
-
-```yaml
-Type: String
-Parameter Sets: AESEncrypted
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

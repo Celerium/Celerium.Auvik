@@ -21,12 +21,6 @@ function Add-AuvikAPIKey {
     .PARAMETER ApiKeySecureString
         Input a SecureString object containing the API key
 
-    .PARAMETER EncryptedStandardAPIKeyPath
-        Path to the AES standard encrypted API key file
-
-    .PARAMETER EncryptedStandardAESKeyPath
-        Path to the AES key file
-
     .EXAMPLE
         Add-AuvikAPIKey -Username 'Celerium@Celerium.org'
 
@@ -50,71 +44,48 @@ function Add-AuvikAPIKey {
         https://celerium.github.io/Celerium.Auvik/site/Internal/Add-AuvikAPIKey.html
 #>
 
-    [cmdletbinding(DefaultParameterSetName = 'PlainText')]
+    [cmdletbinding(DefaultParameterSetName = 'AsPlainText')]
     [alias('Set-AuvikAPIKey')]
     Param (
-        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'PlainText')]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'AsPlainText')]
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'SecureString')]
-        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'AESEncrypted')]
         [ValidateNotNullOrEmpty()]
         [string]$Username,
 
-        [Parameter(Mandatory = $false, ValueFromPipeline = $true, ParameterSetName = 'PlainText')]
+        [Parameter(Mandatory = $false, ValueFromPipeline = $true, ParameterSetName = 'AsPlainText')]
         [ValidateNotNullOrEmpty()]
         [string]$ApiKey,
 
         [Parameter(Mandatory = $false, ValueFromPipeline = $true, ParameterSetName = 'SecureString')]
         [ValidateNotNullOrEmpty()]
-        [securestring]$ApiKeySecureString,
-
-        [Parameter(Mandatory = $false, ParameterSetName = 'AESEncrypted')]
-        [ValidateScript({
-            if (Test-Path $_) { $true }
-            else { throw "The file provided does not exist - [  $_  ]" }
-        })]
-        [string]$EncryptedStandardAPIKeyPath,
-
-        [Parameter(Mandatory = $true, ParameterSetName = 'AESEncrypted')]
-        [ValidateScript({
-            if (Test-Path $_) { $true }
-            else { throw "The file provided does not exist - [  $_  ]" }
-        })]
-        [string]$EncryptedStandardAESKeyPath
+        [securestring]$ApiKeySecureString
     )
 
     begin {}
 
     process {
 
-        Set-Variable -Name "AuvikUserName" -Value $Username -Option ReadOnly -Scope global -Force
+        Set-Variable -Name "AuvikModuleUserName" -Value $Username -Option ReadOnly -Scope global -Force
 
         switch ($PSCmdlet.ParameterSetName) {
 
-            'PlainText' {
+            'AsPlainText' {
 
                 if ($ApiKey) {
                     $SecureString = ConvertTo-SecureString $ApiKey -AsPlainText -Force
 
-                    Set-Variable -Name "AuvikApiKey" -Value $SecureString -Option ReadOnly -Scope global -Force
+                    Set-Variable -Name "AuvikModuleApiKey" -Value $SecureString -Option ReadOnly -Scope global -Force
                 }
                 else {
                     Write-Output "Please enter your API key:"
                     $SecureString = Read-Host -AsSecureString
 
-                    Set-Variable -Name "AuvikApiKey" -Value $SecureString -Option ReadOnly -Scope global -Force
+                    Set-Variable -Name "AuvikModuleApiKey" -Value $SecureString -Option ReadOnly -Scope global -Force
                 }
 
             }
 
-            'SecureString' { Set-Variable -Name "AuvikApiKey" -Value $ApiKeySecureString -Option ReadOnly -Scope global -Force }
-
-            'AESEncrypted' {
-
-                $SecureString =  Get-Content $EncryptedStandardAPIKeyPath | ConvertTo-SecureString -Key $(Get-Content $EncryptedStandardAESKeyPath )
-
-                Set-Variable -Name "AuvikApiKey" -Value $SecureString -Option ReadOnly -Scope global -Force
-
-            }
+            'SecureString' { Set-Variable -Name "AuvikModuleApiKey" -Value $ApiKeySecureString -Option ReadOnly -Scope global -Force }
 
         }
 

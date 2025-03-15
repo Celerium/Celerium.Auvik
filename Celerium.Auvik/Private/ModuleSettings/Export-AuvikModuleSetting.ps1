@@ -10,13 +10,13 @@ function Export-AuvikModuleSetting {
         that can only be unencrypted with the your Windows account as this encryption is tied to your user principal
         This means that you cannot copy your configuration file to another computer or user account and expect it to work
 
-    .PARAMETER AuvikConfPath
+    .PARAMETER AuvikConfigPath
         Define the location to store the Auvik configuration file
 
         By default the configuration file is stored in the following location:
             $env:USERPROFILE\Celerium.Auvik
 
-    .PARAMETER AuvikConfFile
+    .PARAMETER AuvikConfigFile
         Define the name of the Auvik configuration file
 
         By default the configuration file is named:
@@ -30,7 +30,7 @@ function Export-AuvikModuleSetting {
             $env:USERPROFILE\Celerium.Auvik\config.psd1
 
     .EXAMPLE
-        Export-AuvikModuleSetting -AuvikConfPath C:\Celerium.Auvik -AuvikConfFile MyConfig.psd1
+        Export-AuvikModuleSetting -AuvikConfigPath C:\Celerium.Auvik -AuvikConfigFile MyConfig.psd1
 
         Validates that the BaseURI, API, and JSON depth are set then exports their values
         to the current user's Auvik configuration file located at:
@@ -46,10 +46,10 @@ function Export-AuvikModuleSetting {
     [CmdletBinding(DefaultParameterSetName = 'Set')]
     Param (
         [Parameter(ParameterSetName = 'Set')]
-        [string]$AuvikConfPath = $(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) ),
+        [string]$AuvikConfigPath = $(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) ),
 
         [Parameter(ParameterSetName = 'Set')]
-        [string]$AuvikConfFile = 'config.psd1'
+        [string]$AuvikConfigFile = 'config.psd1'
     )
 
     begin {}
@@ -59,24 +59,24 @@ function Export-AuvikModuleSetting {
         Write-Warning "Secrets are stored using Windows Data Protection API (DPAPI)"
         Write-Warning "DPAPI provides user context encryption in Windows but NOT in other operating systems like Linux or UNIX. It is recommended to use a more secure & cross-platform storage method"
 
-        $AuvikConfig = Join-Path -Path $AuvikConfPath -ChildPath $AuvikConfFile
+        $AuvikConfig = Join-Path -Path $AuvikConfigPath -ChildPath $AuvikConfigFile
 
         # Confirm variables exist and are not null before exporting
-        if ($AuvikModuleBaseURI -and $AuvikUserName -and $AuvikApiKey -and $AuvikJSONConversionDepth) {
-            $secureString = $AuvikApiKey | ConvertFrom-SecureString
+        if ($AuvikModuleBaseURI -and $AuvikModuleUserName -and $AuvikModuleApiKey -and $AuvikJSONConversionDepth) {
+            $secureString = $AuvikModuleApiKey | ConvertFrom-SecureString
 
             if ($IsWindows -or $PSEdition -eq 'Desktop') {
-                New-Item -Path $AuvikConfPath -ItemType Directory -Force | ForEach-Object { $_.Attributes = $_.Attributes -bor "Hidden" }
+                New-Item -Path $AuvikConfigPath -ItemType Directory -Force | ForEach-Object { $_.Attributes = $_.Attributes -bor "Hidden" }
             }
             else{
-                New-Item -Path $AuvikConfPath -ItemType Directory -Force
+                New-Item -Path $AuvikConfigPath -ItemType Directory -Force
             }
 @"
     @{
-        AuvikModuleBaseURI = '$AuvikModuleBaseURI'
-        AuvikUserName = '$AuvikUserName'
-        AuvikApiKey = '$secureString'
-        AuvikJSONConversionDepth = '$AuvikJSONConversionDepth'
+        AuvikModuleBaseURI          = '$AuvikModuleBaseURI'
+        AuvikModuleUserName         = '$AuvikModuleUserName'
+        AuvikModuleApiKey           = '$secureString'
+        AuvikJSONConversionDepth    = '$AuvikJSONConversionDepth'
     }
 "@ | Out-File -FilePath $AuvikConfig -Force
         }

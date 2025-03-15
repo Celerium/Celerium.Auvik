@@ -17,12 +17,12 @@ Gets the saved Auvik configuration settings
 
 ### Index (Default)
 ```powershell
-Get-AuvikModuleSetting [-AuvikConfPath <String>] [-AuvikConfFile <String>] [<CommonParameters>]
+Get-AuvikModuleSetting [-AuvikConfigPath <String>] [-AuvikConfigFile <String>] [<CommonParameters>]
 ```
 
 ### show
 ```powershell
-Get-AuvikModuleSetting [-openConfFile] [<CommonParameters>]
+Get-AuvikModuleSetting [-OpenConfigFile] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -47,7 +47,7 @@ The default location of the Auvik configuration file is:
 
 ### EXAMPLE 2
 ```powershell
-Get-AuvikModuleSetting -AuvikConfPath C:\Celerium.Auvik -AuvikConfFile MyConfig.psd1 -openConfFile
+Get-AuvikModuleSetting -AuvikConfigPath C:\Celerium.Auvik -AuvikConfigFile MyConfig.psd1 -OpenConfigFile
 ```
 
 Opens the configuration file from the defined location in the default editor
@@ -57,7 +57,7 @@ The location of the Auvik configuration file in this example is:
 
 ## PARAMETERS
 
-### -AuvikConfPath
+### -AuvikConfigPath
 Define the location to store the Auvik configuration file
 
 By default the configuration file is stored in the following location:
@@ -75,7 +75,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -AuvikConfFile
+### -AuvikConfigFile
 Define the name of the Auvik configuration file
 
 By default the configuration file is named:
@@ -93,7 +93,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -openConfFile
+### -OpenConfigFile
 Opens the Auvik configuration file
 
 ```yaml

@@ -16,7 +16,7 @@ Removes the stored Auvik configuration folder
 ## SYNTAX
 
 ```powershell
-Remove-AuvikModuleSetting [-AuvikConfPath <String>] [-andVariables] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-AuvikModuleSetting [-AuvikConfigPath <String>] [-AndVariables] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,7 +40,7 @@ The default location of the Auvik configuration folder is:
 
 ### EXAMPLE 2
 ```powershell
-Remove-AuvikModuleSetting -AuvikConfPath C:\Celerium.Auvik -andVariables
+Remove-AuvikModuleSetting -AuvikConfigPath C:\Celerium.Auvik -AndVariables
 ```
 
 Checks to see if the defined configuration folder exists and removes it if it does
@@ -51,7 +51,7 @@ The location of the Auvik configuration folder in this example is:
 
 ## PARAMETERS
 
-### -AuvikConfPath
+### -AuvikConfigPath
 Define the location of the Auvik configuration folder
 
 By default the configuration folder is located at:
@@ -69,7 +69,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -andVariables
+### -AndVariables
 Define if sensitive Auvik variables should be removed as well
 
 By default the variables are not removed

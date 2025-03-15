@@ -10,19 +10,19 @@ function Get-AuvikModuleSetting {
         By default the configuration file is stored in the following location:
             $env:USERPROFILE\Celerium.Auvik
 
-    .PARAMETER AuvikConfPath
+    .PARAMETER AuvikConfigPath
         Define the location to store the Auvik configuration file
 
         By default the configuration file is stored in the following location:
             $env:USERPROFILE\Celerium.Auvik
 
-    .PARAMETER AuvikConfFile
+    .PARAMETER AuvikConfigFile
         Define the name of the Auvik configuration file
 
         By default the configuration file is named:
             config.psd1
 
-    .PARAMETER openConfFile
+    .PARAMETER OpenConfigFile
         Opens the Auvik configuration file
 
     .EXAMPLE
@@ -35,7 +35,7 @@ function Get-AuvikModuleSetting {
             $env:USERPROFILE\Celerium.Auvik\config.psd1
 
     .EXAMPLE
-        Get-AuvikModuleSetting -AuvikConfPath C:\Celerium.Auvik -AuvikConfFile MyConfig.psd1 -openConfFile
+        Get-AuvikModuleSetting -AuvikConfigPath C:\Celerium.Auvik -AuvikConfigFile MyConfig.psd1 -OpenConfigFile
 
         Opens the configuration file from the defined location in the default editor
 
@@ -52,28 +52,28 @@ function Get-AuvikModuleSetting {
     [CmdletBinding(DefaultParameterSetName = 'Index')]
     Param (
         [Parameter(Mandatory = $false, ParameterSetName = 'Index')]
-        [string]$AuvikConfPath = $(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) ),
+        [string]$AuvikConfigPath = $(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) ),
 
         [Parameter(Mandatory = $false, ParameterSetName = 'Index')]
-        [String]$AuvikConfFile = 'config.psd1',
+        [String]$AuvikConfigFile = 'config.psd1',
 
         [Parameter(Mandatory = $false, ParameterSetName = 'show')]
-        [Switch]$openConfFile
+        [Switch]$OpenConfigFile
     )
 
     begin {
-        $AuvikConfig = Join-Path -Path $AuvikConfPath -ChildPath $AuvikConfFile
+        $AuvikConfig = Join-Path -Path $AuvikConfigPath -ChildPath $AuvikConfigFile
     }
 
     process {
 
         if ( Test-Path -Path $AuvikConfig ) {
 
-            if($openConfFile) {
+            if($OpenConfigFile) {
                 Invoke-Item -Path $AuvikConfig
             }
             else{
-                Import-LocalizedData -BaseDirectory $AuvikConfPath -FileName $AuvikConfFile
+                Import-LocalizedData -BaseDirectory $AuvikConfigPath -FileName $AuvikConfigFile
             }
 
         }

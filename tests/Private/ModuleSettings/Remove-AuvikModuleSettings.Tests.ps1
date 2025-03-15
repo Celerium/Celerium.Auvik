@@ -109,7 +109,7 @@ param (
 
     AfterAll{
 
-        Remove-AuvikModuleSetting -AuvikConfPath $exportPath -WarningAction SilentlyContinue
+        Remove-AuvikModuleSetting -AuvikConfigPath $exportPath -WarningAction SilentlyContinue
 
         if (Get-Module -Name $moduleName) {
             Remove-Module -Name $moduleName -Force
@@ -133,7 +133,7 @@ Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('m
     Context "[ $commandName ] testing function" {
 
         It "No configuration should throw a warning" {
-            Remove-AuvikModuleSetting -AuvikConfPath $invalidPath -WarningAction SilentlyContinue -WarningVariable moduleSettingsWarning
+            Remove-AuvikModuleSetting -AuvikConfigPath $invalidPath -WarningAction SilentlyContinue -WarningVariable moduleSettingsWarning
 
             [bool]$moduleSettingsWarning | Should -BeTrue
         }
@@ -142,26 +142,26 @@ Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('m
             Add-AuvikBaseUri
             Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
 
-            Export-AuvikModuleSetting -AuvikConfPath $exportPath -WarningAction SilentlyContinue
-            Remove-AuvikModuleSetting -AuvikConfPath $exportPath
+            Export-AuvikModuleSetting -AuvikConfigPath $exportPath -WarningAction SilentlyContinue
+            Remove-AuvikModuleSetting -AuvikConfigPath $exportPath
 
             Test-Path -Path $exportPath | Should -BeFalse
             [bool](Get-Variable -Name AuvikModuleBaseURI -ErrorAction SilentlyContinue)   | Should -BeTrue
-            [bool](Get-Variable -Name AuvikUserName -ErrorAction SilentlyContinue) | Should -BeTrue
-            [bool](Get-Variable -Name AuvikApiKey -ErrorAction SilentlyContinue) | Should -BeTrue
+            [bool](Get-Variable -Name AuvikModuleUserName -ErrorAction SilentlyContinue) | Should -BeTrue
+            [bool](Get-Variable -Name AuvikModuleApiKey -ErrorAction SilentlyContinue) | Should -BeTrue
         }
 
         It "Saved configuration & variables should be removed" {
             Add-AuvikBaseUri
             Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
 
-            Export-AuvikModuleSetting -AuvikConfPath $exportPath -WarningAction SilentlyContinue
-            Remove-AuvikModuleSetting -AuvikConfPath $exportPath -andVariables
+            Export-AuvikModuleSetting -AuvikConfigPath $exportPath -WarningAction SilentlyContinue
+            Remove-AuvikModuleSetting -AuvikConfigPath $exportPath -AndVariables
 
             Test-Path -Path $exportPath | Should -BeFalse
             [bool](Get-Variable -Name AuvikModuleBaseURI -ErrorAction SilentlyContinue)   | Should -BeFalse
-            [bool](Get-Variable -Name AuvikUserName -ErrorAction SilentlyContinue) | Should -BeFalse
-            [bool](Get-Variable -Name AuvikApiKey -ErrorAction SilentlyContinue) | Should -BeFalse
+            [bool](Get-Variable -Name AuvikModuleUserName -ErrorAction SilentlyContinue) | Should -BeFalse
+            [bool](Get-Variable -Name AuvikModuleApiKey -ErrorAction SilentlyContinue) | Should -BeFalse
         }
 
     }

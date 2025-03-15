@@ -16,7 +16,7 @@ Imports the Auvik BaseURI, API, & JSON configuration information to the current 
 ## SYNTAX
 
 ```powershell
-Import-AuvikModuleSetting [-AuvikConfPath <String>] [-AuvikConfFile <String>] [<CommonParameters>]
+Import-AuvikModuleSetting [-AuvikConfigPath <String>] [-AuvikConfigFile <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -41,7 +41,7 @@ The default location of the Auvik configuration file is:
 
 ### EXAMPLE 2
 ```powershell
-Import-AuvikModuleSetting -AuvikConfPath C:\Celerium.Auvik -AuvikConfFile MyConfig.psd1
+Import-AuvikModuleSetting -AuvikConfigPath C:\Celerium.Auvik -AuvikConfigFile MyConfig.psd1
 ```
 
 Validates that the configuration file created with the Export-AuvikModuleSetting cmdlet exists
@@ -52,7 +52,7 @@ The location of the Auvik configuration file in this example is:
 
 ## PARAMETERS
 
-### -AuvikConfPath
+### -AuvikConfigPath
 Define the location to store the Auvik configuration file
 
 By default the configuration file is stored in the following location:
@@ -70,7 +70,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -AuvikConfFile
+### -AuvikConfigFile
 Define the name of the Auvik configuration file
 
 By default the configuration file is named:

@@ -29,7 +29,7 @@ function Get-AuvikAPIKey {
         https://celerium.github.io/Celerium.Auvik/site/Internal/Get-AuvikAPIKey.html
 #>
 
-    [cmdletbinding()]
+    [cmdletbinding(DefaultParameterSetName = 'Index')]
     Param (
         [Parameter(Mandatory = $false)]
         [Switch]$AsPlainText
@@ -41,20 +41,20 @@ function Get-AuvikAPIKey {
 
         try {
 
-            if ($AuvikApiKey) {
+            if ($AuvikModuleApiKey) {
 
                 if ($AsPlainText) {
-                    $ApiKey = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($AuvikApiKey)
+                    $ApiKey = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($AuvikModuleApiKey)
 
                     [PSCustomObject]@{
-                        UserName    = $AuvikUserName
-                        APIKey      = ( [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($ApiKey) ).ToString()
+                        UserName    = $AuvikModuleUserName
+                        ApiKey      = ( [System.Runtime.InteropServices.Marshal]::PtrToStringBSTR($ApiKey) ).ToString()
                     }
                 }
                 else {
                     [PSCustomObject]@{
-                        UserName    = $AuvikUserName
-                        APIKey      = $AuvikApiKey
+                        UserName    = $AuvikModuleUserName
+                        ApiKey      = $AuvikModuleApiKey
                     }
                 }
 
