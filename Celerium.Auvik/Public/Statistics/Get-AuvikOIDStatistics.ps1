@@ -1,138 +1,138 @@
 function Get-AuvikOIDStatistics {
 <#
     .SYNOPSIS
-        Provides the current value for numeric SNMP Pollers
+        Read OID Statistics
 
     .DESCRIPTION
-        The Get-AuvikOIDStatistics cmdlet provides the current
-        value for numeric SNMP Pollers
+        The Get-AuvikOIDStatistics cmdlet invokes the GET method of the /stat/oid/{statId} endpoint (Read OID Statistics)
+
+        Use the Read OID Statistics API to fetch the last recorded value of a monitored device OID.
 
     .PARAMETER StatId
         ID of statistic to return
 
-        Example: "deviceMonitor"
-
-    .PARAMETER Tenants
-        Comma delimited list of tenant IDs to request info from
+        Allowed values:
+        'deviceMonitor'
 
     .PARAMETER FilterDeviceId
         Filter by device ID
 
     .PARAMETER FilterDeviceType
-        Filter by device type
+        Filter by device type.
 
         Allowed values:
-            "unknown", "switch", "l3Switch", "router", "accessPoint", "firewall",
-            "workstation", "server", "storage", "printer", "copier", "hypervisor",
-            "multimedia", "phone", "tablet", "handheld", "virtualAppliance", "bridge",
-            "controller", "hub", "modem", "ups", "module", "loadBalancer", "camera",
-            "telecommunications", "packetProcessor", "chassis", "airConditioner",
-            "virtualMachine", "pdu", "ipPhone", "backhaul", "internetOfThings",
-            "voipSwitch", "stack", "backupDevice", "timeClock", "lightingDevice",
-            "audioVisual", "securityAppliance", "utm", "alarm", "buildingManagement",
-            "ipmi", "thinAccessPoint", "thinClient"
+        'unknown', 'switch', 'l3Switch', 'router', 'accessPoint', 'firewall', 'workstation', 'server', 'storage', 'printer', 'copier', 'hypervisor', 'multimedia', 'phone', 'tablet', 'handheld', 'virtualAppliance', 'bridge', 'controller', 'hub', 'modem', 'ups', 'module', 'loadBalancer', 'camera', 'telecommunications', 'packetProcessor', 'chassis', 'airConditioner', 'virtualMachine', 'pdu', 'ipPhone', 'backhaul', 'internetOfThings', 'voipSwitch', 'stack', 'backupDevice', 'timeClock', 'lightingDevice', 'audioVisual', 'securityAppliance', 'utm', 'alarm', 'buildingManagement', 'ipmi', 'thinAccessPoint', 'thinClient', 'subnet'
 
-    .PARAMETER FilterOID
+    .PARAMETER FilterOid
         Filter by OID
 
-    .PARAMETER PageFirst
-        For paginated responses, the first N elements will be returned
-        Used in combination with page[after]
+    .PARAMETER Tenants
+        Comma delimited list of tenant IDs to request info from.
 
-        Default Value: 100
+        Accepts multiple values which are sent to the API as a comma delimited list
+
+    .PARAMETER PageFirst
+        For paginated responses, the first N elements will be returned. Used in combination with page[after].
+
+        Default value: 100
 
     .PARAMETER PageAfter
-        Cursor after which elements will be returned as a page
-        The page size is provided by page[first]
+        Cursor after which elements will be returned as a page. The page size is provided by page[first].
 
     .PARAMETER PageLast
-        For paginated responses, the last N services will be returned
-        Used in combination with page[before]
+        For paginated responses, the last N services will be returned. Used in combination with page[before].
 
-        Default Value: 100
+        Default value: 100
 
     .PARAMETER PageBefore
-        Cursor before which elements will be returned as a page
-        The page size is provided by page[last]
+        Cursor before which elements will be returned as a page. The page size is provided by page[last].
 
     .PARAMETER AllResults
-        Returns all items from an endpoint
+        Returns all items from the endpoint by following the pagination links
 
-        Highly recommended to only use with filters to reduce API errors\timeouts
+        When using this parameter there is no need to use the PageFirst, PageAfter, PageLast, or PageBefore parameters
 
-    .EXAMPLE
-        Get-AuvikOIDStatistics -StatId deviceMonitor
-
-        Provides the first 100 values for numeric SNMP Pollers
+        Highly recommended to only use with filters to reduce API errors & timeouts
 
     .EXAMPLE
-        Get-AuvikOIDStatistics -StatId deviceMonitor -PageFirst 1000 -AllResults
+        Get-AuvikOIDStatistics -StatId 'd'
 
-        Provides all values for numeric SNMP Pollers
+        Returns the result of the /stat/oid/{statId} endpoint
+
+    .EXAMPLE
+        Get-AuvikOIDStatistics -StatId 'd' -Tenants '1234567890' -PageFirst 10
+
+        Returns the result of the /stat/oid/{statId} endpoint limited to the defined tenant
+
+    .EXAMPLE
+        Get-AuvikOIDStatistics -StatId 'd' -AllResults
+
+        Returns every item from the /stat/oid/{statId} endpoint by following the pagination links
+
+    .INPUTS
+        System.String
+
+    .OUTPUTS
+        System.Management.Automation.PSCustomObject
 
     .NOTES
-        N\A
+        Endpoint : GET /stat/oid/{statId}
+        The Auvik API user needs the role permissions that are required by the endpoint
 
     .LINK
         https://celerium.github.io/Celerium.Auvik/site/Statistics/Get-AuvikOIDStatistics.html
 #>
 
-    [CmdletBinding(DefaultParameterSetName = 'Index' )]
-    Param (
-        [Parameter( Mandatory = $true )]
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('Id')]
         [ValidateNotNullOrEmpty()]
+        [ValidateSet('deviceMonitor')]
         [string]$StatId,
 
-        [Parameter( Mandatory = $false, ValueFromPipeline = $true )]
-        [ValidateNotNullOrEmpty()]
-        [string[]]$Tenants,
-
-        [Parameter( Mandatory = $false )]
+        [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]
         [string]$FilterDeviceId,
 
-        [Parameter( Mandatory = $false )]
-        [ValidateSet(   "unknown", "switch", "l3Switch", "router", "accessPoint", "firewall",
-                        "workstation", "server", "storage", "printer", "copier", "hypervisor",
-                        "multimedia", "phone", "tablet", "handheld", "virtualAppliance", "bridge",
-                        "controller", "hub", "modem", "ups", "module", "loadBalancer", "camera",
-                        "telecommunications", "packetProcessor", "chassis", "airConditioner",
-                        "virtualMachine", "pdu", "ipPhone", "backhaul", "internetOfThings",
-                        "voipSwitch", "stack", "backupDevice", "timeClock", "lightingDevice",
-                        "audioVisual", "securityAppliance", "utm", "alarm", "buildingManagement",
-                        "ipmi", "thinAccessPoint", "thinClient"
-        )]
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [ValidateSet('unknown', 'switch', 'l3Switch', 'router', 'accessPoint', 'firewall', 'workstation', 'server', 'storage', 'printer', 'copier', 'hypervisor', 'multimedia', 'phone', 'tablet', 'handheld', 'virtualAppliance', 'bridge', 'controller', 'hub', 'modem', 'ups', 'module', 'loadBalancer', 'camera', 'telecommunications', 'packetProcessor', 'chassis', 'airConditioner', 'virtualMachine', 'pdu', 'ipPhone', 'backhaul', 'internetOfThings', 'voipSwitch', 'stack', 'backupDevice', 'timeClock', 'lightingDevice', 'audioVisual', 'securityAppliance', 'utm', 'alarm', 'buildingManagement', 'ipmi', 'thinAccessPoint', 'thinClient', 'subnet')]
         [string]$FilterDeviceType,
 
-        [Parameter( Mandatory = $false )]
+        [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]
-        [string]$FilterOID,
+        [string]$FilterOid,
 
-        [Parameter( Mandatory = $false )]
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string[]]$Tenants,
+
+        [Parameter(Mandatory = $false)]
         [ValidateRange(1, [int64]::MaxValue)]
         [int64]$PageFirst,
 
-        [Parameter( Mandatory = $false )]
+        [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]
         [string]$PageAfter,
 
-        [Parameter( Mandatory = $false )]
+        [Parameter(Mandatory = $false)]
         [ValidateRange(1, [int64]::MaxValue)]
         [int64]$PageLast,
 
-        [Parameter( Mandatory = $false )]
+        [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]
         [string]$PageBefore,
 
-        [Parameter( Mandatory = $false )]
+        [Parameter(Mandatory = $false)]
         [switch]$AllResults
     )
 
     begin {
 
         $FunctionName       = $MyInvocation.InvocationName
-        $ParameterName      = $functionName + '_Parameters'      -replace '-','_'
-        $QueryParameterName = $functionName + '_ParametersQuery' -replace '-','_'
+        $ParameterName      = ($FunctionName -replace '-', '') + 'Parameters'
+        $QueryParameterName = $ParameterName + 'Query'
 
     }
 
@@ -140,29 +140,31 @@ function Get-AuvikOIDStatistics {
 
         Write-Verbose "[ $($MyInvocation.MyCommand.Name) ] - Running the [ $($PSCmdlet.ParameterSetName) ] ParameterSet"
 
-        $ResourceUri = "/stat/oid/$StatId"
-
-        $UriParameters = @{}
-
-        #Region     [ Parameter Translation ]
-
-        if ($PSCmdlet.ParameterSetName -eq 'Index') {
-            if ($Tenants)           { $UriParameters['tenants']             = $Tenants }
-            if ($FilterDeviceId)    { $UriParameters['filter[deviceId]']    = $FilterDeviceId }
-            if ($FilterDeviceType)  { $UriParameters['filter[deviceType]']  = $FilterDeviceType }
-            if ($FilterOID)         { $UriParameters['filter[oid]']         = $FilterOID}
-            if ($PageFirst)         { $UriParameters['page[first]']         = $PageFirst }
-            if ($PageAfter)         { $UriParameters['page[after]']         = $PageAfter }
-            if ($PageLast)          { $UriParameters['page[last]']          = $PageLast }
-            if ($PageBefore)        { $UriParameters['page[before]']        = $PageBefore }
+        $ResourceUri = "/stat/oid/$([System.Uri]::EscapeDataString($StatId))"
+        $NameMap = @{
+            FilterDeviceId   = 'filter[deviceId]'
+            FilterDeviceType = 'filter[deviceType]'
+            FilterOid        = 'filter[oid]'
+            Tenants          = 'tenants'
+            PageFirst        = 'page[first]'
+            PageAfter        = 'page[after]'
+            PageLast         = 'page[last]'
+            PageBefore       = 'page[before]'
         }
 
-        #EndRegion  [ Parameter Translation ]
+        $UriParameters = Get-AuvikUriParameter -BoundParameter $PSBoundParameters -NameMap $NameMap
 
-        Set-Variable -Name $ParameterName -Value $PSBoundParameters -Scope Global -Force -Confirm:$false
-        Set-Variable -Name $QueryParameterName -Value $UriParameters -Scope Global -Force -Confirm:$false
+        $InvokeParams = @{
+            Method      = 'GET'
+            ResourceUri = $ResourceUri
+            UriFilter   = $UriParameters
+            AllResults  = $AllResults
+        }
 
-        return Invoke-AuvikRequest -Method GET -ResourceUri $ResourceUri -UriFilter $UriParameters -AllResults:$AllResults
+        Set-Variable -Name $ParameterName -Value $PSBoundParameters -Scope Global -Force -Confirm:$false -WhatIf:$false
+        Set-Variable -Name $QueryParameterName -Value $UriParameters -Scope Global -Force -Confirm:$false -WhatIf:$false
+
+        return Invoke-AuvikRequest @InvokeParams
 
     }
 

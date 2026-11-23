@@ -1,174 +1,249 @@
 ---
-external help file: Celerium.Auvik-help.xml
+document type: cmdlet
+external help file: Celerium.Auvik-Help.xml
 grand_parent: SaaSManagement
+HelpUri: https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html
+Locale: en-US
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html
 parent: GET
-schema: 2.0.0
+PlatyPS schema version: 2024-05-01
 title: Get-AuvikASMTag
 ---
 
 # Get-AuvikASMTag
 
 ## SYNOPSIS
-Get Auvik ASM tag information
+
+Read Multiple ASM Tags' Info
 
 ## SYNTAX
 
-```powershell
-Get-AuvikASMTag [[-FilterClientId] <String>] [[-FilterApplicationId] <String>] [[-PageFirst] <Int64>]
- [[-PageAfter] <String>] [[-PageLast] <Int64>] [[-PageBefore] <String>] [-AllResults] [<CommonParameters>]
+### __AllParameterSets
+
+```
+Get-AuvikASMTag [-FilterClientId] <string> [[-FilterApplicationId] <string>] [[-PageFirst] <long>]
+ [[-PageAfter] <string>] [[-PageLast] <long>] [[-PageBefore] <string>] [-AllResults]
 ```
 
+## ALIASES
+
+This cmdlet has the following aliases,
+  - None
+
 ## DESCRIPTION
-The Get-AuvikASMTag cmdlet gets multiple ASM applications' info
-to retrieve the information related to the SaaS applications discovered
-within an ASM client deployment
+
+The Get-AuvikASMTag cmdlet invokes the GET method of the /asm/tag/info endpoint (Read Multiple ASM Tags' Info)
+
+Use the Read Multiple ASM Tags' Info API to retrieve information about tags configured within an ASM client.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
+
 ```powershell
-Get-AuvikASMTag
+Get-AuvikASMTag -FilterClientId 'Example'
 ```
 
-Get Auvik ASM tag information
+Returns the result of the /asm/tag/info endpoint
 
 ### EXAMPLE 2
+
 ```powershell
-Get-AuvikASMTag -PageFirst 1000 -AllResults
+Get-AuvikASMTag -FilterClientId 'Example' -PageFirst 10
 ```
 
-Get Auvik ASM tag information for all devices found by Auvik
+Returns the result of the /asm/tag/info endpoint limited to the defined number of items
+
+### EXAMPLE 3
+
+```powershell
+Get-AuvikASMTag -FilterClientId 'Example' -AllResults
+```
+
+Returns every item from the /asm/tag/info endpoint by following the pagination links
 
 ## PARAMETERS
 
-### -FilterClientId
-Filter by client ID
+### -AllResults
+
+Returns all items from the endpoint by following the pagination links
+
+When using this parameter there is no need to use the PageFirst, PageAfter, PageLast, or PageBefore parameters
+
+Highly recommended to only use with filters to reduce API errors & timeouts
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -FilterApplicationId
-Filter by application ID
+
+Filter by application ID.
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
-### -PageFirst
-For paginated responses, the first N elements will be returned
-Used in combination with page\[after\]
+### -FilterClientId
 
-Default Value: 100
+Filter by client ID.
 
 ```yaml
-Type: Int64
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 0
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -PageAfter
-Cursor after which elements will be returned as a page
-The page size is provided by page\[first\]
+
+Cursor after which elements will be returned as a page.
+The page size is provided by page[first].
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PageLast
-For paginated responses, the last N services will be returned
-Used in combination with page\[before\]
-
-Default Value: 100
-
-```yaml
-Type: Int64
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 3
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -PageBefore
-Cursor before which elements will be returned as a page
-The page size is provided by page\[last\]
+
+Cursor before which elements will be returned as a page.
+The page size is provided by page[last].
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 5
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
-### -AllResults
-Returns all items from an endpoint
+### -PageFirst
 
-Highly recommended to only use with filters to reduce API errors\timeouts
+For paginated responses, the first N elements will be returned.
+Used in combination with page[after].
+
+Default value: 100
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
+Type: System.Int64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 2
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
 
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
+### -PageLast
+
+For paginated responses, the last N services will be returned.
+Used in combination with page[before].
+
+Default value: 100
+
+```yaml
+Type: System.Int64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 4
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
+-ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ## OUTPUTS
 
+### System.Management.Automation.PSCustomObject
+
+{{ Fill in the Description }}
+
 ## NOTES
-N\A
+
+Endpoint : GET /asm/tag/info
+The Auvik API user needs the role permissions that are required by the endpoint
+
 
 ## RELATED LINKS
 
-[https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html](https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html)
-
+- [](https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html)

@@ -1,158 +1,229 @@
 ---
-external help file: Celerium.Auvik-help.xml
+document type: cmdlet
+external help file: Celerium.Auvik-Help.xml
 grand_parent: SaaSManagement
+HelpUri: https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMUser.html
+Locale: en-US
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMUser.html
 parent: GET
-schema: 2.0.0
+PlatyPS schema version: 2024-05-01
 title: Get-AuvikASMUser
 ---
 
 # Get-AuvikASMUser
 
 ## SYNOPSIS
-Get Auvik ASM user information
+
+Read Multiple ASM Users' Info
 
 ## SYNTAX
 
-```powershell
-Get-AuvikASMUser [[-FilterClientId] <String>] [[-PageFirst] <Int64>] [[-PageAfter] <String>]
- [[-PageLast] <Int64>] [[-PageBefore] <String>] [-AllResults] [<CommonParameters>]
+### __AllParameterSets
+
+```
+Get-AuvikASMUser [-FilterClientId] <string> [[-PageFirst] <long>] [[-PageAfter] <string>]
+ [[-PageLast] <long>] [[-PageBefore] <string>] [-AllResults]
 ```
 
+## ALIASES
+
+This cmdlet has the following aliases,
+  - None
+
 ## DESCRIPTION
-The Get-AuvikASMUser cmdlet gets information about any monitored
-users that exist within a specific Auvik SaaS Management tenant
+
+The Get-AuvikASMUser cmdlet invokes the GET method of the /asm/user/info endpoint (Read Multiple ASM Users' Info)
+
+Use the Read Multiple ASM Users' Info API to retrieve information about any monitored users that exist within a specific Auvik SaaS Management tenant.
+ASM user data includes core information about the SaaS applications a monitored user is using as well as which accounts a user is leveraging to log into those applications.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
+
 ```powershell
-Get-AuvikASMUser
+Get-AuvikASMUser -FilterClientId 'Example'
 ```
 
-Get Auvik ASM user information
+Returns the result of the /asm/user/info endpoint
 
 ### EXAMPLE 2
+
 ```powershell
-Get-AuvikASMUser -PageFirst 1000 -AllResults
+Get-AuvikASMUser -FilterClientId 'Example' -PageFirst 10
 ```
 
-Get Auvik ASM user information for all devices found by Auvik
+Returns the result of the /asm/user/info endpoint limited to the defined number of items
+
+### EXAMPLE 3
+
+```powershell
+Get-AuvikASMUser -FilterClientId 'Example' -AllResults
+```
+
+Returns every item from the /asm/user/info endpoint by following the pagination links
 
 ## PARAMETERS
 
-### -FilterClientId
-Filter by client ID
+### -AllResults
+
+Returns all items from the endpoint by following the pagination links
+
+When using this parameter there is no need to use the PageFirst, PageAfter, PageLast, or PageBefore parameters
+
+Highly recommended to only use with filters to reduce API errors & timeouts
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
-### -PageFirst
-For paginated responses, the first N elements will be returned
-Used in combination with page\[after\]
+### -FilterClientId
 
-Default Value: 100
+Filter by client ID.
 
 ```yaml
-Type: Int64
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 0
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -PageAfter
-Cursor after which elements will be returned as a page
-The page size is provided by page\[first\]
+
+Cursor after which elements will be returned as a page.
+The page size is provided by page[first].
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PageLast
-For paginated responses, the last N services will be returned
-Used in combination with page\[before\]
-
-Default Value: 100
-
-```yaml
-Type: Int64
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 2
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -PageBefore
-Cursor before which elements will be returned as a page
-The page size is provided by page\[last\]
+
+Cursor before which elements will be returned as a page.
+The page size is provided by page[last].
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 4
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
-### -AllResults
-Returns all items from an endpoint
+### -PageFirst
 
-Highly recommended to only use with filters to reduce API errors\timeouts
+For paginated responses, the first N elements will be returned.
+Used in combination with page[after].
+
+Default value: 100
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
+Type: System.Int64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
 
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
+### -PageLast
+
+For paginated responses, the last N services will be returned.
+Used in combination with page[before].
+
+Default value: 100
+
+```yaml
+Type: System.Int64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 3
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
+-ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ## OUTPUTS
 
+### System.Management.Automation.PSCustomObject
+
+{{ Fill in the Description }}
+
 ## NOTES
-N\A
+
+Endpoint : GET /asm/user/info
+The Auvik API user needs the role permissions that are required by the endpoint
+
 
 ## RELATED LINKS
 
-[https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMUser.html](https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMUser.html)
-
+- [](https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMUser.html)

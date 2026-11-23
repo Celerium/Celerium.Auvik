@@ -1,137 +1,152 @@
 function Get-AuvikASMSecurityLog {
-    <#
-        .SYNOPSIS
-            Get Auvik ASM security log information
+<#
+    .SYNOPSIS
+        Read Multiple ASM Security Logs' Info
 
-        .DESCRIPTION
-            The Get-AuvikASMSecurityLog cmdlet gets multiple ASM security logs' info
-            to retrieve the information related to the SaaS applications discovered
-            within an ASM client deployment
+    .DESCRIPTION
+        The Get-AuvikASMSecurityLog cmdlet invokes the GET method of the /asm/securityLog/info endpoint (Read Multiple ASM Security Logs' Info)
 
-        .PARAMETER FilterClientId
-            Filter by client ID
+        Use the Read Multiple ASM Security Logs' Info API to retrieve in depth information about the security logs within an Auvik SaaS Management client. Security logs include specific SaaS events, such as logins or downloads with timestamps for each event.
 
-        .PARAMETER Include
-            Use to include extended details of the security log or of its related objects
+    .PARAMETER FilterClientId
+        Filter by client ID.
 
-            Allowed values:
-                "users" "applications"
+    .PARAMETER Include
+        Use to include extended details of the security log or of its related objects.
 
-        .PARAMETER FilterQueryDate
-            Return associated breaches added after this date
+        Allowed values:
+        'users', 'applications'
 
-        .PARAMETER PageFirst
-            For paginated responses, the first N elements will be returned
-            Used in combination with page[after]
+    .PARAMETER FilterQueryDate
+        Only return security logs added after this date.
 
-            Default Value: 100
+        Accepts a date & time which is sent to the API in UTC
 
-        .PARAMETER PageAfter
-            Cursor after which elements will be returned as a page
-            The page size is provided by page[first]
+    .PARAMETER PageFirst
+        For paginated responses, the first N elements will be returned. Used in combination with page[after].
 
-        .PARAMETER PageLast
-            For paginated responses, the last N services will be returned
-            Used in combination with page[before]
+        Default value: 100
 
-            Default Value: 100
+    .PARAMETER PageAfter
+        Cursor after which elements will be returned as a page. The page size is provided by page[first].
 
-        .PARAMETER PageBefore
-            Cursor before which elements will be returned as a page
-            The page size is provided by page[last]
+    .PARAMETER PageLast
+        For paginated responses, the last N services will be returned. Used in combination with page[before].
 
-        .PARAMETER AllResults
-            Returns all items from an endpoint
+        Default value: 100
 
-            Highly recommended to only use with filters to reduce API errors\timeouts
+    .PARAMETER PageBefore
+        Cursor before which elements will be returned as a page. The page size is provided by page[last].
 
-        .EXAMPLE
-            Get-AuvikASMSecurityLog
+    .PARAMETER AllResults
+        Returns all items from the endpoint by following the pagination links
 
-            Get Auvik ASM security log information
+        When using this parameter there is no need to use the PageFirst, PageAfter, PageLast, or PageBefore parameters
 
-        .EXAMPLE
-            Get-AuvikASMSecurityLog -PageFirst 1000 -AllResults
+        Highly recommended to only use with filters to reduce API errors & timeouts
 
-            Get Auvik ASM security log information for all devices found by Auvik
+    .EXAMPLE
+        Get-AuvikASMSecurityLog -FilterClientId 'Example'
 
-        .NOTES
-        N\A
+        Returns the result of the /asm/securityLog/info endpoint
 
-        .LINK
-            https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMSecurityLog.html
-    #>
+    .EXAMPLE
+        Get-AuvikASMSecurityLog -FilterClientId 'Example' -PageFirst 10
 
-        [CmdletBinding(DefaultParameterSetName = 'Index')]
-        Param (
-            [Parameter( Mandatory = $false, ValueFromPipeline = $true)]
-            [ValidateNotNullOrEmpty()]
-            [string]$FilterClientId,
+        Returns the result of the /asm/securityLog/info endpoint limited to the defined number of items
 
-            [Parameter( Mandatory = $false)]
-            [ValidateSet( "users", "applications" )]
-            [string[]]$Include,
+    .EXAMPLE
+        Get-AuvikASMSecurityLog -FilterClientId 'Example' -AllResults
 
-            [Parameter( Mandatory = $false)]
-            [DateTime]$FilterQueryDate,
+        Returns every item from the /asm/securityLog/info endpoint by following the pagination links
 
-            [Parameter( Mandatory = $false)]
-            [ValidateRange(1, [int64]::MaxValue)]
-            [int64]$PageFirst,
+    .INPUTS
+        None
 
-            [Parameter( Mandatory = $false)]
-            [ValidateNotNullOrEmpty()]
-            [string]$PageAfter,
+    .OUTPUTS
+        System.Management.Automation.PSCustomObject
 
-            [Parameter( Mandatory = $false)]
-            [ValidateRange(1, [int64]::MaxValue)]
-            [int64]$PageLast,
+    .NOTES
+        Endpoint : GET /asm/securityLog/info
+        The Auvik API user needs the role permissions that are required by the endpoint
 
-            [Parameter( Mandatory = $false)]
-            [ValidateNotNullOrEmpty()]
-            [string]$PageBefore,
+    .LINK
+        https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMSecurityLog.html
+#>
 
-            [Parameter( Mandatory = $false)]
-            [switch]$AllResults
-        )
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$FilterClientId,
 
-        begin {
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [ValidateSet('users', 'applications')]
+        [string]$Include,
 
-            $FunctionName       = $MyInvocation.InvocationName
-            $ParameterName      = $functionName + '_Parameters'      -replace '-','_'
-            $QueryParameterName = $functionName + '_ParametersQuery' -replace '-','_'
+        [Parameter(Mandatory = $false)]
+        [datetime]$FilterQueryDate,
 
-        }
+        [Parameter(Mandatory = $false)]
+        [ValidateRange(1, [int64]::MaxValue)]
+        [int64]$PageFirst,
 
-        process {
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string]$PageAfter,
 
-            Write-Verbose "[ $($MyInvocation.MyCommand.Name) ] - Running the [ $($PSCmdlet.ParameterSetName) ] ParameterSet"
+        [Parameter(Mandatory = $false)]
+        [ValidateRange(1, [int64]::MaxValue)]
+        [int64]$PageLast,
 
-            $ResourceUri = "/asm/securityLog/info"
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string]$PageBefore,
 
-            $UriParameters = @{}
+        [Parameter(Mandatory = $false)]
+        [switch]$AllResults
+    )
 
-            #Region     [ Parameter Translation ]
+    begin {
 
-            if ($PSCmdlet.ParameterSetName -eq 'Index') {
-                if ($FilterClientId)    { $UriParameters['filter[clientId]']    = $FilterClientId }
-                if ($Include)           { $UriParameters['include']             = $Include }
-                if ($FilterQueryDate)   { $UriParameters['filter[queryDate]']   = $FilterQueryDate }
-                if ($PageFirst)         { $UriParameters['page[first]']         = $PageFirst }
-                if ($PageAfter)         { $UriParameters['page[after]']         = $PageAfter }
-                if ($PageLast)          { $UriParameters['page[last]']          = $PageLast }
-                if ($PageBefore)        { $UriParameters['page[before]']        = $PageBefore }
-            }
-
-            #EndRegion  [ Parameter Translation ]
-
-            Set-Variable -Name $ParameterName -Value $PSBoundParameters -Scope Global -Force -Confirm:$false
-            Set-Variable -Name $QueryParameterName -Value $UriParameters -Scope Global -Force -Confirm:$false
-
-            return Invoke-AuvikRequest -Method GET -ResourceUri $ResourceUri -UriFilter $UriParameters -AllResults:$AllResults
-
-        }
-
-        end {}
+        $FunctionName       = $MyInvocation.InvocationName
+        $ParameterName      = ($FunctionName -replace '-', '') + 'Parameters'
+        $QueryParameterName = $ParameterName + 'Query'
 
     }
+
+    process {
+
+        Write-Verbose "[ $($MyInvocation.MyCommand.Name) ] - Running the [ $($PSCmdlet.ParameterSetName) ] ParameterSet"
+
+        $ResourceUri = '/asm/securityLog/info'
+        $NameMap = @{
+            FilterClientId  = 'filter[clientId]'
+            Include         = 'include'
+            FilterQueryDate = 'filter[queryDate]'
+            PageFirst       = 'page[first]'
+            PageAfter       = 'page[after]'
+            PageLast        = 'page[last]'
+            PageBefore      = 'page[before]'
+        }
+
+        $UriParameters = Get-AuvikUriParameter -BoundParameter $PSBoundParameters -NameMap $NameMap
+
+        $InvokeParams = @{
+            Method      = 'GET'
+            ResourceUri = $ResourceUri
+            UriFilter   = $UriParameters
+            AllResults  = $AllResults
+        }
+
+        Set-Variable -Name $ParameterName -Value $PSBoundParameters -Scope Global -Force -Confirm:$false -WhatIf:$false
+        Set-Variable -Name $QueryParameterName -Value $UriParameters -Scope Global -Force -Confirm:$false -WhatIf:$false
+
+        return Invoke-AuvikRequest @InvokeParams
+
+    }
+
+    end {}
+
+}

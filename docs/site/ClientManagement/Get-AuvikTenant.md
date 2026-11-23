@@ -1,125 +1,73 @@
 ---
-external help file: Celerium.Auvik-help.xml
+document type: cmdlet
+external help file: Celerium.Auvik-Help.xml
 grand_parent: ClientManagement
+HelpUri: https://celerium.github.io/Celerium.Auvik/site/ClientManagement/Get-AuvikTenant.html
+Locale: en-US
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/ClientManagement/Get-AuvikTenant.html
 parent: GET
-schema: 2.0.0
+PlatyPS schema version: 2024-05-01
 title: Get-AuvikTenant
 ---
 
 # Get-AuvikTenant
 
 ## SYNOPSIS
-Get Auvik tenant information
+
+Read Multiple Tenants
 
 ## SYNTAX
 
-### IndexMultiTenant (Default)
-```powershell
-Get-AuvikTenant [<CommonParameters>]
+### __AllParameterSets
+
+```
+Get-AuvikTenant
 ```
 
-### IndexSingleTenantDetails
-```powershell
-Get-AuvikTenant -TenantDomainPrefix <String> -ID <String> [<CommonParameters>]
-```
+## ALIASES
 
-### IndexMultiTenantDetails
-```powershell
-Get-AuvikTenant -TenantDomainPrefix <String> [-FilterAvailableTenants] [<CommonParameters>]
-```
+This cmdlet has the following aliases,
+  - None
 
 ## DESCRIPTION
-The Get-AuvikTenant cmdlet get Auvik general or detailed
-tenant information associated to your Auvik user account
+
+The Get-AuvikTenant cmdlet invokes the GET method of the /tenants endpoint (Read Multiple Tenants)
+
+Use the Read Multiple Tenants API to pull access detail about multiple multi-clients and clients associated with your Auvik user account.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
+
 ```powershell
 Get-AuvikTenant
 ```
 
-Gets general information about multiple multi-clients and
-clients associated with your Auvik user account
-
-### EXAMPLE 2
-```powershell
-Get-AuvikTenant -TenantDomainPrefix CeleriumMSP
-```
-
-Gets detailed information about multiple multi-clients and
-clients associated with your main Auvik account
-
-### EXAMPLE 3
-```powershell
-Get-AuvikTenant -TenantDomainPrefix CeleriumMSP -ID 123456789
-```
-
-Gets detailed information about a single tenant from
-your main Auvik account
+Returns the result of the /tenants endpoint
 
 ## PARAMETERS
 
-### -TenantDomainPrefix
-Domain prefix of your main Auvik account (tenant)
-
-```yaml
-Type: String
-Parameter Sets: IndexSingleTenantDetails, IndexMultiTenantDetails
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FilterAvailableTenants
-Filter whether or not a tenant is available,
-i.e.
-data can be gotten from them via the API
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: IndexMultiTenantDetails
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ID
-ID of tenant
-
-```yaml
-Type: String
-Parameter Sets: IndexSingleTenantDetails
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
+-ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ## OUTPUTS
 
+### System.Management.Automation.PSCustomObject
+
+{{ Fill in the Description }}
+
 ## NOTES
-N\A
+
+Endpoint : GET /tenants
+The Auvik API user needs the role permissions that are required by the endpoint
+
 
 ## RELATED LINKS
 
-[https://celerium.github.io/Celerium.Auvik/site/ClientManagement/Get-AuvikTenant.html](https://celerium.github.io/Celerium.Auvik/site/ClientManagement/Get-AuvikTenant.html)
-
+- [](https://celerium.github.io/Celerium.Auvik/site/ClientManagement/Get-AuvikTenant.html)

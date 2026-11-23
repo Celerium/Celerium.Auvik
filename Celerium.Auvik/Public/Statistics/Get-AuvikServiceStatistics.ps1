@@ -1,129 +1,147 @@
 function Get-AuvikServiceStatistics {
 <#
     .SYNOPSIS
-        Provides historical cloud ping check statistics
+        Read Service Statistics
 
     .DESCRIPTION
-        The Get-AuvikServiceStatistics cmdlet provides historical
-        cloud ping check statistics
+        The Get-AuvikServiceStatistics cmdlet invokes the GET method of the /stat/service/{statId} endpoint (Read Service Statistics)
 
-    .PARAMETER statId
+        Use the Read Service Statistics API to fetch detailed statistics of a client's (and client's children if a multi-client) services for a given time range.
+
+    .PARAMETER StatId
         ID of statistic to return
 
         Allowed values:
-            "pingTime", "pingPacket"
-
-    .PARAMETER Tenants
-        Comma delimited list of tenant IDs to request info from
+        'pingTime', 'pingPacket'
 
     .PARAMETER FilterFromTime
         Timestamp from which you want to query
 
-    .PARAMETER FilterThruTime
-        Timestamp to which you want to query (defaults to current time)
+        Accepts a date & time which is sent to the API in UTC
 
     .PARAMETER FilterInterval
         Statistics reporting interval
 
         Allowed values:
-            "minute", "hour", "day"
+        'minute', 'hour', 'day'
+
+    .PARAMETER FilterThruTime
+        Timestamp to which you want to query (defaults to current time)
+
+        Accepts a date & time which is sent to the API in UTC
 
     .PARAMETER FilterServiceId
         Filter by service ID
 
-    .PARAMETER PageFirst
-        For paginated responses, the first N elements will be returned
-        Used in combination with page[after]
+    .PARAMETER Tenants
+        Comma delimited list of tenant IDs to request info from.
 
-        Default Value: 100
+        Accepts multiple values which are sent to the API as a comma delimited list
+
+    .PARAMETER PageFirst
+        For paginated responses, the first N elements will be returned. Used in combination with page[after].
+
+        Default value: 100
 
     .PARAMETER PageAfter
-        Cursor after which elements will be returned as a page
-        The page size is provided by page[first]
+        Cursor after which elements will be returned as a page. The page size is provided by page[first].
 
     .PARAMETER PageLast
-        For paginated responses, the last N services will be returned
-        Used in combination with page[before]
+        For paginated responses, the last N services will be returned. Used in combination with page[before].
 
-        Default Value: 100
+        Default value: 100
 
     .PARAMETER PageBefore
-        Cursor before which elements will be returned as a page
-        The page size is provided by page[last]
+        Cursor before which elements will be returned as a page. The page size is provided by page[last].
 
     .PARAMETER AllResults
-        Returns all items from an endpoint
+        Returns all items from the endpoint by following the pagination links
 
-        Highly recommended to only use with filters to reduce API errors\timeouts
+        When using this parameter there is no need to use the PageFirst, PageAfter, PageLast, or PageBefore parameters
 
-    .EXAMPLE
-        Get-AuvikServiceStatistics -StatId pingTime -FilterFromTime 2023-10-03 -FilterInterval day
-
-        Provides the first 100 historical cloud ping check statistics
+        Highly recommended to only use with filters to reduce API errors & timeouts
 
     .EXAMPLE
-        Get-AuvikServiceStatistics -StatId pingTime -FilterFromTime 2023-10-03 -FilterInterval day -PageFirst 1000 -AllResults
+        Get-AuvikServiceStatistics -StatId 'pingTime' -FilterFromTime '2025-01-01T00:00:00Z' -FilterInterval 'minute'
 
-        Provides all historical cloud ping check statistics
+        Returns the result of the /stat/service/{statId} endpoint
+
+    .EXAMPLE
+        Get-AuvikServiceStatistics -StatId 'pingTime' -FilterFromTime '2025-01-01T00:00:00Z' -FilterInterval 'minute' -Tenants '1234567890' -PageFirst 10
+
+        Returns the result of the /stat/service/{statId} endpoint limited to the defined tenant
+
+    .EXAMPLE
+        Get-AuvikServiceStatistics -StatId 'pingTime' -FilterFromTime '2025-01-01T00:00:00Z' -FilterInterval 'minute' -AllResults
+
+        Returns every item from the /stat/service/{statId} endpoint by following the pagination links
+
+    .INPUTS
+        System.String
+
+    .OUTPUTS
+        System.Management.Automation.PSCustomObject
 
     .NOTES
-        N\A
+        Endpoint : GET /stat/service/{statId}
+        The Auvik API user needs the role permissions that are required by the endpoint
 
     .LINK
         https://celerium.github.io/Celerium.Auvik/site/Statistics/Get-AuvikServiceStatistics.html
 #>
 
-    [CmdletBinding(DefaultParameterSetName = 'Index' )]
-    Param (
-        [Parameter( Mandatory = $true )]
-        [ValidateSet( "pingTime", "pingPacket" )]
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('Id')]
+        [ValidateNotNullOrEmpty()]
+        [ValidateSet('pingTime', 'pingPacket')]
         [string]$StatId,
 
-        [Parameter( Mandatory = $false, ValueFromPipeline = $true )]
-        [ValidateNotNullOrEmpty()]
-        [string[]]$Tenants,
+        [Parameter(Mandatory = $true)]
+        [datetime]$FilterFromTime,
 
-        [Parameter( Mandatory = $true )]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
-        [DateTime]$FilterFromTime,
-
-        [Parameter( Mandatory = $false )]
-        [ValidateNotNullOrEmpty()]
-        [DateTime]$FilterThruTime,
-
-        [Parameter( Mandatory = $true )]
-        [ValidateSet( "minute", "hour", "day" )]
+        [ValidateSet('minute', 'hour', 'day')]
         [string]$FilterInterval,
 
-        [Parameter( Mandatory = $false )]
+        [Parameter(Mandatory = $false)]
+        [datetime]$FilterThruTime,
+
+        [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]
         [string]$FilterServiceId,
 
-        [Parameter( Mandatory = $false )]
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string[]]$Tenants,
+
+        [Parameter(Mandatory = $false)]
         [ValidateRange(1, [int64]::MaxValue)]
         [int64]$PageFirst,
 
-        [Parameter( Mandatory = $false )]
+        [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]
         [string]$PageAfter,
 
-        [Parameter( Mandatory = $false )]
+        [Parameter(Mandatory = $false)]
         [ValidateRange(1, [int64]::MaxValue)]
         [int64]$PageLast,
 
-        [Parameter( Mandatory = $false )]
+        [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]
         [string]$PageBefore,
 
-        [Parameter( Mandatory = $false )]
+        [Parameter(Mandatory = $false)]
         [switch]$AllResults
     )
 
     begin {
 
         $FunctionName       = $MyInvocation.InvocationName
-        $ParameterName      = $functionName + '_Parameters'      -replace '-','_'
-        $QueryParameterName = $functionName + '_ParametersQuery' -replace '-','_'
+        $ParameterName      = ($FunctionName -replace '-', '') + 'Parameters'
+        $QueryParameterName = $ParameterName + 'Query'
 
     }
 
@@ -131,30 +149,35 @@ function Get-AuvikServiceStatistics {
 
         Write-Verbose "[ $($MyInvocation.MyCommand.Name) ] - Running the [ $($PSCmdlet.ParameterSetName) ] ParameterSet"
 
-        $ResourceUri = "/stat/service/$StatId"
-
-        $UriParameters = @{}
-
-        #Region     [ Parameter Translation ]
-
-        if ($PSCmdlet.ParameterSetName -eq 'Index') {
-            if ($Tenants)           { $UriParameters['tenants']             = $Tenants }
-            if ($FilterFromTime)    { $UriParameters['filter[fromTime]']    = $FilterFromTime }
-            if ($FilterThruTime)    { $UriParameters['filter[thruTime]']    = $FilterThruTime }
-            if ($FilterInterval)    { $UriParameters['filter[interval]']    = $FilterInterval }
-            if ($FilterServiceId)   { $UriParameters['filter[serviceId]']   = $FilterServiceId }
-            if ($PageFirst)         { $UriParameters['page[first]']         = $PageFirst }
-            if ($PageAfter)         { $UriParameters['page[after]']         = $PageAfter }
-            if ($PageLast)          { $UriParameters['page[last]']          = $PageLast }
-            if ($PageBefore)        { $UriParameters['page[before]']        = $PageBefore }
+        $ResourceUri = "/stat/service/$([System.Uri]::EscapeDataString($StatId))"
+        $NameMap = @{
+            FilterFromTime  = 'filter[fromTime]'
+            FilterThruTime  = 'filter[thruTime]'
+            FilterInterval  = 'filter[interval]'
+            FilterServiceId = 'filter[serviceId]'
+            Tenants         = 'tenants'
+            PageFirst       = 'page[first]'
+            PageAfter       = 'page[after]'
+            PageLast        = 'page[last]'
+            PageBefore      = 'page[before]'
         }
 
-        #EndRegion  [ Parameter Translation ]
+        $UriParameters = Get-AuvikUriParameter -BoundParameter $PSBoundParameters -NameMap $NameMap
 
-        Set-Variable -Name $ParameterName -Value $PSBoundParameters -Scope Global -Force -Confirm:$false
-        Set-Variable -Name $QueryParameterName -Value $UriParameters -Scope Global -Force -Confirm:$false
+        # The API requires filter[thruTime] even though the spec defines it as optional (it defaults to the current time)
+        if ($UriParameters.ContainsKey('filter[fromTime]') -and -not $UriParameters.ContainsKey('filter[thruTime]')) { $UriParameters['filter[thruTime]'] = [datetime]::UtcNow }
 
-        return Invoke-AuvikRequest -Method GET -ResourceUri $ResourceUri -UriFilter $UriParameters -AllResults:$AllResults
+        $InvokeParams = @{
+            Method      = 'GET'
+            ResourceUri = $ResourceUri
+            UriFilter   = $UriParameters
+            AllResults  = $AllResults
+        }
+
+        Set-Variable -Name $ParameterName -Value $PSBoundParameters -Scope Global -Force -Confirm:$false -WhatIf:$false
+        Set-Variable -Name $QueryParameterName -Value $UriParameters -Scope Global -Force -Confirm:$false -WhatIf:$false
+
+        return Invoke-AuvikRequest @InvokeParams
 
     }
 

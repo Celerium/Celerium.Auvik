@@ -1,60 +1,47 @@
 <#
 .NOTES
-    Copyright 1990-2024 Celerium
+    Copyright 1990-2025 Celerium
 
     NAME: Celerium.Auvik.Tests.ps1
     Type: PowerShell
 
         AUTHOR:  David Schulte
-        DATE:    2023-04-1
         EMAIL:   celerium@Celerium.org
-        Updated: 2023-09-16
-
-    TODO:
-    Huge thank you to LazyWinAdmin, Vexx32, & JeffBrown for their blog posts!
 
 .SYNOPSIS
-    Pester tests for the Celerium.Auvik module manifest file.
+    Pester tests for the Celerium.Auvik module manifest file
 
 .DESCRIPTION
-    Pester tests for the Celerium.Auvik module manifest file.
+    Pester tests for the Celerium.Auvik module manifest file & the import of the module
 
-.PARAMETER moduleName
+    The expected values are calculated from the module files on disk, so adding or
+    removing a function does not require any changes to this file
+
+.PARAMETER ModuleName
     The name of the local module to import
+
+    Default value: Celerium.Auvik
 
 .PARAMETER Version
     The version of the local module to import
 
-.PARAMETER buildTarget
+.PARAMETER BuildTarget
     Which version of the module to run tests against
 
     Allowed values:
         'built', 'notBuilt'
 
 .EXAMPLE
-    Invoke-Pester -Path .\Tests\Private\APIKeys\Get-AuvikAPIKey.Tests.ps1
-
-    Runs a pester test and outputs simple results
-
-.EXAMPLE
-    Invoke-Pester -Path .\Tests\Private\APIKeys\Get-AuvikAPIKey.Tests.ps1 -Output Detailed
-
-    Runs a pester test and outputs detailed results
+    Invoke-Pester -Path .\Celerium.Auvik.Tests.ps1
 
 .INPUTS
-    N\A
+    N/A
 
 .OUTPUTS
-    N\A
+    N/A
 
 .LINK
     https://celerium.org
-
-.LINK
-    https://vexx32.github.io/2020/07/08/Verify-Module-Help-Pester/
-    https://lazywinadmin.com/2016/05/using-pester-to-test-your-comment-based.html
-    https://jeffbrown.tech/getting-started-with-pester-testing-in-powershell/
-    https://github.com/Celerium/Celerium.Auvik
 
 #>
 
@@ -62,7 +49,7 @@
                                         Code
 ############################################################################################>
 #Requires -Version 5.1
-#Requires -Modules @{ ModuleName='Pester'; ModuleVersion='5.5.0' }
+#Requires -Modules @{ ModuleName='Pester'; ModuleVersion='6.0.0' }
 
 #Region     [ Parameters ]
 
@@ -71,15 +58,15 @@
 param (
     [Parameter(Mandatory = $false)]
     [ValidateNotNullOrEmpty()]
-    [String]$moduleName = 'Celerium.Auvik',
+    [string]$ModuleName = 'Celerium.Auvik',
 
-    [Parameter(Mandatory=$true)]
+    [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
-    [String]$version,
+    [string]$Version,
 
-    [Parameter(Mandatory=$true)]
-    [ValidateSet('built','notBuilt')]
-    [string]$buildTarget
+    [Parameter(Mandatory = $true)]
+    [ValidateSet('built', 'notBuilt')]
+    [string]$BuildTarget
 )
 
 #EndRegion  [ Parameters ]
@@ -88,71 +75,98 @@ param (
 
 #Available in Describe and Context but NOT It
 #Can be used in [ It ] with [ -TestCases @{ VariableName = $VariableName } ]
-    BeforeDiscovery{
+    BeforeDiscovery {
 
-        $pester_TestName = (Get-Item -Path $PSCommandPath).Name
-        $commandName = $pester_TestName -replace '.Tests.ps1',''
+        $TestsPath = $PSScriptRoot
+        while ($TestsPath -and -not (Test-Path -Path (Join-Path -Path $TestsPath -ChildPath 'TestHelper.ps1'))) { $TestsPath = Split-Path -Path $TestsPath -Parent }
+        . (Join-Path -Path $TestsPath -ChildPath 'TestHelper.ps1')
+
+        $PesterTestName = (Get-Item -Path $PSCommandPath).Name
+
+        # The functions & aliases defined by the source files of the module
+        $DiscoveredFunctions = [System.Collections.Generic.List[string]]::new()
+        $DiscoveredAliases   = [System.Collections.Generic.List[string]]::new()
+
+        foreach ($ModuleFile in (Get-TestModuleFile -ModuleName $ModuleName)) {
+
+            $ParsedFile = Get-TestScriptAst -Path $ModuleFile.FullName
+            foreach ($Function in $ParsedFile.Ast.FindAll({ param ($Node) $Node -is [System.Management.Automation.Language.FunctionDefinitionAst] }, $false)) { $DiscoveredFunctions.Add($Function.Name) }
+
+            foreach ($AliasMatch in [regex]::Matches((Get-Content -Path $ModuleFile.FullName -Raw), "(?im)^\s*Set-Alias\s+-Name\s+['""]?([\w-]+)")) { $DiscoveredAliases.Add($AliasMatch.Groups[1].Value) }
+
+        }
+
+        $FunctionCases = @($DiscoveredFunctions | Sort-Object | ForEach-Object { @{ FunctionName = $_ } })
+        $AliasCases    = @($DiscoveredAliases | Sort-Object | ForEach-Object { @{ AliasName = $_ } })
 
     }
 
 #Available inside It but NOT Describe or Context
     BeforeAll {
 
-        if ($IsWindows -or $PSEdition -eq 'Desktop') {
-            $rootPath = "$( $PSCommandPath.Substring(0, $PSCommandPath.IndexOf('\tests', [System.StringComparison]::OrdinalIgnoreCase)) )"
+        $TestsPath = $PSScriptRoot
+        while ($TestsPath -and -not (Test-Path -Path (Join-Path -Path $TestsPath -ChildPath 'TestHelper.ps1'))) { $TestsPath = Split-Path -Path $TestsPath -Parent }
+        . (Join-Path -Path $TestsPath -ChildPath 'TestHelper.ps1')
+
+        $ModulePath = Get-TestModulePath -ModuleName $ModuleName -Version $Version -BuildTarget $BuildTarget
+        $ModulePsd1 = Join-Path -Path $ModulePath -ChildPath "$ModuleName.psd1"
+        $ModulePsm1 = Join-Path -Path $ModulePath -ChildPath "$ModuleName.psm1"
+
+        Import-TestModule -ModuleName $ModuleName -Version $Version -BuildTarget $BuildTarget
+        Add-TestHttpGuard -MockModule (Get-TestMockModuleName -CommandName 'Invoke-AuvikRequest')
+
+        $Module         = Get-Module -Name $ModuleName
+        $ManifestData   = Import-PowerShellDataFile -Path $ModulePsd1
+        $ModuleFiles    = @(Get-ChildItem -Path $ModulePath -File -Recurse)
+
+        $SourceFiles    = @(Get-TestModuleFile -ModuleName $ModuleName)
+
+        $SourceFunctions = foreach ($SourceFile in $SourceFiles) {
+            (Get-TestScriptAst -Path $SourceFile.FullName).Ast.FindAll({ param ($Node) $Node -is [System.Management.Automation.Language.FunctionDefinitionAst] }, $false) | ForEach-Object { $_.Name }
         }
-        else{
-            $rootPath = "$( $PSCommandPath.Substring(0, $PSCommandPath.IndexOf('/tests', [System.StringComparison]::OrdinalIgnoreCase)) )"
+        $SourceFunctions = @($SourceFunctions | Sort-Object)
+
+        # Files that only run code & do not define a function, such as Initialize-AuvikModuleSetting.ps1
+        $ScriptOnlyFiles = @($SourceFiles | Where-Object {
+            -not (Get-TestScriptAst -Path $_.FullName).Ast.FindAll({ param ($Node) $Node -is [System.Management.Automation.Language.FunctionDefinitionAst] }, $false)
+        } | ForEach-Object { $_.BaseName })
+
+        $SourceAliases = foreach ($SourceFile in $SourceFiles) {
+            [regex]::Matches((Get-Content -Path $SourceFile.FullName -Raw), "(?im)^\s*Set-Alias\s+-Name\s+['""]?([\w-]+)") | ForEach-Object { $_.Groups[1].Value }
         }
-
-        switch ($buildTarget) {
-            'built'     { $modulePath = Join-Path -Path $rootPath -ChildPath "\build\$moduleName\$version" }
-            'notBuilt'  { $modulePath = Join-Path -Path $rootPath -ChildPath "$moduleName" }
-        }
-
-        if (Get-Module -Name $moduleName) {
-            Remove-Module -Name $moduleName -Force
-        }
-
-        $modulePsd1 = Join-Path -Path $modulePath -ChildPath "$moduleName.psd1"
-        $modulePsm1 = Join-Path -Path $modulePath -ChildPath "$moduleName.psm1"
-
-        Import-Module -Name $modulePsd1 -ErrorAction Stop -ErrorVariable moduleError *> $null
-
-        $Module = Get-Module -Name $moduleName | Select-Object * -ExcludeProperty Definition
-        $moduleFiles = Get-ChildItem -Path $modulePath -File -Recurse
-
-        if ($moduleError) {
-            $moduleError
-            exit 1
-        }
+        $SourceAliases = @($SourceAliases | Sort-Object)
 
     }
 
-    AfterAll{
-
-        if (Get-Module -Name $moduleName) {
-            Remove-Module -Name $moduleName -Force
-        }
-
+    AfterAll {
+        Remove-TestModule -ModuleName $ModuleName
     }
 
 #EndRegion  [ Prerequisites ]
 
-Describe "Testing the [ $buildTarget ] version of [ $moduleName ] with [ $pester_TestName ]" {
+Describe "Testing the [ $BuildTarget ] version of [ $ModuleName ] with [ $PesterTestName ]" {
 
-    Context "[ $moduleName.psd1 ] general manifest data" {
+    Context "[ $ModuleName.psd1 ] general manifest data" {
 
         It "Manifest [ RootModule ] has valid data" {
             $Module.RootModule | Should -Be 'Celerium.Auvik.psm1'
         }
 
         It "Manifest [ ModuleVersion ] has valid data" {
-            $Module.Version | Should -BeGreaterOrEqual $version
+            $Module.Version | Should -BeGreaterOrEqual ([version]$Version)
+        }
+
+        It "Manifest [ CompatiblePSEditions ] has valid data" {
+            $ManifestData.CompatiblePSEditions | Should -Contain 'Desktop'
+            $ManifestData.CompatiblePSEditions | Should -Contain 'Core'
         }
 
         It "Manifest [ GUID ] has valid data" {
-            $Module.GUID | Should -Be 'c4624e25-e787-48eb-a8d5-a4c8e287412f'
+            $Module.GUID | Should -Be 'c12d0f6b-e5fa-476f-b3cc-88bac180a278'
+        }
+
+        It "Manifest [ GUID ] starts with c12 (Celerium standard)" {
+            $Module.GUID.ToString() | Should -Match '^c12'
         }
 
         It "Manifest [ Author ] has valid data" {
@@ -172,39 +186,96 @@ Describe "Testing the [ $buildTarget ] version of [ $moduleName ] with [ $pester
         }
 
         It "Manifest [ PowerShellVersion ] has valid data" {
-            $Module.PowerShellVersion | Should -BeGreaterOrEqual '5.0'
+            $Module.PowerShellVersion | Should -Be ([version]'5.1')
         }
 
         It "Manifest [ NestedModules ] has valid data" {
-            switch ($buildTarget) {
-                'built'     { ($Module.NestedModules.Name).Count | Should -Be 0 }
-                'notBuilt'  { ($Module.NestedModules.Name).Count | Should -Be 40 }
+
+            switch ($BuildTarget) {
+                'built'     { @($Module.NestedModules).Count | Should -Be 0 }
+                'notBuilt'  {
+                    @($Module.NestedModules).Count | Should -Be $SourceFiles.Count
+                    @($ManifestData.NestedModules).Count | Should -Be $SourceFiles.Count
+                }
             }
+
         }
 
-        It "Manifest [ FunctionsToExport ] has valid data" {
-            ($Module.ExportedCommands).Count | Should -Be 41
+        It "Manifest [ NestedModules ] lists every module file & only existing files" -Skip:($BuildTarget -eq 'built') {
+
+            $Listed = @($ManifestData.NestedModules | ForEach-Object { ($_ -replace '\\', '/') } | Sort-Object)
+            $Actual = @($SourceFiles | ForEach-Object { $_.FullName.Substring((Join-Path -Path (Get-TestRootPath) -ChildPath $ModuleName).Length + 1) -replace '\\', '/' } | Sort-Object)
+
+            $Missing = @($Actual | Where-Object { $_ -notin $Listed })
+            $Missing | Should -BeNullOrEmpty -Because "[ $($Missing -join ', ') ] exists but is not listed in NestedModules"
+
+            $Stale = @($Listed | Where-Object { $_ -notin $Actual })
+            $Stale | Should -BeNullOrEmpty -Because "[ $($Stale -join ', ') ] is listed in NestedModules but does not exist"
+
+        }
+
+        It "Manifest [ FunctionsToExport ] does not use wildcards" {
+            @($ManifestData.FunctionsToExport).Count | Should -BeGreaterThan 0
+            @($ManifestData.FunctionsToExport | Where-Object { $_ -match '[*?\[]' }) | Should -BeNullOrEmpty
+        }
+
+        It "Manifest [ FunctionsToExport ] matches the functions defined in the module files" {
+
+            $Exported = @($ManifestData.FunctionsToExport | Sort-Object)
+
+            $Missing = @($SourceFunctions | Where-Object { $_ -notin $Exported })
+            $Missing | Should -BeNullOrEmpty -Because "[ $($Missing -join ', ') ] is defined in the module files but is not listed in FunctionsToExport"
+
+            # The build lists the name of every file in FunctionsToExport, including the files that only run code. PowerShell ignores
+            # a name that is not a function, so it is only tolerated in the built manifest
+            $Allowed = if ($BuildTarget -eq 'built') { @($SourceFunctions) + @($ScriptOnlyFiles) } else { @($SourceFunctions) }
+
+            $Stale = @($Exported | Where-Object { $_ -notin $Allowed })
+            $Stale | Should -BeNullOrEmpty -Because "[ $($Stale -join ', ') ] is listed in FunctionsToExport but is not defined in the module files"
+
+        }
+
+        It "Module exports exactly the functions defined in the module files" {
+            $Actual = @($Module.ExportedFunctions.Keys | Sort-Object)
+            $Actual | Should -Be $SourceFunctions
+        }
+
+        It "Module [ ExportedCommands ] only contains functions & aliases" {
+            @($Module.ExportedCommands.Values | Where-Object { $_.CommandType -notin 'Function', 'Alias' }) | Should -BeNullOrEmpty
         }
 
         It "Manifest [ CmdletsToExport ] is empty" {
-            ($Module.ExportedCmdlets).Count |  Should -Be 0
+            @($Module.ExportedCmdlets.Keys).Count | Should -Be 0
+            @($ManifestData.CmdletsToExport).Count | Should -Be 0
         }
 
         It "Manifest [ VariablesToExport ] is empty" {
-            ($Module.ExportedVariables).Count |  Should -Be 0
+            @($Module.ExportedVariables.Keys).Count | Should -Be 0
+            @($ManifestData.VariablesToExport).Count | Should -Be 0
         }
 
-        It "Manifest [ AliasesToExport ] has alias" {
-            switch ($buildTarget) {
-                'built'     { ($Module.ExportedAliases).Count |  Should -Be 2 }
-                'notBuilt'  { $Module.ExportedAliases |  Should -Not -BeNullOrEmpty }
-            }
+        It "Manifest [ AliasesToExport ] does not use wildcards" {
+            @($ManifestData.AliasesToExport | Where-Object { $_ -match '[*?\[]' }) | Should -BeNullOrEmpty
+        }
+
+        It "Manifest [ AliasesToExport ] matches the aliases defined in the module files" {
+
+            $Exported = @($ManifestData.AliasesToExport | Sort-Object)
+
+            $Missing = @($SourceAliases | Where-Object { $_ -notin $Exported })
+            $Missing | Should -BeNullOrEmpty -Because "[ $($Missing -join ', ') ] is defined in the module files but is not listed in AliasesToExport"
+
+            $Stale = @($Exported | Where-Object { $_ -notin $SourceAliases })
+            $Stale | Should -BeNullOrEmpty -Because "[ $($Stale -join ', ') ] is listed in AliasesToExport but is not defined in the module files"
+
         }
 
         It "Manifest [ Tags ] has valid data" {
             $Module.PrivateData.PSData.Tags | Should -Contain 'Auvik'
             $Module.PrivateData.PSData.Tags | Should -Contain 'Celerium'
-            ($Module.PrivateData.PSData.Tags).Count | Should -BeGreaterOrEqual 7
+            $Module.PrivateData.PSData.Tags | Should -Contain 'PSEdition_Desktop'
+            $Module.PrivateData.PSData.Tags | Should -Contain 'PSEdition_Core'
+            @($Module.PrivateData.PSData.Tags).Count | Should -BeGreaterOrEqual 7
         }
 
         It "Manifest [ LicenseUri ] has valid data" {
@@ -212,42 +283,85 @@ Describe "Testing the [ $buildTarget ] version of [ $moduleName ] with [ $pester
         }
 
         It "Manifest [ ProjectUri ] has valid data" {
-            $Module.ProjectUri  | Should -Be 'https://github.com/Celerium/Celerium.Auvik'
+            $Module.ProjectUri | Should -Be 'https://github.com/Celerium/Celerium.Auvik'
         }
 
         It "Manifest [ IconUri ] has valid data" {
-            $Module.IconUri  | Should -Be 'https://raw.githubusercontent.com/Celerium/Celerium.Auvik/main/.github/images/Celerium_PoSHGallery_Celerium.Auvik.png'
+            $Module.IconUri | Should -Be 'https://raw.githubusercontent.com/Celerium/Celerium.Auvik/main/.github/images/Celerium_PoSHGallery_Celerium.Auvik.png'
         }
 
         It "Manifest [ ReleaseNotes ] has valid data" {
-            $Module.ReleaseNotes  | Should -Be 'https://github.com/Celerium/Celerium.Auvik/blob/main/README.md'
+            $Module.ReleaseNotes | Should -Be 'https://github.com/Celerium/Celerium.Auvik/blob/main/README.md'
         }
 
-        It "Manifest [ HelpInfoUri ] is not empty" {
+        It "Manifest [ HelpInfoUri ] is empty" {
             $Module.HelpInfoUri | Should -BeNullOrEmpty
         }
 
     }
 
-    Context "[ $moduleName.psd1 ] module import test" {
+    Context "[ $ModuleName.psd1 ] exported functions" {
 
-        It "Module contains only PowerShell files" {
-            ($moduleFiles | Group-Object Extension).Name.Count | Should -BeLessOrEqual 3
+        It "Function [ <FunctionName> ] is defined in the module files & exported" -ForEach $FunctionCases {
+            $Module.ExportedFunctions.Keys | Should -Contain $FunctionName
+            Get-Command -Name $FunctionName -Module $ModuleName -CommandType Function | Should -Not -BeNullOrEmpty
+        }
+
+        It "Alias [ <AliasName> ] is defined in the module files & exported" -ForEach $AliasCases {
+            $Module.ExportedAliases.Keys | Should -Contain $AliasName
+            (Get-Alias -Name $AliasName).ResolvedCommand | Should -Not -BeNullOrEmpty
+        }
+
+    }
+
+    Context "[ $ModuleName.psd1 ] module import test" {
+
+        It "Module contains only PowerShell files (& the OpenAPI spec in the built module)" {
+            $Allowed = @('.ps1', '.psm1', '.psd1')
+            if ($BuildTarget -eq 'built') { $Allowed += '.json' }
+
+            $Extensions = @($ModuleFiles | ForEach-Object { $_.Extension.ToLowerInvariant() } | Sort-Object -Unique)
+            @($Extensions | Where-Object { $_ -notin $Allowed }) | Should -BeNullOrEmpty
+        }
+
+        It "The built module includes the OpenAPI spec" -Skip:($BuildTarget -ne 'built') {
+            @($ModuleFiles | Where-Object { $_.Name -like 'Auvik-*.json' }).Count | Should -Be 1
         }
 
         It "Module files exist" {
-            $modulePsd1 | Should -Exist
-            $modulePsm1 | Should -Exist
+            $ModulePsd1 | Should -Exist
+            $ModulePsm1 | Should -Exist
         }
 
         It "Should pass Test-ModuleManifest" {
-            $modulePsd1 | Test-ModuleManifest -ErrorAction SilentlyContinue -ErrorVariable error_ModuleManifest
-            [bool]$error_ModuleManifest | Should -Be $false
+            $Result = Test-ModuleManifest -Path $ModulePsd1 -ErrorAction Stop
+            $Result.Name | Should -Be $ModuleName
         }
 
-        It "Should import successfully" {
-            Import-Module $modulePsd1 -ErrorAction SilentlyContinue -ErrorVariable error_ModuleImport
-            [bool]$error_ModuleImport | Should -Be $false
+        It "Should import successfully without errors or warnings" {
+
+            Remove-Module -Name $ModuleName -Force
+
+            $null = Import-Module -Name $ModulePsd1 -Force -ErrorAction Stop -ErrorVariable ImportError -WarningVariable ImportWarning -PassThru
+            @($ImportError) | Should -BeNullOrEmpty
+            @($ImportWarning) | Should -BeNullOrEmpty
+            Get-Module -Name $ModuleName | Should -Not -BeNullOrEmpty
+
+            Reset-TestModuleState
+
+        }
+
+        It "Should load the default settings when imported" {
+
+            Remove-TestState
+            Import-Module -Name $ModulePsd1 -Force -ErrorAction Stop
+
+            # The user configuration file could have been loaded, so only check that the values exist
+            Get-AuvikBaseURI | Should -Match '^https://'
+            $AuvikJSONConversionDepth | Should -BeGreaterThan 0
+
+            Reset-TestModuleState
+
         }
 
     }

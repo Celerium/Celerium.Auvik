@@ -6,13 +6,14 @@ has_children: true
 ## Internal - endpoint help & documentation
 
 {: .highlight }
-Some functions will handle more than one endpoint and the numbers below show the total endpoints **not** the total functions
+Some functions will handle more than one endpoint and the numbers below show the total endpoints **not** the total functions. Write endpoints (POST, PUT, PATCH, DELETE) change data in Auvik, use `-WhatIf` to preview a request
 
-| **Method** | **Endpoint Count**  |
-|------------|---------------------|
-| DELETE     | 3       |
-| GET        | 7          |
-| POST       | 4         |
-| PUT        | 1          |
+| **Method** | **Implemented** | **Total** |
+|------------|-----------------|-----------|
+| GET        | 7           | 7       |
+| POST       | 0           | 0       |
+| PUT        | 4           | 4       |
+| PATCH      | 0           | 0       |
+| DELETE     | 3           | 3       |
 
 Have a look around and if you would like to contribute please read over the [Contributing guide](https://github.com/Celerium/Celerium.Auvik/blob/main/.github/CONTRIBUTING.md)

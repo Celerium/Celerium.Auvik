@@ -34,9 +34,35 @@ If the feature is accepted and I have time to test, the pull request will be app
 * Once the new feature is ready,
 
   * [ ] Update any documentation if needed
-  * [ ] Submit a pulling request to the **development** branch
+  * [ ] Submit a pulling request to the **main** branch
 
 If the feature is accepted and I have time to test, the pull request will be approved.
+
+## **Building, testing, and generated code**
+
+The public functions of this module are **generated** from the Auvik v1 OpenAPI spec ([docs/Auvik-v1.json](https://github.com/Celerium/Celerium.Auvik/blob/main/docs/Auvik-v1.json)). The CI workflow regenerates them and fails when the committed files are different.
+
+* **Do not edit the generated public functions by hand** (`Celerium.Auvik/Public/**`, the export lists of `Celerium.Auvik.psd1`, and `docs/endpoints.csv`). Change `build/New-PublicFunctions.ps1` or the spec instead and then run it:
+
+  ```powershell
+  ./build/New-PublicFunctions.ps1
+  ```
+
+* The spec can be refreshed & compared to the online version with `build/Get-AuvikSpec.ps1` & `build/Compare-AuvikSpec.ps1`.
+* The private functions (`Celerium.Auvik/Private/**`), the build scripts, the tests, and the examples are maintained by hand.
+* All parameters & variables use PascalCase.
+* Install the build prerequisites once, then build and test the module:
+
+  ```powershell
+  ./build/Install-Prerequisites.ps1
+  ./build/Invoke-ModuleBuild.ps1 -Version 2.0.0
+  ./build/Invoke-PesterTests.ps1 -Version 2.0.0 -BuildTarget notBuilt
+  ./build/Invoke-PesterTests.ps1 -Version 2.0.0 -BuildTarget built
+  ```
+
+* The module supports **Windows PowerShell 5.1** and **PowerShell 7+** on Windows, Linux, and macOS. Run the tests on both Windows PowerShell 5.1 (`powershell.exe`) and PowerShell 7+ (`pwsh`) before submitting a pull request. The GitHub Actions CI workflow runs them on Windows PowerShell 5.1, Windows PowerShell 7+, Linux, & macOS.
+* The `Live` tests make read-only requests against a real Auvik tenant and are skipped by default. Never commit credentials; use the `AUVIK_USERNAME`, `AUVIK_API_KEY`, & `AUVIK_SITE_NAME` environment variables if you run them.
+* The markdown documentation in `docs/` is generated from the module help & the tracking CSV with `build/Invoke-HelpContent.ps1`. Update the comment based help of a function (or the generator) instead of the markdown.
 
 Thanks! :heart:
 

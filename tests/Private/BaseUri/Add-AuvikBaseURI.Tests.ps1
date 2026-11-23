@@ -1,44 +1,44 @@
 <#
-    .SYNOPSIS
-        Pester tests for the Celerium.Auvik baseURI functions
+.NOTES
+    Copyright 1990-2025 Celerium
 
-    .DESCRIPTION
-        Pester tests for the Celerium.Auvik baseURI functions
+    NAME: Add-AuvikBaseURI.Tests.ps1
+    Type: PowerShell
 
-    .PARAMETER moduleName
-        The name of the local module to import
+        AUTHOR:  David Schulte
+        EMAIL:   celerium@Celerium.org
 
-    .PARAMETER Version
-        The version of the local module to import
+.SYNOPSIS
+    Pester tests for the Add-AuvikBaseURI function
 
-    .PARAMETER buildTarget
-        Which version of the module to run tests against
+.DESCRIPTION
+    Pester tests for the Add-AuvikBaseURI function
 
-        Allowed values:
-            'built', 'notBuilt'
+.PARAMETER ModuleName
+    The name of the local module to import
 
-    .EXAMPLE
-        Invoke-Pester -Path .\Tests\Private\baseUri\Get-AuvikBaseURI.Tests.ps1
+    Default value: Celerium.Auvik
 
-        Runs a pester test and outputs simple results
+.PARAMETER Version
+    The version of the local module to import
 
-    .EXAMPLE
-        Invoke-Pester -Path .\Tests\Private\baseUri\Get-AuvikBaseURI.Tests.ps1 -Output Detailed
+.PARAMETER BuildTarget
+    Which version of the module to run tests against
 
-        Runs a pester test and outputs detailed results
+    Allowed values:
+        'built', 'notBuilt'
 
-    .INPUTS
-        N\A
+.EXAMPLE
+    Invoke-Pester -Path .\Add-AuvikBaseURI.Tests.ps1
 
-    .OUTPUTS
-        N\A
+.INPUTS
+    N/A
 
-    .NOTES
-        N\A
+.OUTPUTS
+    N/A
 
-
-    .LINK
-        https://celerium.org
+.LINK
+    https://celerium.org
 
 #>
 
@@ -46,7 +46,7 @@
                                         Code
 ############################################################################################>
 #Requires -Version 5.1
-#Requires -Modules @{ ModuleName='Pester'; ModuleVersion='5.5.0' }
+#Requires -Modules @{ ModuleName='Pester'; ModuleVersion='6.0.0' }
 
 #Region     [ Parameters ]
 
@@ -55,124 +55,152 @@
 param (
     [Parameter(Mandatory = $false)]
     [ValidateNotNullOrEmpty()]
-    [String]$moduleName = 'Celerium.Auvik',
+    [string]$ModuleName = 'Celerium.Auvik',
 
-    [Parameter(Mandatory=$true)]
+    [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
-    [String]$version,
+    [string]$Version,
 
-    [Parameter(Mandatory=$true)]
-    [ValidateSet('built','notBuilt')]
-    [string]$buildTarget
+    [Parameter(Mandatory = $true)]
+    [ValidateSet('built', 'notBuilt')]
+    [string]$BuildTarget
 )
 
 #EndRegion  [ Parameters ]
 
 #Region     [ Prerequisites ]
 
-#Available inside It but NOT Describe or Context
+    BeforeDiscovery {
+
+        $PesterTestName = (Get-Item -Path $PSCommandPath).Name
+
+        # The regions of the API & the host name of the base URI they use. us & eu are aliases of the first data center of the region
+        $DataCenterCases = @(
+            @{ DataCenter = 'au1'; Region = 'au1' }
+            @{ DataCenter = 'ca1'; Region = 'ca1' }
+            @{ DataCenter = 'eu';  Region = 'eu1' }
+            @{ DataCenter = 'eu1'; Region = 'eu1' }
+            @{ DataCenter = 'eu2'; Region = 'eu2' }
+            @{ DataCenter = 'us';  Region = 'us1' }
+            @{ DataCenter = 'us1'; Region = 'us1' }
+            @{ DataCenter = 'us2'; Region = 'us2' }
+            @{ DataCenter = 'us3'; Region = 'us3' }
+            @{ DataCenter = 'us4'; Region = 'us4' }
+            @{ DataCenter = 'us5'; Region = 'us5' }
+            @{ DataCenter = 'us6'; Region = 'us6' }
+        )
+
+    }
+
     BeforeAll {
 
-        if ($IsWindows -or $PSEdition -eq 'Desktop') {
-            $rootPath = "$( $PSCommandPath.Substring(0, $PSCommandPath.IndexOf('\tests', [System.StringComparison]::OrdinalIgnoreCase)) )"
-        }
-        else{
-            $rootPath = "$( $PSCommandPath.Substring(0, $PSCommandPath.IndexOf('/tests', [System.StringComparison]::OrdinalIgnoreCase)) )"
-        }
+        $TestsPath = $PSScriptRoot
+        while ($TestsPath -and -not (Test-Path -Path (Join-Path -Path $TestsPath -ChildPath 'TestHelper.ps1'))) { $TestsPath = Split-Path -Path $TestsPath -Parent }
+        . (Join-Path -Path $TestsPath -ChildPath 'TestHelper.ps1')
 
-        switch ($buildTarget) {
-            'built'     { $modulePath = Join-Path -Path $rootPath -ChildPath "\build\$moduleName\$version" }
-            'notBuilt'  { $modulePath = Join-Path -Path $rootPath -ChildPath "$moduleName" }
-        }
-
-        if (Get-Module -Name $moduleName) {
-            Remove-Module -Name $moduleName -Force
-        }
-
-        $modulePsd1 = Join-Path -Path $modulePath -ChildPath "$moduleName.psd1"
-
-        Import-Module -Name $modulePsd1 -ErrorAction Stop -ErrorVariable moduleError *> $null
-
-        if ($moduleError) {
-            $moduleError
-            exit 1
-        }
+        Import-TestModule -ModuleName $ModuleName -Version $Version -BuildTarget $BuildTarget
+        Add-TestHttpGuard -MockModule (Get-TestMockModuleName -CommandName 'Invoke-AuvikRequest')
 
     }
 
-    AfterAll{
-
-        Remove-AuvikAPIKey -WarningAction SilentlyContinue
-
-        if (Get-Module -Name $moduleName) {
-            Remove-Module -Name $moduleName -Force
-        }
-
-    }
-
-#Available in Describe and Context but NOT It
-#Can be used in [ It ] with [ -TestCases @{ VariableName = $VariableName } ]
-    BeforeDiscovery{
-
-        $pester_TestName = (Get-Item -Path $PSCommandPath).Name
-        $commandName = $pester_TestName -replace '.Tests.ps1',''
-
+    AfterAll {
+        Remove-TestModule -ModuleName $ModuleName
     }
 
 #EndRegion  [ Prerequisites ]
 
+Describe "Testing the [ $BuildTarget ] version of [ $ModuleName ] with [ $PesterTestName ]" {
 
-Describe "Testing [ $commandName ] functions with [ $pester_TestName ]" -Tag @('baseUri') {
-
-Context "[ $commandName ] testing functions" {
-
-    It "[ $commandName ] should have an alias of [ Set-AuvikBaseURI ]" {
-        Get-Alias -Name Set-AuvikBaseURI | Should -BeTrue
+    BeforeEach {
+        Reset-TestModuleState
     }
 
-    It "Without parameters should return the default URI" {
-        Add-AuvikBaseURI
-        Get-AuvikBaseURI | Should -Be 'https://auvikapi.us1.my.auvik.com/v1'
-    }
+    Context "[ Add-AuvikBaseURI ] with a base URI" {
 
-    It "Should accept a value from the pipeline" {
-        'https://celerium.org' | Add-AuvikBaseURI
-        Get-AuvikBaseURI | Should -Be 'https://celerium.org'
-    }
+        It "Defaults to the US1 data center" {
+            Remove-AuvikBaseURI
+            Add-AuvikBaseURI
+            $AuvikModuleBaseURI | Should -Be 'https://auvikapi.us1.my.auvik.com/v1'
+        }
 
-    It "With parameter -BaseUri <value> should return what was inputted" {
-        Add-AuvikBaseURI -BaseUri 'https://celerium.org'
-        Get-AuvikBaseURI | Should -Be 'https://celerium.org'
-    }
+        It "Stores the base URI" {
+            Add-AuvikBaseURI -BaseUri 'https://auvikapi.example.com/v1'
+            $AuvikModuleBaseURI | Should -Be 'https://auvikapi.example.com/v1'
+        }
 
-    It "With parameter -DataCenter should return the default URIs" {
+        It "Removes a trailing slash" {
+            Add-AuvikBaseURI -BaseUri 'https://auvikapi.example.com/v1/'
+            $AuvikModuleBaseURI | Should -Be 'https://auvikapi.example.com/v1'
+        }
 
-        $uris = 'au1', 'ca1', 'eu1', 'eu2', 'us1', 'us2', 'us3', 'us4'
-        foreach ($uri in $uris) {
-            Add-AuvikBaseURI -DataCenter $uri
-            Get-AuvikBaseURI | Should -Be "https://auvikapi.$uri.my.auvik.com/v1"
+        It "Converts the Auvik host [ <Value> ] to the API base URI" -ForEach @(
+            @{ Value = 'us2.my.auvik.com' }
+            @{ Value = 'https://us2.my.auvik.com' }
+            @{ Value = 'auvikapi.us2.my.auvik.com' }
+            @{ Value = 'https://auvikapi.US2.my.auvik.com/v1/' }
+        ) {
+            Add-AuvikBaseURI -BaseUri $Value
+            $AuvikModuleBaseURI | Should -Be 'https://auvikapi.us2.my.auvik.com/v1'
+        }
+
+        It "Uses https for a custom URI without a scheme" {
+            Add-AuvikBaseURI -BaseUri 'gateway.example.com/auvik'
+            $AuvikModuleBaseURI | Should -Be 'https://gateway.example.com/auvik'
+        }
+
+        It "Keeps the scheme of a custom URI" {
+            Add-AuvikBaseURI -BaseUri 'http://localhost:8080/v1'
+            $AuvikModuleBaseURI | Should -Be 'http://localhost:8080/v1'
+        }
+
+        It "Does not change a base URI without a trailing slash" {
+            Add-AuvikBaseURI -BaseUri 'https://auvikapi.eu1.my.auvik.com/v1'
+            $AuvikModuleBaseURI | Should -Be 'https://auvikapi.eu1.my.auvik.com/v1'
+        }
+
+        It "Accepts the base URI from the pipeline" {
+            'https://auvikapi.piped.com/v1/' | Add-AuvikBaseURI
+            $AuvikModuleBaseURI | Should -Be 'https://auvikapi.piped.com/v1'
+        }
+
+        It "Stores the base URI as a read only global variable" {
+            Add-AuvikBaseURI -BaseUri 'https://auvikapi.example.com/v1'
+            (Get-Variable -Name 'AuvikModuleBaseURI' -Scope Global).Options.ToString() | Should -Match 'ReadOnly'
+        }
+
+        It "Replaces an existing base URI" {
+            Add-AuvikBaseURI -BaseUri 'https://auvikapi.first.com/v1'
+            Add-AuvikBaseURI -BaseUri 'https://auvikapi.second.com/v1'
+            $AuvikModuleBaseURI | Should -Be 'https://auvikapi.second.com/v1'
+        }
+
+        It "Works with the Set-AuvikBaseURI alias" {
+            Set-AuvikBaseURI -BaseUri 'https://auvikapi.alias.com/v1'
+            $AuvikModuleBaseURI | Should -Be 'https://auvikapi.alias.com/v1'
+        }
+
+        It "Does not return anything" {
+            Add-AuvikBaseURI -BaseUri 'https://auvikapi.example.com/v1' | Should -BeNullOrEmpty
         }
 
     }
 
-    It "With invalid parameter value -DataCenter Space should return an error" {
-        Remove-AuvikBaseURI
-        {Add-AuvikBaseURI -DataCenter Space} | Should -Throw
+    Context "[ Add-AuvikBaseURI ] with a data center" {
+
+        It "Maps the [ <DataCenter> ] data center to the [ <Region> ] host" -ForEach $DataCenterCases {
+            Add-AuvikBaseURI -DataCenter $DataCenter
+            $AuvikModuleBaseURI | Should -Be "https://auvikapi.$Region.my.auvik.com/v1"
+        }
+
+        It "Uses the data center instead of the base URI" {
+            Add-AuvikBaseURI -BaseUri 'https://auvikapi.example.com/v1' -DataCenter us2
+            $AuvikModuleBaseURI | Should -Be 'https://auvikapi.us2.my.auvik.com/v1'
+        }
+
+        It "Does not accept an unknown data center" {
+            { Add-AuvikBaseURI -DataCenter 'mars1' } | Should -Throw
+        }
+
     }
-
-    It "The default URI should NOT contain a trailing forward slash" {
-        Add-AuvikBaseURI
-
-        $URI = Get-AuvikBaseURI
-        ($URI[$URI.Length-1] -eq "/") | Should -BeFalse
-    }
-
-    It "A custom URI should NOT contain a trailing forward slash" {
-        Add-AuvikBaseURI -BaseUri 'https://celerium.org/'
-
-        $URI = Get-AuvikBaseURI
-        ($URI[$URI.Length-1] -eq "/") | Should -BeFalse
-    }
-}
 
 }

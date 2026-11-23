@@ -1,44 +1,44 @@
 <#
-    .SYNOPSIS
-        Pester tests for the Celerium.Auvik APIKeys functions
+.NOTES
+    Copyright 1990-2025 Celerium
 
-    .DESCRIPTION
-        Pester tests for the Celerium.Auvik APIKeys functions
+    NAME: Remove-AuvikAPIKey.Tests.ps1
+    Type: PowerShell
 
-    .PARAMETER moduleName
-        The name of the local module to import
+        AUTHOR:  David Schulte
+        EMAIL:   celerium@Celerium.org
 
-    .PARAMETER Version
-        The version of the local module to import
+.SYNOPSIS
+    Pester tests for the Remove-AuvikAPIKey function
 
-    .PARAMETER buildTarget
-        Which version of the module to run tests against
+.DESCRIPTION
+    Pester tests for the Remove-AuvikAPIKey function
 
-        Allowed values:
-            'built', 'notBuilt'
+.PARAMETER ModuleName
+    The name of the local module to import
 
-    .EXAMPLE
-        Invoke-Pester -Path .\Tests\Private\APIKeys\Remove-AuvikAPIKey.Tests.ps1
+    Default value: Celerium.Auvik
 
-        Runs a pester test and outputs simple results
+.PARAMETER Version
+    The version of the local module to import
 
-    .EXAMPLE
-        Invoke-Pester -Path .\Tests\Private\APIKeys\Remove-AuvikAPIKey.Tests.ps1 -Output Detailed
+.PARAMETER BuildTarget
+    Which version of the module to run tests against
 
-        Runs a pester test and outputs detailed results
+    Allowed values:
+        'built', 'notBuilt'
 
-    .INPUTS
-        N\A
+.EXAMPLE
+    Invoke-Pester -Path .\Remove-AuvikAPIKey.Tests.ps1
 
-    .OUTPUTS
-        N\A
+.INPUTS
+    N/A
 
-    .NOTES
-        N\A
+.OUTPUTS
+    N/A
 
-
-    .LINK
-        https://celerium.org
+.LINK
+    https://celerium.org
 
 #>
 
@@ -46,7 +46,7 @@
                                         Code
 ############################################################################################>
 #Requires -Version 5.1
-#Requires -Modules @{ ModuleName='Pester'; ModuleVersion='5.5.0' }
+#Requires -Modules @{ ModuleName='Pester'; ModuleVersion='6.0.0' }
 
 #Region     [ Parameters ]
 
@@ -55,106 +55,99 @@
 param (
     [Parameter(Mandatory = $false)]
     [ValidateNotNullOrEmpty()]
-    [String]$moduleName = 'Celerium.Auvik',
+    [string]$ModuleName = 'Celerium.Auvik',
 
-    [Parameter(Mandatory=$true)]
+    [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
-    [String]$version,
+    [string]$Version,
 
-    [Parameter(Mandatory=$true)]
-    [ValidateSet('built','notBuilt')]
-    [string]$buildTarget
+    [Parameter(Mandatory = $true)]
+    [ValidateSet('built', 'notBuilt')]
+    [string]$BuildTarget
 )
 
 #EndRegion  [ Parameters ]
 
 #Region     [ Prerequisites ]
 
-#Available inside It but NOT Describe or Context
+    BeforeDiscovery {
+
+        $PesterTestName = (Get-Item -Path $PSCommandPath).Name
+
+    }
+
     BeforeAll {
 
-        if ($IsWindows -or $PSEdition -eq 'Desktop') {
-            $rootPath = "$( $PSCommandPath.Substring(0, $PSCommandPath.IndexOf('\tests', [System.StringComparison]::OrdinalIgnoreCase)) )"
-        }
-        else{
-            $rootPath = "$( $PSCommandPath.Substring(0, $PSCommandPath.IndexOf('/tests', [System.StringComparison]::OrdinalIgnoreCase)) )"
-        }
+        $TestsPath = $PSScriptRoot
+        while ($TestsPath -and -not (Test-Path -Path (Join-Path -Path $TestsPath -ChildPath 'TestHelper.ps1'))) { $TestsPath = Split-Path -Path $TestsPath -Parent }
+        . (Join-Path -Path $TestsPath -ChildPath 'TestHelper.ps1')
 
-        switch ($buildTarget) {
-            'built'     { $modulePath = Join-Path -Path $rootPath -ChildPath "\build\$moduleName\$version" }
-            'notBuilt'  { $modulePath = Join-Path -Path $rootPath -ChildPath "$moduleName" }
-        }
-
-        if (Get-Module -Name $moduleName) {
-            Remove-Module -Name $moduleName -Force
-        }
-
-        $modulePsd1 = Join-Path -Path $modulePath -ChildPath "$moduleName.psd1"
-
-        Import-Module -Name $modulePsd1 -ErrorAction Stop -ErrorVariable moduleError *> $null
-
-        if ($moduleError) {
-            $moduleError
-            exit 1
-        }
+        Import-TestModule -ModuleName $ModuleName -Version $Version -BuildTarget $BuildTarget
+        Add-TestHttpGuard -MockModule (Get-TestMockModuleName -CommandName 'Invoke-AuvikRequest')
 
     }
 
-    AfterAll{
-
-        Remove-AuvikAPIKey -WarningAction SilentlyContinue
-
-        if (Get-Module -Name $moduleName) {
-            Remove-Module -Name $moduleName -Force
-        }
-
-    }
-
-
-#Available in Describe and Context but NOT It
-#Can be used in [ It ] with [ -TestCases @{ VariableName = $VariableName } ]
-    BeforeDiscovery{
-
-        $pester_TestName = (Get-Item -Path $PSCommandPath).Name
-        $commandName = $pester_TestName -replace '.Tests.ps1',''
-
+    AfterAll {
+        Remove-TestModule -ModuleName $ModuleName
     }
 
 #EndRegion  [ Prerequisites ]
 
-Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('APIKeys') {
+Describe "Testing the [ $BuildTarget ] version of [ $ModuleName ] with [ $PesterTestName ]" {
 
-    Context "[ $commandName ] testing function" {
+    BeforeEach {
+        Reset-TestModuleState
+    }
 
-        It "Running [ $commandName ] should remove all APIKey variables" {
-            Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
-            Remove-AuvikAPIKey
-            $AuvikModuleUserName | Should -BeNullOrEmpty
-            $AuvikModuleApiKey | Should -BeNullOrEmpty
+    Context "[ Remove-AuvikAPIKey ] when the API key is set" {
+
+        BeforeEach {
+            Add-AuvikAPIKey -Username 'user@example.com' -ApiKey 'fake-api-key'
         }
 
-        It "If the [ AuvikModuleUserName ] is already empty a warning should be thrown" {
-            Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
-            Remove-Variable -Name "AuvikModuleUserName" -Scope global -Force
-
-            Remove-AuvikAPIKey -WarningAction SilentlyContinue -WarningVariable APIKeyWarning
-            $APIKeyWarning | Should -Be "The Auvik API [ username ] is not set. Nothing to remove"
-        }
-
-        It "If the [ AuvikApiKey ] is already empty a warning should be thrown" {
-            Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
-            Remove-Variable -Name "AuvikModuleApiKey" -Scope global -Force
-
-            Remove-AuvikAPIKey -WarningAction SilentlyContinue -WarningVariable APIKeyWarning
-            $APIKeyWarning | Should -Be "The Auvik API [ API ] key is not set. Nothing to remove"
-        }
-
-        It "If the APIKeys are already gone two warnings should be thrown" {
-            Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
+        It "Removes the username & the API key" {
             Remove-AuvikAPIKey
 
-            Remove-AuvikAPIKey -WarningAction SilentlyContinue -WarningVariable APIKeyWarning
-            $APIKeyWarning.Count | Should -Be '2'
+            Get-Variable -Name 'AuvikModuleUserName' -Scope Global -ErrorAction SilentlyContinue | Should -BeNullOrEmpty
+            Get-Variable -Name 'AuvikModuleApiKey' -Scope Global -ErrorAction SilentlyContinue | Should -BeNullOrEmpty
+        }
+
+        It "Does not warn or return anything" {
+            $Result = Remove-AuvikAPIKey -WarningVariable RemoveWarning -WarningAction SilentlyContinue
+
+            $Result | Should -BeNullOrEmpty
+            $RemoveWarning | Should -BeNullOrEmpty
+        }
+
+        It "Makes Get-AuvikAPIKey warn afterwards" {
+            Remove-AuvikAPIKey
+
+            $Result = Get-AuvikAPIKey -WarningVariable ApiKeyWarning -WarningAction SilentlyContinue
+            $Result | Should -BeNullOrEmpty
+            "$ApiKeyWarning" | Should -Match 'not set'
+        }
+
+        It "Does not remove anything with -WhatIf" {
+            Remove-AuvikAPIKey -WhatIf *> $null
+
+            $AuvikModuleUserName | Should -Be 'user@example.com'
+            $AuvikModuleApiKey | Should -BeOfType [securestring]
+        }
+
+        It "Does not remove the base URI" {
+            Remove-AuvikAPIKey
+            $AuvikModuleBaseURI | Should -Not -BeNullOrEmpty
+        }
+
+    }
+
+    Context "[ Remove-AuvikAPIKey ] when the API key is not set" {
+
+        It "Warns that there is nothing to remove without an error" {
+            Remove-AuvikAPIKey -WarningVariable RemoveWarning -WarningAction SilentlyContinue -ErrorVariable RemoveError -ErrorAction SilentlyContinue
+
+            "$RemoveWarning" | Should -Match 'Nothing to remove'
+            $RemoveError | Should -BeNullOrEmpty
         }
 
     }

@@ -8,8 +8,13 @@ function ConvertTo-AuvikQueryString {
         from a function which are later used to make the full resource uri for
         an API call
 
-        This is an internal helper function the ties in directly with the
-        ConvertTo-AuvikQueryString & any public functions that define parameters
+        This is an internal helper function that ties in directly with the
+        Invoke-AuvikRequest function & any public functions that define parameters
+
+        The following values are converted to the format the Auvik API expects:
+            - Arrays are sent as a comma delimited list
+            - Booleans are sent as true or false
+            - Dates are sent in UTC as YYYY-MM-DDTHH:MM:SS.sssZ (fromDate & thruDate as YYYY-MM-DD)
 
     .PARAMETER UriFilter
         Hashtable of values to combine a functions parameters with
@@ -21,73 +26,77 @@ function ConvertTo-AuvikQueryString {
         Defines the short resource uri (url) to use when creating the API call
 
     .EXAMPLE
-        ConvertTo-AuvikQueryString -UriFilter $UriFilter -ResourceUri '/account'
+        ConvertTo-AuvikQueryString -UriFilter $UriFilter -ResourceUri '/inventory/device/info'
 
-        Example: (From public function)
-            $UriFilter = @{}
+        Example:
+            $UriFilter = @{ 'filter[deviceType]' = 'router'; 'page[first]' = 10 }
 
-            ForEach ( $Key in $PSBoundParameters.GetEnumerator() ) {
-                if( $excludedParameters -contains $Key.Key ) {$null}
-                else{ $UriFilter += @{ $Key.Key = $Key.Value } }
-            }
-
-            1x key = https://auvikapi.us1.my.auvik.com/v1/account?accountId=12345
-            2x key = https://auvikapi.us1.my.auvik.com/v1/account?accountId=12345&Details=True
+            https://auvikapi.us1.my.auvik.com/v1/inventory/device/info?filter%5bdeviceType%5d=router&page%5bfirst%5d=10
 
     .NOTES
         N\A
 
     .LINK
         https://celerium.github.io/Celerium.Auvik/site/Internal/ConvertTo-AuvikQueryString.html
-
 #>
 
-[CmdletBinding(DefaultParameterSetName = 'Convert')]
-param(
-    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
-    [hashtable]$UriFilter,
+    [CmdletBinding(DefaultParameterSetName = 'Convert')]
+    param (
+        [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+        [hashtable]$UriFilter,
 
-    [Parameter(Mandatory = $true)]
-    [String]$ResourceUri
-)
+        [Parameter(Mandatory = $true)]
+        [string]$ResourceUri
+    )
 
-    begin {}
+    begin {
+
+        # Load Web assembly when needed as PowerShell Core has the assembly preloaded
+        if ( -not ('System.Web.HttpUtility' -as [type]) ) {
+            Add-Type -AssemblyName System.Web
+        }
+
+    }
 
     process {
 
         Write-Verbose "[ $($MyInvocation.MyCommand.Name) ] - Running the [ $($PSCmdlet.ParameterSetName) ] ParameterSet"
 
-        $QueryString = [System.Web.HttpUtility]::ParseQueryString([String]::Empty)
+        if (-not $AuvikModuleBaseURI) {
+            throw 'The Auvik base URI is not set. Run Add-AuvikBaseURI to set the base URI.'
+        }
+
+        $QueryString = [System.Web.HttpUtility]::ParseQueryString([string]::Empty)
 
         if ($UriFilter) {
 
-            ForEach ( $Key in $UriFilter.GetEnumerator() ) {
+            foreach ($Key in $UriFilter.GetEnumerator()) {
 
-                if ( $Key.Value.GetType().IsArray ) {
+                if ($null -eq $Key.Value) { continue }
+
+                if ($Key.Value -is [array]) {
 
                     Write-Verbose "[ $($MyInvocation.MyCommand.Name) ] - [ $($Key.Key) ] is an array parameter"
-
-                    foreach ($Value in $Key.Value) {
-                        $QueryString.Add($Key.Key, $Value)
-                    }
+                    $QueryString.Add($Key.Key, (@($Key.Value) -join ','))
 
                 }
-                elseif ( $Key.Value.GetType().FullName -eq 'System.DateTime' ) {
+                elseif ($Key.Value -is [datetime]) {
 
                     Write-Verbose "[ $($MyInvocation.MyCommand.Name) ] - [ $($Key.Key) ] is a dateTime parameter"
 
-                    if ($Key.Key -like "*fromDate*" -or $Key.Key -like "*thruDate*" ) {
-                        $universalTime = ($Key.Value).ToUniversalTime().ToString('yyyy-MM-dd')
+                    if ($Key.Key -like '*fromDate*' -or $Key.Key -like '*thruDate*') {
+                        $UniversalTime = $Key.Value.ToUniversalTime().ToString('yyyy-MM-dd', [System.Globalization.CultureInfo]::InvariantCulture)
                     }
-                    else{
-                        $universalTime = ($Key.Value).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ')
+                    else {
+                        $UniversalTime = $Key.Value.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [System.Globalization.CultureInfo]::InvariantCulture)
                     }
 
-                    Write-Verbose "[ $($MyInvocation.MyCommand.Name) ] - Converting [ $($Key.Value) ] to [ $universalTime ]"
-                    $QueryString.Add($Key.Key, $universalTime)
+                    Write-Verbose "[ $($MyInvocation.MyCommand.Name) ] - Converting [ $($Key.Value) ] to [ $UniversalTime ]"
+                    $QueryString.Add($Key.Key, $UniversalTime)
 
                 }
-                else{ $QueryString.Add($Key.Key, $Key.Value) }
+                elseif ($Key.Value -is [bool]) { $QueryString.Add($Key.Key, $Key.Value.ToString().ToLowerInvariant()) }
+                else { $QueryString.Add($Key.Key, [string]$Key.Value) }
 
             }
 

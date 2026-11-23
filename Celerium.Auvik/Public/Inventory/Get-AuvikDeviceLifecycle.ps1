@@ -1,180 +1,206 @@
 function Get-AuvikDeviceLifecycle {
-    <#
-        .SYNOPSIS
-            Get Auvik devices and other related information
+<#
+    .SYNOPSIS
+        Read Multiple Devices' Lifecycle Info / Read a Single Device's Lifecycle Info
 
-        .DESCRIPTION
-            The Get-AuvikDeviceLifecycle cmdlet allows you to view an inventory of
-            devices and other related information discovered by Auvik
+    .DESCRIPTION
+        Parameter set [ List ] - The Get-AuvikDeviceLifecycle cmdlet invokes the GET method of the /inventory/device/lifecycle endpoint (Read Multiple Devices' Lifecycle Info)
 
-        .PARAMETER ID
-            ID of device
+        Use the Read Multiple Devices' Lifecycle API to pull the collected lifecycle information about the various devices Auvik has discovered. You'll need the client IDs for the clients you want to run the multiple read against.
 
-        .PARAMETER Tenants
-            Comma delimited list of tenant IDs to request info from
+        Parameter set [ ById ] - The Get-AuvikDeviceLifecycle cmdlet invokes the GET method of the /inventory/device/lifecycle/{id} endpoint (Read a Single Device's Lifecycle Info)
 
-        .PARAMETER FilterSalesAvailability
-            Filter by sales availability
+        Use the Read Single Device's Lifecycle Info API to pull the collected information about a specific device Auvik has discovered. You'll need the device ID for the specific device.
 
-            Allowed values:
-                "covered", "available", "expired", "securityOnly", "unpublished", "empty"
+    .PARAMETER Id
+        ID of device
 
-        .PARAMETER FilterSoftwareMaintenanceStatus
-            Filter by software maintenance status
+    .PARAMETER FilterSalesAvailability
+        Filter by sales availability.
 
-            Allowed values:
-                "covered", "available", "expired", "securityOnly", "unpublished", "empty"
+        Allowed values:
+        'covered', 'available', 'expired', 'securityOnly', 'unpublished', 'empty'
 
-        .PARAMETER FilterSecuritySoftwareMaintenanceStatus
-            Filter by security software maintenance status
+    .PARAMETER FilterSoftwareMaintenanceStatus
+        Filter by software maintenance status.
 
-            Allowed values:
-                "covered", "available", "expired", "securityOnly", "unpublished", "empty"
+        Allowed values:
+        'covered', 'available', 'expired', 'securityOnly', 'unpublished', 'empty'
 
-        .PARAMETER FilterLastSupportStatus
-            Filter by last support status
+    .PARAMETER FilterSecuritySoftwareMaintenanceStatus
+        Filter by security software maintenance status.
 
-            Allowed values:
-                "covered", "available", "expired", "securityOnly", "unpublished", "empty"
+        Allowed values:
+        'covered', 'available', 'expired', 'securityOnly', 'unpublished', 'empty'
 
-        .PARAMETER PageFirst
-            For paginated responses, the first N elements will be returned
-            Used in combination with page[after]
+    .PARAMETER FilterLastSupportStatus
+        Filter by last support status.
 
-            Default Value: 100
+        Allowed values:
+        'covered', 'available', 'expired', 'securityOnly', 'unpublished', 'empty'
 
-        .PARAMETER PageAfter
-            Cursor after which elements will be returned as a page
-            The page size is provided by page[first]
+    .PARAMETER Tenants
+        Comma delimited list of tenant IDs to request info from.
 
-        .PARAMETER PageLast
-            For paginated responses, the last N services will be returned
-            Used in combination with page[before]
+        Accepts multiple values which are sent to the API as a comma delimited list
 
-            Default Value: 100
+    .PARAMETER PageFirst
+        For paginated responses, the first N elements will be returned. Used in combination with page[after].
 
-        .PARAMETER PageBefore
-            Cursor before which elements will be returned as a page
-            The page size is provided by page[last]
+        Default value: 100
 
-        .PARAMETER AllResults
-            Returns all items from an endpoint
+    .PARAMETER PageAfter
+        Cursor after which elements will be returned as a page. The page size is provided by page[first].
 
-            Highly recommended to only use with filters to reduce API errors\timeouts
+    .PARAMETER PageLast
+        For paginated responses, the last N services will be returned. Used in combination with page[before].
 
-        .EXAMPLE
-            Get-AuvikDeviceLifecycle
+        Default value: 100
 
-            Gets general lifecycle information about the first 100 devices
-            Auvik has discovered
+    .PARAMETER PageBefore
+        Cursor before which elements will be returned as a page. The page size is provided by page[last].
 
-        .EXAMPLE
-            Get-AuvikDeviceLifecycle -ID 123456789
+    .PARAMETER AllResults
+        Returns all items from the endpoint by following the pagination links
 
-            Gets general lifecycle information for the defined device
-            Auvik has discovered
+        When using this parameter there is no need to use the PageFirst, PageAfter, PageLast, or PageBefore parameters
 
+        Highly recommended to only use with filters to reduce API errors & timeouts
 
-        .EXAMPLE
-            Get-AuvikDeviceLifecycle -PageFirst 1000 -AllResults
+    .EXAMPLE
+        Get-AuvikDeviceLifecycle
 
-            Gets general lifecycle information for all devices found by Auvik
+        Returns the result of the /inventory/device/lifecycle endpoint
 
-        .NOTES
-        N\A
+    .EXAMPLE
+        Get-AuvikDeviceLifecycle -Tenants '1234567890' -PageFirst 10
 
-        .LINK
-            https://celerium.github.io/Celerium.Auvik/site/Inventory/Get-AuvikDeviceLifecycle.html
-    #>
+        Returns the result of the /inventory/device/lifecycle endpoint limited to the defined tenant
 
-        [CmdletBinding(DefaultParameterSetName = 'IndexByMultiDevice' )]
-        Param (
-            [Parameter( Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'IndexBySingleDevice' )]
-            [ValidateNotNullOrEmpty()]
-            [string]$ID,
+    .EXAMPLE
+        Get-AuvikDeviceLifecycle -AllResults
 
-            [Parameter( Mandatory = $false, ParameterSetName = 'IndexByMultiDevice' )]
-            [ValidateNotNullOrEmpty()]
-            [string[]]$Tenants,
+        Returns every item from the /inventory/device/lifecycle endpoint by following the pagination links
 
-            [Parameter( Mandatory = $false, ParameterSetName = 'IndexByMultiDevice' )]
-            [ValidateSet( "covered", "available", "expired", "securityOnly", "unpublished", "empty" )]
-            [string]$FilterSalesAvailability,
+    .EXAMPLE
+        Get-AuvikDeviceLifecycle -Id '1234567890'
 
-            [Parameter( Mandatory = $false, ParameterSetName = 'IndexByMultiDevice' )]
-            [ValidateSet( "covered", "available", "expired", "securityOnly", "unpublished", "empty" )]
-            [string]$FilterSoftwareMaintenanceStatus,
+        Returns the result of the /inventory/device/lifecycle/{id} endpoint
 
-            [Parameter( Mandatory = $false, ParameterSetName = 'IndexByMultiDevice' )]
-            [ValidateSet( "covered", "available", "expired", "securityOnly", "unpublished", "empty" )]
-            [string]$FilterSecuritySoftwareMaintenanceStatus,
+    .INPUTS
+        System.String
 
-            [Parameter( Mandatory = $false, ParameterSetName = 'IndexByMultiDevice' )]
-            [ValidateSet( "covered", "available", "expired", "securityOnly", "unpublished", "empty" )]
-            [string]$FilterLastSupportStatus,
+    .OUTPUTS
+        System.Management.Automation.PSCustomObject
 
-            [Parameter( Mandatory = $false, ParameterSetName = 'IndexByMultiDevice' )]
-            [ValidateRange(1, [int64]::MaxValue)]
-            [int64]$PageFirst,
+    .NOTES
+        Endpoint : GET /inventory/device/lifecycle
+        Endpoint : GET /inventory/device/lifecycle/{id}
+        The Auvik API user needs the role permissions that are required by the endpoint
 
-            [Parameter( Mandatory = $false, ParameterSetName = 'IndexByMultiDevice' )]
-            [ValidateNotNullOrEmpty()]
-            [string]$PageAfter,
+    .LINK
+        https://celerium.github.io/Celerium.Auvik/site/Inventory/Get-AuvikDeviceLifecycle.html
+#>
 
-            [Parameter( Mandatory = $false, ParameterSetName = 'IndexByMultiDevice' )]
-            [ValidateRange(1, [int64]::MaxValue)]
-            [int64]$PageLast,
+    [CmdletBinding(DefaultParameterSetName = 'List')]
+    param (
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'ById')]
+        [ValidateNotNullOrEmpty()]
+        [string]$Id,
 
-            [Parameter( Mandatory = $false, ParameterSetName = 'IndexByMultiDevice' )]
-            [ValidateNotNullOrEmpty()]
-            [string]$PageBefore,
+        [Parameter(Mandatory = $false, ParameterSetName = 'List')]
+        [ValidateNotNullOrEmpty()]
+        [ValidateSet('covered', 'available', 'expired', 'securityOnly', 'unpublished', 'empty')]
+        [string]$FilterSalesAvailability,
 
-            [Parameter( Mandatory = $false, ParameterSetName = 'IndexByMultiDevice' )]
-            [switch]$AllResults
-        )
+        [Parameter(Mandatory = $false, ParameterSetName = 'List')]
+        [ValidateNotNullOrEmpty()]
+        [ValidateSet('covered', 'available', 'expired', 'securityOnly', 'unpublished', 'empty')]
+        [string]$FilterSoftwareMaintenanceStatus,
 
-        begin {
+        [Parameter(Mandatory = $false, ParameterSetName = 'List')]
+        [ValidateNotNullOrEmpty()]
+        [ValidateSet('covered', 'available', 'expired', 'securityOnly', 'unpublished', 'empty')]
+        [string]$FilterSecuritySoftwareMaintenanceStatus,
 
-            $FunctionName       = $MyInvocation.InvocationName
-            $ParameterName      = $functionName + '_Parameters'      -replace '-','_'
-            $QueryParameterName = $functionName + '_ParametersQuery' -replace '-','_'
+        [Parameter(Mandatory = $false, ParameterSetName = 'List')]
+        [ValidateNotNullOrEmpty()]
+        [ValidateSet('covered', 'available', 'expired', 'securityOnly', 'unpublished', 'empty')]
+        [string]$FilterLastSupportStatus,
 
-        }
+        [Parameter(Mandatory = $false, ParameterSetName = 'List')]
+        [ValidateNotNullOrEmpty()]
+        [string[]]$Tenants,
 
-        process {
+        [Parameter(Mandatory = $false, ParameterSetName = 'List')]
+        [ValidateRange(1, [int64]::MaxValue)]
+        [int64]$PageFirst,
 
-            Write-Verbose "[ $($MyInvocation.MyCommand.Name) ] - Running the [ $($PSCmdlet.ParameterSetName) ] ParameterSet"
+        [Parameter(Mandatory = $false, ParameterSetName = 'List')]
+        [ValidateNotNullOrEmpty()]
+        [string]$PageAfter,
 
-            switch ( $($PSCmdlet.ParameterSetName) ) {
-                'IndexByMultiDevice'    { $ResourceUri = "/inventory/device/lifecycle" }
-                'IndexBySingleDevice'   { $ResourceUri = "/inventory/device/lifecycle/$ID" }
-            }
+        [Parameter(Mandatory = $false, ParameterSetName = 'List')]
+        [ValidateRange(1, [int64]::MaxValue)]
+        [int64]$PageLast,
 
-            $UriParameters = @{}
+        [Parameter(Mandatory = $false, ParameterSetName = 'List')]
+        [ValidateNotNullOrEmpty()]
+        [string]$PageBefore,
 
-            #Region     [ Parameter Translation ]
+        [Parameter(Mandatory = $false, ParameterSetName = 'List')]
+        [switch]$AllResults
+    )
 
-            if ($PSCmdlet.ParameterSetName -eq 'IndexByMultiDevice') {
-                if ($Tenants)                                   { $UriParameters['tenants']                                     = $Tenants }
-                if ($FilterSalesAvailability)                   { $UriParameters['filter[salesAvailability]']                   = $FilterSalesAvailability }
-                if ($FilterSoftwareMaintenanceStatus)           { $UriParameters['filter[softwareMaintenanceStatus]']           = $FilterSoftwareMaintenanceStatus }
-                if ($FilterSecuritySoftwareMaintenanceStatus)   { $UriParameters['filter[securitySoftwareMaintenanceStatus]']   = $FilterSecuritySoftwareMaintenanceStatus }
-                if ($FilterLastSupportStatus)                   { $UriParameters['filter[lastSupportStatus]']                   = $FilterLastSupportStatus }
-                if ($PageFirst)                                 { $UriParameters['page[first]']                                 = $PageFirst }
-                if ($PageAfter)                                 { $UriParameters['page[after]']                                 = $PageAfter }
-                if ($PageLast)                                  { $UriParameters['page[last]']                                  = $PageLast }
-                if ($PageBefore)                                { $UriParameters['page[before]']                                = $PageBefore }
-            }
+    begin {
 
-            #EndRegion  [ Parameter Translation ]
-
-            Set-Variable -Name $ParameterName -Value $PSBoundParameters -Scope Global -Force -Confirm:$false
-            Set-Variable -Name $QueryParameterName -Value $UriParameters -Scope Global -Force -Confirm:$false
-
-            return Invoke-AuvikRequest -Method GET -ResourceUri $ResourceUri -UriFilter $UriParameters -AllResults:$AllResults
-
-        }
-
-        end {}
+        $FunctionName       = $MyInvocation.InvocationName
+        $ParameterName      = ($FunctionName -replace '-', '') + 'Parameters'
+        $QueryParameterName = $ParameterName + 'Query'
 
     }
+
+    process {
+
+        Write-Verbose "[ $($MyInvocation.MyCommand.Name) ] - Running the [ $($PSCmdlet.ParameterSetName) ] ParameterSet"
+
+        switch ($PSCmdlet.ParameterSetName) {
+            'ById' {
+                $ResourceUri = "/inventory/device/lifecycle/$([System.Uri]::EscapeDataString($Id))"
+                $NameMap = @{}
+            }
+            'List' {
+                $ResourceUri = '/inventory/device/lifecycle'
+                $NameMap = @{
+                    FilterSalesAvailability                 = 'filter[salesAvailability]'
+                    FilterSoftwareMaintenanceStatus         = 'filter[softwareMaintenanceStatus]'
+                    FilterSecuritySoftwareMaintenanceStatus = 'filter[securitySoftwareMaintenanceStatus]'
+                    FilterLastSupportStatus                 = 'filter[lastSupportStatus]'
+                    Tenants                                 = 'tenants'
+                    PageFirst                               = 'page[first]'
+                    PageAfter                               = 'page[after]'
+                    PageLast                                = 'page[last]'
+                    PageBefore                              = 'page[before]'
+                }
+            }
+        }
+
+        $UriParameters = Get-AuvikUriParameter -BoundParameter $PSBoundParameters -NameMap $NameMap
+
+        $InvokeParams = @{
+            Method      = 'GET'
+            ResourceUri = $ResourceUri
+            UriFilter   = $UriParameters
+            AllResults  = $AllResults
+        }
+
+        Set-Variable -Name $ParameterName -Value $PSBoundParameters -Scope Global -Force -Confirm:$false -WhatIf:$false
+        Set-Variable -Name $QueryParameterName -Value $UriParameters -Scope Global -Force -Confirm:$false -WhatIf:$false
+
+        return Invoke-AuvikRequest @InvokeParams
+
+    }
+
+    end {}
+
+}

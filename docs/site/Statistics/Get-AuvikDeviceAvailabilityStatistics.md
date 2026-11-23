@@ -1,267 +1,397 @@
 ---
-external help file: Celerium.Auvik-help.xml
+document type: cmdlet
+external help file: Celerium.Auvik-Help.xml
 grand_parent: Statistics
+HelpUri: https://celerium.github.io/Celerium.Auvik/site/Statistics/Get-AuvikDeviceAvailabilityStatistics.html
+Locale: en-US
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/Statistics/Get-AuvikDeviceAvailabilityStatistics.html
 parent: GET
-schema: 2.0.0
+PlatyPS schema version: 2024-05-01
 title: Get-AuvikDeviceAvailabilityStatistics
 ---
 
 # Get-AuvikDeviceAvailabilityStatistics
 
 ## SYNOPSIS
-Provides historical device uptime and outage statistics
+
+Read Device Availability Statistics
 
 ## SYNTAX
 
-```powershell
-Get-AuvikDeviceAvailabilityStatistics [-StatId] <String> [[-Tenants] <String[]>] [-FilterFromTime] <DateTime>
- [[-FilterThruTime] <DateTime>] [-FilterInterval] <String> [[-FilterDeviceType] <String>]
- [[-FilterDeviceId] <String>] [[-PageFirst] <Int64>] [[-PageAfter] <String>] [[-PageLast] <Int64>]
- [[-PageBefore] <String>] [-AllResults] [<CommonParameters>]
+### __AllParameterSets
+
+```
+Get-AuvikDeviceAvailabilityStatistics [-StatId] <string> -FilterFromTime <datetime>
+ -FilterInterval <string> [-FilterThruTime <datetime>] [-FilterDeviceType <string>]
+ [-FilterDeviceId <string>] [-FilterOmitUndiscovered <bool>] [-Tenants <string[]>]
+ [-PageFirst <long>] [-PageAfter <string>] [-PageLast <long>] [-PageBefore <string>] [-AllResults]
 ```
 
+## ALIASES
+
+This cmdlet has the following aliases,
+  - None
+
 ## DESCRIPTION
-The Get-AuvikDeviceAvailabilityStatistics cmdlet provides
-historical device uptime and outage statistics
+
+The Get-AuvikDeviceAvailabilityStatistics cmdlet invokes the GET method of the /stat/deviceAvailability/{statId} endpoint (Read Device Availability Statistics)
+
+Use the Read Device Availability Statistics API to fetch detailed availability statistics of a client's (and client's children if a multi-client) devices for a given time range.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
+
 ```powershell
-Get-AuvikDeviceAvailabilityStatistics -StatId uptime -FilterFromTime 2023-10-03 -FilterInterval day
+Get-AuvikDeviceAvailabilityStatistics -StatId 'uptime' -FilterFromTime '2025-01-01T00:00:00Z' -FilterInterval 'minute'
 ```
 
-Provides the first 100 historical device uptime and outage statistics
+Returns the result of the /stat/deviceAvailability/{statId} endpoint
 
 ### EXAMPLE 2
+
 ```powershell
-Get-AuvikDeviceAvailabilityStatistics -StatId uptime -FilterFromTime 2023-10-03 -FilterInterval day -PageFirst 1000 -AllResults
+Get-AuvikDeviceAvailabilityStatistics -StatId 'uptime' -FilterFromTime '2025-01-01T00:00:00Z' -FilterInterval 'minute' -Tenants '1234567890' -PageFirst 10
 ```
 
-Provides all historical device uptime and outage statistics
+Returns the result of the /stat/deviceAvailability/{statId} endpoint limited to the defined tenant
+
+### EXAMPLE 3
+
+```powershell
+Get-AuvikDeviceAvailabilityStatistics -StatId 'uptime' -FilterFromTime '2025-01-01T00:00:00Z' -FilterInterval 'minute' -AllResults
+```
+
+Returns every item from the /stat/deviceAvailability/{statId} endpoint by following the pagination links
 
 ## PARAMETERS
 
-### -StatId
-ID of statistic to return
+### -AllResults
 
-Allowed values:
-    "uptime", "outage"
+Returns all items from the endpoint by following the pagination links
 
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
+When using this parameter there is no need to use the PageFirst, PageAfter, PageLast, or PageBefore parameters
 
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Tenants
-Comma delimited list of tenant IDs to request info from
+Highly recommended to only use with filters to reduce API errors & timeouts
 
 ```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -FilterFromTime
-Timestamp from which you want to query
-
-```yaml
-Type: DateTime
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FilterThruTime
-Timestamp to which you want to query (defaults to current time)
-
-```yaml
-Type: DateTime
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FilterInterval
-Statistics reporting interval
-
-Allowed values:
-    "minute", "hour", "day"
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FilterDeviceType
-Filter by device type
-
-Allowed values:
-    "unknown", "switch", "l3Switch", "router", "accessPoint", "firewall",
-    "workstation", "server", "storage", "printer", "copier", "hypervisor",
-    "multimedia", "phone", "tablet", "handheld", "virtualAppliance", "bridge",
-    "controller", "hub", "modem", "ups", "module", "loadBalancer", "camera",
-    "telecommunications", "packetProcessor", "chassis", "airConditioner",
-    "virtualMachine", "pdu", "ipPhone", "backhaul", "internetOfThings",
-    "voipSwitch", "stack", "backupDevice", "timeClock", "lightingDevice",
-    "audioVisual", "securityAppliance", "utm", "alarm", "buildingManagement",
-    "ipmi", "thinAccessPoint", "thinClient"
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -FilterDeviceId
+
 Filter by device ID
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
-### -PageFirst
-For paginated responses, the first N elements will be returned
-Used in combination with page\[after\]
+### -FilterDeviceType
 
-Default Value: 100
+Filter by device type.
+
+Allowed values:
+'unknown', 'switch', 'l3Switch', 'router', 'accessPoint', 'firewall', 'workstation', 'server', 'storage', 'printer', 'copier', 'hypervisor', 'multimedia', 'phone', 'tablet', 'handheld', 'virtualAppliance', 'bridge', 'controller', 'hub', 'modem', 'ups', 'module', 'loadBalancer', 'camera', 'telecommunications', 'packetProcessor', 'chassis', 'airConditioner', 'virtualMachine', 'pdu', 'ipPhone', 'backhaul', 'internetOfThings', 'voipSwitch', 'stack', 'backupDevice', 'timeClock', 'lightingDevice', 'audioVisual', 'securityAppliance', 'utm', 'alarm', 'buildingManagement', 'ipmi', 'thinAccessPoint', 'thinClient', 'subnet'
 
 ```yaml
-Type: Int64
-Parameter Sets: (All)
-Aliases:
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
 
-Required: False
-Position: 8
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
+### -FilterFromTime
+
+Timestamp from which you want to query
+
+Accepts a date & time which is sent to the API in UTC
+
+```yaml
+Type: System.DateTime
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -FilterInterval
+
+Statistics reporting interval
+
+Allowed values:
+'minute', 'hour', 'day'
+
+```yaml
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -FilterOmitUndiscovered
+
+When true, omits availability data for time periods before the device was first discovered (See firstDiscoveredDateTime).
+
+```yaml
+Type: System.Boolean
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -FilterThruTime
+
+Timestamp to which you want to query (defaults to current time)
+
+Accepts a date & time which is sent to the API in UTC
+
+```yaml
+Type: System.DateTime
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -PageAfter
-Cursor after which elements will be returned as a page
-The page size is provided by page\[first\]
+
+Cursor after which elements will be returned as a page.
+The page size is provided by page[first].
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 9
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PageLast
-For paginated responses, the last N services will be returned
-Used in combination with page\[before\]
-
-Default Value: 100
-
-```yaml
-Type: Int64
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 10
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -PageBefore
-Cursor before which elements will be returned as a page
-The page size is provided by page\[last\]
+
+Cursor before which elements will be returned as a page.
+The page size is provided by page[last].
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 11
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
-### -AllResults
-Returns all items from an endpoint
+### -PageFirst
 
-Highly recommended to only use with filters to reduce API errors\timeouts
+For paginated responses, the first N elements will be returned.
+Used in combination with page[after].
+
+Default value: 100
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
+Type: System.Int64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
 
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
+### -PageLast
+
+For paginated responses, the last N services will be returned.
+Used in combination with page[before].
+
+Default value: 100
+
+```yaml
+Type: System.Int64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -StatId
+
+ID of statistic to return
+
+Allowed values:
+'uptime', 'outage'
+
+```yaml
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases:
+- Id
+ParameterSets:
+- Name: (All)
+  Position: 0
+  IsRequired: true
+  ValueFromPipeline: true
+  ValueFromPipelineByPropertyName: true
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -Tenants
+
+Comma delimited list of tenant IDs to request info from.
+
+Accepts multiple values which are sent to the API as a comma delimited list
+
+```yaml
+Type: System.String[]
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
+-ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
+### System.String
+
+{{ Fill in the Description }}
+
 ## OUTPUTS
 
+### System.Management.Automation.PSCustomObject
+
+{{ Fill in the Description }}
+
 ## NOTES
-N\A
+
+Endpoint : GET /stat/deviceAvailability/{statId}
+The Auvik API user needs the role permissions that are required by the endpoint
+
 
 ## RELATED LINKS
 
-[https://celerium.github.io/Celerium.Auvik/site/Statistics/Get-AuvikDeviceAvailabilityStatistics.html](https://celerium.github.io/Celerium.Auvik/site/Statistics/Get-AuvikDeviceAvailabilityStatistics.html)
-
+- [](https://celerium.github.io/Celerium.Auvik/site/Statistics/Get-AuvikDeviceAvailabilityStatistics.html)

@@ -1,282 +1,394 @@
 ---
-external help file: Celerium.Auvik-help.xml
+document type: cmdlet
+external help file: Celerium.Auvik-Help.xml
 grand_parent: Pollers
+HelpUri: https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPollerDevice.html
+Locale: en-US
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPollerDevice.html
 parent: GET
-schema: 2.0.0
+PlatyPS schema version: 2024-05-01
 title: Get-AuvikSNMPPollerDevice
 ---
 
 # Get-AuvikSNMPPollerDevice
 
 ## SYNOPSIS
-Provides Details about all the devices associated to a
-specific SNMP Poller Setting
+
+Read SNMP Poller Setting's Devices
 
 ## SYNTAX
 
-```powershell
-Get-AuvikSNMPPollerDevice [-SNMPPollerSettingId] <String> [-Tenants] <String[]>
- [[-FilterOnlineStatus] <String>] [[-FilterModifiedAfter] <DateTime>] [[-FilterNotSeenSince] <DateTime>]
- [[-FilterDeviceType] <String>] [[-FilterMakeModel] <String>] [[-FilterVendorName] <String>]
- [[-PageFirst] <Int64>] [[-PageAfter] <String>] [[-PageLast] <Int64>] [[-PageBefore] <String>] [-AllResults]
- [<CommonParameters>]
+### __AllParameterSets
+
+```
+Get-AuvikSNMPPollerDevice [-SnmpPollerSettingId] <string> -Tenants <string[]>
+ [-FilterOnlineStatus <string>] [-FilterModifiedAfter <datetime>] [-FilterNotSeenSince <datetime>]
+ [-FilterDeviceType <string>] [-FilterMakeModel <string>] [-FilterVendorName <string>]
+ [-PageFirst <long>] [-PageAfter <string>] [-PageLast <long>] [-PageBefore <string>] [-AllResults]
 ```
 
+## ALIASES
+
+This cmdlet has the following aliases,
+  - None
+
 ## DESCRIPTION
-The Get-AuvikSNMPPollerDevice cmdlet provides Details about all
-the devices associated to a specific SNMP Poller Setting
+
+The Get-AuvikSNMPPollerDevice cmdlet invokes the GET method of the /settings/snmppoller/{snmpPollerSettingId}/devices endpoint (Read SNMP Poller Setting's Devices)
+
+Use Read SNMP Poller Setting's Devices API to pull the list of devices that apply to a specific SNMP Poller Setting Id.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
+
 ```powershell
-Get-AuvikSNMPPollerDevice -SNMPPollerSettingId MTk5NTAyNzg2ODc3 -Tenants 123456789
+Get-AuvikSNMPPollerDevice -SnmpPollerSettingId '1234567890' -Tenants '1234567890'
 ```
 
-Provides Details about the first 100 devices associated to the defined
-SNMP Poller id
+Returns the result of the /settings/snmppoller/{snmpPollerSettingId}/devices endpoint
 
 ### EXAMPLE 2
+
 ```powershell
-Get-AuvikSNMPPollerDevice -SNMPPollerSettingId MTk5NTAyNzg2ODc3 -Tenants 123456789 -PageFirst 1000 -AllResults
+Get-AuvikSNMPPollerDevice -SnmpPollerSettingId '1234567890' -Tenants '1234567890' -PageFirst 10
 ```
 
-Provides Details about all the devices associated to the defined
-SNMP Poller id
+Returns the result of the /settings/snmppoller/{snmpPollerSettingId}/devices endpoint limited to the defined number of items
+
+### EXAMPLE 3
+
+```powershell
+Get-AuvikSNMPPollerDevice -SnmpPollerSettingId '1234567890' -Tenants '1234567890' -AllResults
+```
+
+Returns every item from the /settings/snmppoller/{snmpPollerSettingId}/devices endpoint by following the pagination links
 
 ## PARAMETERS
 
-### -SNMPPollerSettingId
-ID of the SNMP Poller Setting that the devices apply to
+### -AllResults
+
+Returns all items from the endpoint by following the pagination links
+
+When using this parameter there is no need to use the PageFirst, PageAfter, PageLast, or PageBefore parameters
+
+Highly recommended to only use with filters to reduce API errors & timeouts
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -Tenants
-Comma delimited list of tenant IDs to request info from
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FilterOnlineStatus
-Filter by the device's online status
-
-Allowed values:
-    "online", "offline", "unreachable", "testing", "unknown", "dormant", "notPresent", "lowerLayerDown"
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FilterModifiedAfter
-Filter by date and time, only returning entities modified after provided value
-
-```yaml
-Type: DateTime
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FilterNotSeenSince
-Filter by the last seen online time, returning entities not
-seen online after the provided value
-
-```yaml
-Type: DateTime
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -FilterDeviceType
-Filter by device type
+
+Filter by device type.
 
 Allowed values:
-    "unknown", "switch", "l3Switch", "router", "accessPoint", "firewall", "workstation",
-    "server", "storage", "printer", "copier", "hypervisor", "multimedia", "phone", "tablet",
-    "handheld", "virtualAppliance", "bridge", "controller", "hub", "modem", "ups", "module",
-    "loadBalancer", "camera", "telecommunications", "packetProcessor", "chassis", "airConditioner",
-    "virtualMachine", "pdu", "ipPhone", "backhaul", "internetOfThings", "voipSwitch", "stack",
-    "backupDevice", "timeClock", "lightingDevice", "audioVisual", "securityAppliance", "utm",
-    "alarm", "buildingManagement", "ipmi", "thinAccessPoint", "thinClient"
+'unknown', 'switch', 'l3Switch', 'router', 'accessPoint', 'firewall', 'workstation', 'server', 'storage', 'printer', 'copier', 'hypervisor', 'multimedia', 'phone', 'tablet', 'handheld', 'virtualAppliance', 'bridge', 'controller', 'hub', 'modem', 'ups', 'module', 'loadBalancer', 'camera', 'telecommunications', 'packetProcessor', 'chassis', 'airConditioner', 'virtualMachine', 'pdu', 'ipPhone', 'backhaul', 'internetOfThings', 'voipSwitch', 'stack', 'backupDevice', 'timeClock', 'lightingDevice', 'audioVisual', 'securityAppliance', 'utm', 'alarm', 'buildingManagement', 'ipmi', 'thinAccessPoint', 'thinClient', 'subnet'
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -FilterMakeModel
-Filter by the device's make and model
+
+Filter by the device's make and model.
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
 
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+### -FilterModifiedAfter
+
+Filter by date and time, only returning entities modified after provided value.
+
+Accepts a date & time which is sent to the API in UTC
+
+```yaml
+Type: System.DateTime
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -FilterNotSeenSince
+
+Filter by the last seen online time, returning entities not seen online after the provided value.
+
+Accepts a date & time which is sent to the API in UTC
+
+```yaml
+Type: System.DateTime
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -FilterOnlineStatus
+
+Filter by the device's online status.
+
+Allowed values:
+'online', 'offline', 'unreachable', 'testing', 'unknown', 'dormant', 'notPresent', 'lowerLayerDown'
+
+```yaml
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -FilterVendorName
-Filter by the device's vendor/manufacturer
+
+Filter by the device's vendor/manufacturer.
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PageFirst
-For paginated responses, the first N elements will be returned
-Used in combination with page\[after\]
-
-Default Value: 100
-
-```yaml
-Type: Int64
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 9
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -PageAfter
-Cursor after which elements will be returned as a page
-The page size is provided by page\[first\]
+
+Cursor after which elements will be returned as a page.
+The page size is provided by page[first].
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 10
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PageLast
-For paginated responses, the last N services will be returned
-Used in combination with page\[before\]
-
-Default Value: 100
-
-```yaml
-Type: Int64
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 11
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -PageBefore
-Cursor before which elements will be returned as a page
-The page size is provided by page\[last\]
+
+Cursor before which elements will be returned as a page.
+The page size is provided by page[last].
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 12
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
-### -AllResults
-Returns all items from an endpoint
+### -PageFirst
 
-Highly recommended to only use with filters to reduce API errors\timeouts
+For paginated responses, the first N elements will be returned.
+Used in combination with page[after].
+
+Default value: 100
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
+Type: System.Int64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
 
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
+### -PageLast
+
+For paginated responses, the last N services will be returned.
+Used in combination with page[before].
+
+Default value: 100
+
+```yaml
+Type: System.Int64
+DefaultValue: 0
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -SnmpPollerSettingId
+
+ID of the SNMP Poller Setting that the devices apply to
+
+```yaml
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases:
+- Id
+ParameterSets:
+- Name: (All)
+  Position: 0
+  IsRequired: true
+  ValueFromPipeline: true
+  ValueFromPipelineByPropertyName: true
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -Tenants
+
+Comma delimited list of tenant IDs to request info from.
+
+Accepts multiple values which are sent to the API as a comma delimited list
+
+```yaml
+Type: System.String[]
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
+-ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
+### System.String
+
+{{ Fill in the Description }}
+
 ## OUTPUTS
 
+### System.Management.Automation.PSCustomObject
+
+{{ Fill in the Description }}
+
 ## NOTES
-N\A
+
+Endpoint : GET /settings/snmppoller/{snmpPollerSettingId}/devices
+The Auvik API user needs the role permissions that are required by the endpoint
+
 
 ## RELATED LINKS
 
-[https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPollerDevice.html](https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPollerDevice.html)
-
+- [](https://celerium.github.io/Celerium.Auvik/site/Pollers/Get-AuvikSNMPPollerDevice.html)

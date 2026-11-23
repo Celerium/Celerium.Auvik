@@ -14,7 +14,8 @@ function Export-AuvikModuleSetting {
         Define the location to store the Auvik configuration file
 
         By default the configuration file is stored in the following location:
-            $env:USERPROFILE\Celerium.Auvik
+            Windows: $env:USERPROFILE\Celerium.Auvik
+            Linux & macOS: $HOME/.Celerium.Auvik
 
     .PARAMETER AuvikConfigFile
         Define the name of the Auvik configuration file
@@ -43,10 +44,10 @@ function Export-AuvikModuleSetting {
         https://celerium.github.io/Celerium.Auvik/site/Internal/Export-AuvikModuleSetting.html
 #>
 
-    [CmdletBinding(DefaultParameterSetName = 'Set')]
-    Param (
+    [CmdletBinding(DefaultParameterSetName = 'Set', SupportsShouldProcess)]
+    param (
         [Parameter(ParameterSetName = 'Set')]
-        [string]$AuvikConfigPath = $(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) ),
+        [string]$AuvikConfigPath = $(Join-Path -Path $HOME -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') { 'Celerium.Auvik' } else { '.Celerium.Auvik' }) ),
 
         [Parameter(ParameterSetName = 'Set')]
         [string]$AuvikConfigFile = 'config.psd1'
@@ -56,34 +57,40 @@ function Export-AuvikModuleSetting {
 
     process {
 
-        Write-Warning "Secrets are stored using Windows Data Protection API (DPAPI)"
-        Write-Warning "DPAPI provides user context encryption in Windows but NOT in other operating systems like Linux or UNIX. It is recommended to use a more secure & cross-platform storage method"
+        Write-Warning 'Secrets are stored using Windows Data Protection API (DPAPI)'
+        Write-Warning 'DPAPI provides user context encryption in Windows but NOT in other operating systems like Linux or UNIX. It is recommended to use a more secure & cross-platform storage method'
 
         $AuvikConfig = Join-Path -Path $AuvikConfigPath -ChildPath $AuvikConfigFile
 
         # Confirm variables exist and are not null before exporting
         if ($AuvikModuleBaseURI -and $AuvikModuleUserName -and $AuvikModuleApiKey -and $AuvikJSONConversionDepth) {
-            $secureString = $AuvikModuleApiKey | ConvertFrom-SecureString
 
-            if ($IsWindows -or $PSEdition -eq 'Desktop') {
-                New-Item -Path $AuvikConfigPath -ItemType Directory -Force | ForEach-Object { $_.Attributes = $_.Attributes -bor "Hidden" }
+            $SecureString = $AuvikModuleApiKey | ConvertFrom-SecureString
+
+            if ($PSCmdlet.ShouldProcess($AuvikConfig, 'Export the Auvik module settings')) {
+
+                if ($IsWindows -or $PSEdition -eq 'Desktop') {
+                    New-Item -Path $AuvikConfigPath -ItemType Directory -Force | ForEach-Object { $_.Attributes = $_.Attributes -bor 'Hidden' }
+                }
+                else {
+                    New-Item -Path $AuvikConfigPath -ItemType Directory -Force > $null
+                }
+
+                $ConfigContent = @"
+@{
+    AuvikModuleBaseURI          = '$AuvikModuleBaseURI'
+    AuvikModuleUserName         = '$AuvikModuleUserName'
+    AuvikModuleApiKey           = '$SecureString'
+    AuvikJSONConversionDepth    = '$AuvikJSONConversionDepth'
+}
+"@
+                Set-Content -Path $AuvikConfig -Value $ConfigContent -Force -Encoding UTF8
+
             }
-            else{
-                New-Item -Path $AuvikConfigPath -ItemType Directory -Force
-            }
-@"
-    @{
-        AuvikModuleBaseURI          = '$AuvikModuleBaseURI'
-        AuvikModuleUserName         = '$AuvikModuleUserName'
-        AuvikModuleApiKey           = '$secureString'
-        AuvikJSONConversionDepth    = '$AuvikJSONConversionDepth'
-    }
-"@ | Out-File -FilePath $AuvikConfig -Force
+
         }
         else {
-            Write-Error "Failed to export Auvik Module settings to [ $AuvikConfig ]"
-            Write-Error $_
-            exit 1
+            Write-Error "Failed to export Auvik Module settings to [ $AuvikConfig ]. The base URI, API username, API key, & JSON depth must be set"
         }
 
     }

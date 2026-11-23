@@ -19,12 +19,12 @@
     The Publish-celeriumModule script publishes a PowerShell module
     to the PowerShell Gallery
 
-.PARAMETER moduleName
+.PARAMETER ModuleName
     The name of the module to update help docs for
 
     Default value: Celerium.Auvik
 
-.PARAMETER version
+.PARAMETER Version
     The build version to publish
 
 .PARAMETER NuGetApiKey
@@ -42,10 +42,10 @@
     Publishes a PowerShell module to the PowerShell Gallery
 
 .INPUTS
-    N\A
+    N/A
 
 .OUTPUTS
-    N\A
+    N/A
 
 .LINK
     https://celerium.org
@@ -56,29 +56,24 @@
 param (
     [Parameter(Mandatory=$false)]
     [ValidateNotNullOrEmpty()]
-    [String]$moduleName = 'Celerium.Auvik',
+    [string]$ModuleName = 'Celerium.Auvik',
 
     [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
-    [string]$version,
+    [string]$Version,
 
     [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
-    [String]$NuGetApiKey
+    [string]$NuGetApiKey
 
 )
 
 begin {
 
-    if ($IsWindows -or $PSEdition -eq 'Desktop') {
-        $rootPath = "$( $PSCommandPath.Substring(0, $PSCommandPath.IndexOf('\build', [System.StringComparison]::OrdinalIgnoreCase)) )"
-    }
-    else{
-        $rootPath = "$( $PSCommandPath.Substring(0, $PSCommandPath.IndexOf('/build', [System.StringComparison]::OrdinalIgnoreCase)) )"
-    }
+    $RootPath = Split-Path -Path $PSScriptRoot -Parent
 
-    $modulePath = Join-Path -Path $rootPath -ChildPath "\build\$moduleName\$version"
-    $modulePsd1 = Join-Path -Path $modulePath -ChildPath "$moduleName.psd1"
+    $ModulePath = Join-Path -Path (Join-Path -Path (Join-Path -Path $RootPath -ChildPath 'build') -ChildPath $ModuleName) -ChildPath $Version
+    $ModulePsd1 = Join-Path -Path $ModulePath -ChildPath "$ModuleName.psd1"
 
 }
 
@@ -86,19 +81,19 @@ process {
 
     try {
 
-        if ( $($Test = Test-ModuleManifest -Path $modulePsd1 -ErrorAction SilentlyContinue; $?) ) {
+        if ( $($Test = Test-ModuleManifest -Path $ModulePsd1 -ErrorAction SilentlyContinue; $?) ) {
 
-            $publish_Params = @{
-                Path        = $modulePath
+            $PublishParams = @{
+                Path        = $ModulePath
                 NuGetApiKey = $NuGetApiKey
                 WhatIf      = $WhatIfPreference
             }
 
-            Publish-Module @publish_Params
+            Publish-Module @PublishParams
 
         }
         else{
-            throw "The [ $moduleName ] module failed Test-ModuleManifest"
+            throw "The [ $ModuleName ] module failed Test-ModuleManifest"
             Write-Error $_
         }
 

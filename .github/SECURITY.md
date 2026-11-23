@@ -22,7 +22,7 @@ Report security bugs in third-party modules to the person or team maintaining th
 
 *Your responsibility is to report vulnerabilities to us using the guidelines outlined below.*
 
-Discuss how someone should disclose a vulnerability to "Celerium.Auvik", in tl;dr ( or ELI5 ) language. Then expand on this with "How To Disclose a vulnerability in detail". Please give detailed steps on how to disclose the vulnerability. Keep these OWASP guidelines in mind ( <https://www.owasp.org/index.php/Vulnerability_Disclosure_Cheat_Sheet> ) when creating your disclosure policy. Below are some recommendations for security disclosures:
+Please report vulnerabilities privately instead of opening a public issue. Email the lead maintainer, include the word "SECURITY" in the subject line, and give us enough information to reproduce the problem. Never include real Auvik API keys, usernames, or customer data in a report. Rotate any API key that may have been exposed in the Auvik portal. Keep these OWASP guidelines in mind ( <https://www.owasp.org/index.php/Vulnerability_Disclosure_Cheat_Sheet> ) when disclosing. Below are some recommendations for security disclosures:
 
 - "Celerium.Auvik" security contact { contact: mailto:[celerium@celerium.org] }
 - Disclosure format: When disclosing vulnerabilities please

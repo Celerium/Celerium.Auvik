@@ -10,6 +10,9 @@ function Add-AuvikBaseURI {
     .PARAMETER BaseUri
         Define the base URI for the Auvik API connection using Auvik's URI or a custom URI
 
+        An Auvik host such as us2.my.auvik.com or auvikapi.us2.my.auvik.com is converted to
+        https://auvikapi.us2.my.auvik.com/v1 & a URI without a scheme uses https
+
     .PARAMETER DataCenter
         Auvik's URI connection point that can be one of the predefined data centers
 
@@ -32,44 +35,65 @@ function Add-AuvikBaseURI {
         The base URI will use https://auvikapi.us1.my.auvik.com/v1 which is Auvik's US URI
 
     .EXAMPLE
+        Add-AuvikBaseURI -BaseUri us2.my.auvik.com
+
+        The base URI will use https://auvikapi.us2.my.auvik.com/v1
+
+    .EXAMPLE
         Add-AuvikBaseURI -BaseUri http://myapi.gateway.celerium.org
 
         A custom API gateway of http://myapi.gateway.celerium.org will be used for all API calls to Auvik's API
 
     .NOTES
-        N\A
+        N/A
 
     .LINK
         https://celerium.github.io/Celerium.Auvik/site/Internal/Add-AuvikBaseURI.html
 #>
 
-    [cmdletbinding(DefaultParameterSetName = 'Set')]
-    [alias('Set-AuvikBaseURI')]
-    Param (
+    [CmdletBinding(DefaultParameterSetName = 'Set')]
+    param (
         [Parameter(Mandatory = $false , ValueFromPipeline = $true)]
         [string]$BaseUri = 'https://auvikapi.us1.my.auvik.com/v1',
 
         [Parameter(Mandatory = $false)]
         [ValidateSet( 'au1', 'ca1', 'eu', 'eu1', 'eu2', 'us', 'us1', 'us2', 'us3', 'us4', 'us5', 'us6' )]
-        [String]$DataCenter
+        [string]$DataCenter
     )
 
     begin {}
 
     process {
 
-        if ($BaseUri[$BaseUri.Length-1] -eq "/") {
-            $BaseUri = $BaseUri.Substring(0,$BaseUri.Length-1)
+        $BaseUri = $BaseUri.Trim().TrimEnd('/')
+
+        # An Auvik host without a scheme or the API prefix (such as us2.my.auvik.com) is converted to the API base URI
+        if ($BaseUri -match '^(?:https?://)?(?:auvikapi\.)?(?<Region>[A-Za-z]+\d*)\.my\.auvik\.com(?:/v1)?$') {
+            $BaseUri = "https://auvikapi.$($Matches['Region'].ToLowerInvariant()).my.auvik.com/v1"
+        }
+        elseif ($BaseUri -notmatch '^[A-Za-z][A-Za-z0-9+.-]*://') {
+            $BaseUri = "https://$BaseUri"
         }
 
         if ($DataCenter) {
-            $BaseUri = "https://auvikapi.$DataCenter.my.auvik.com/v1"
+
+            # The generic regions are aliases of the first data center in the region
+            $Region = switch ($DataCenter) {
+                'us'    { 'us1' }
+                'eu'    { 'eu1' }
+                default { $DataCenter.ToLowerInvariant() }
+            }
+
+            $BaseUri = "https://auvikapi.$Region.my.auvik.com/v1"
+
         }
 
-        Set-Variable -Name "AuvikModuleBaseURI" -Value $BaseUri -Option ReadOnly -Scope global -Force
+        Set-Variable -Name 'AuvikModuleBaseURI' -Value $BaseUri -Option ReadOnly -Scope Global -Force
 
     }
 
     end {}
 
 }
+
+Set-Alias -Name 'Set-AuvikBaseURI' -Value 'Add-AuvikBaseURI'

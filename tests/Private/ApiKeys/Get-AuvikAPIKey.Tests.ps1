@@ -1,44 +1,44 @@
 <#
-    .SYNOPSIS
-        Pester tests for the Celerium.Auvik APIKeys functions
+.NOTES
+    Copyright 1990-2025 Celerium
 
-    .DESCRIPTION
-        Pester tests for the Celerium.Auvik APIKeys functions
+    NAME: Get-AuvikAPIKey.Tests.ps1
+    Type: PowerShell
 
-    .PARAMETER moduleName
-        The name of the local module to import
+        AUTHOR:  David Schulte
+        EMAIL:   celerium@Celerium.org
 
-    .PARAMETER Version
-        The version of the local module to import
+.SYNOPSIS
+    Pester tests for the Get-AuvikAPIKey function
 
-    .PARAMETER buildTarget
-        Which version of the module to run tests against
+.DESCRIPTION
+    Pester tests for the Get-AuvikAPIKey function
 
-        Allowed values:
-            'built', 'notBuilt'
+.PARAMETER ModuleName
+    The name of the local module to import
 
-    .EXAMPLE
-        Invoke-Pester -Path .\Tests\Private\APIKeys\Get-AuvikAPIKey.Tests.ps1
+    Default value: Celerium.Auvik
 
-        Runs a pester test and outputs simple results
+.PARAMETER Version
+    The version of the local module to import
 
-    .EXAMPLE
-        Invoke-Pester -Path .\Tests\Private\APIKeys\Get-AuvikAPIKey.Tests.ps1 -Output Detailed
+.PARAMETER BuildTarget
+    Which version of the module to run tests against
 
-        Runs a pester test and outputs detailed results
+    Allowed values:
+        'built', 'notBuilt'
 
-    .INPUTS
-        N\A
+.EXAMPLE
+    Invoke-Pester -Path .\Get-AuvikAPIKey.Tests.ps1
 
-    .OUTPUTS
-        N\A
+.INPUTS
+    N/A
 
-    .NOTES
-        N\A
+.OUTPUTS
+    N/A
 
-
-    .LINK
-        https://celerium.org
+.LINK
+    https://celerium.org
 
 #>
 
@@ -46,7 +46,7 @@
                                         Code
 ############################################################################################>
 #Requires -Version 5.1
-#Requires -Modules @{ ModuleName='Pester'; ModuleVersion='5.5.0' }
+#Requires -Modules @{ ModuleName='Pester'; ModuleVersion='6.0.0' }
 
 #Region     [ Parameters ]
 
@@ -55,115 +55,106 @@
 param (
     [Parameter(Mandatory = $false)]
     [ValidateNotNullOrEmpty()]
-    [String]$moduleName = 'Celerium.Auvik',
+    [string]$ModuleName = 'Celerium.Auvik',
 
-    [Parameter(Mandatory=$true)]
+    [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
-    [String]$version,
+    [string]$Version,
 
-    [Parameter(Mandatory=$true)]
-    [ValidateSet('built','notBuilt')]
-    [string]$buildTarget
+    [Parameter(Mandatory = $true)]
+    [ValidateSet('built', 'notBuilt')]
+    [string]$BuildTarget
 )
 
 #EndRegion  [ Parameters ]
 
 #Region     [ Prerequisites ]
 
-#Available inside It but NOT Describe or Context
+    BeforeDiscovery {
+
+        $PesterTestName = (Get-Item -Path $PSCommandPath).Name
+
+    }
+
     BeforeAll {
 
-        if ($IsWindows -or $PSEdition -eq 'Desktop') {
-            $rootPath = "$( $PSCommandPath.Substring(0, $PSCommandPath.IndexOf('\tests', [System.StringComparison]::OrdinalIgnoreCase)) )"
-        }
-        else{
-            $rootPath = "$( $PSCommandPath.Substring(0, $PSCommandPath.IndexOf('/tests', [System.StringComparison]::OrdinalIgnoreCase)) )"
-        }
+        $TestsPath = $PSScriptRoot
+        while ($TestsPath -and -not (Test-Path -Path (Join-Path -Path $TestsPath -ChildPath 'TestHelper.ps1'))) { $TestsPath = Split-Path -Path $TestsPath -Parent }
+        . (Join-Path -Path $TestsPath -ChildPath 'TestHelper.ps1')
 
-        switch ($buildTarget) {
-            'built'     { $modulePath = Join-Path -Path $rootPath -ChildPath "\build\$moduleName\$version" }
-            'notBuilt'  { $modulePath = Join-Path -Path $rootPath -ChildPath "$moduleName" }
-        }
-
-        if (Get-Module -Name $moduleName) {
-            Remove-Module -Name $moduleName -Force
-        }
-
-        $modulePsd1 = Join-Path -Path $modulePath -ChildPath "$moduleName.psd1"
-
-        Import-Module -Name $modulePsd1 -ErrorAction Stop -ErrorVariable moduleError *> $null
-
-        if ($moduleError) {
-            $moduleError
-            exit 1
-        }
+        Import-TestModule -ModuleName $ModuleName -Version $Version -BuildTarget $BuildTarget
+        Add-TestHttpGuard -MockModule (Get-TestMockModuleName -CommandName 'Invoke-AuvikRequest')
 
     }
 
-    AfterAll{
-
-        Remove-AuvikAPIKey -WarningAction SilentlyContinue
-
-        if (Get-Module -Name $moduleName) {
-            Remove-Module -Name $moduleName -Force
-        }
-
-    }
-
-#Available in Describe and Context but NOT It
-#Can be used in [ It ] with [ -TestCases @{ VariableName = $VariableName } ]
-    BeforeDiscovery{
-
-        $pester_TestName = (Get-Item -Path $PSCommandPath).Name
-        $commandName = $pester_TestName -replace '.Tests.ps1',''
-
+    AfterAll {
+        Remove-TestModule -ModuleName $ModuleName
     }
 
 #EndRegion  [ Prerequisites ]
 
-Describe "Testing [ $commandName ] function with [ $pester_TestName ]" -Tag @('APIKeys') {
+Describe "Testing the [ $BuildTarget ] version of [ $ModuleName ] with [ $PesterTestName ]" {
 
-    Context "[ $commandName ] testing function" {
+    BeforeEach {
+        Reset-TestModuleState
+    }
 
-        It "When both parameters [ -Username ] & [ -ApiKey ] are called they should not return empty" {
-            Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
-            Get-AuvikAPIKey | Should -Not -BeNullOrEmpty
+    Context "[ Get-AuvikAPIKey ] when the API key is set" {
+
+        BeforeEach {
+            Add-AuvikAPIKey -Username 'user@example.com' -ApiKey 'fake-api-key'
         }
 
-        It "Pipeline  - [ -Username ] should return a string" {
-            "AuvikKey" | Add-AuvikAPIKey -Username 'Celerium@Celerium.org'
-            (Get-AuvikAPIKey).UserName | Should -BeOfType String
+        It "Returns the username & the API key as a SecureString" {
+            $Result = Get-AuvikAPIKey
+
+            $Result.UserName | Should -Be 'user@example.com'
+            $Result.ApiKey | Should -BeOfType [securestring]
         }
 
-        It "Pipeline  - [ -ApiKey ] should return a secure string" {
-            "AuvikKey" | Add-AuvikAPIKey -Username 'Celerium@Celerium.org'
-            (Get-AuvikAPIKey).APIKey | Should -BeOfType SecureString
+        It "Does not expose the API key as plain text by default" {
+            $Result = Get-AuvikAPIKey
+            ($Result | Out-String) | Should -Not -Match 'fake-api-key'
+            ($Result | ConvertTo-Json -Depth 3 -WarningAction SilentlyContinue) | Should -Not -Match 'fake-api-key'
         }
 
-        It "Parameter - [ -Username ] should return a string" {
-            Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
-            (Get-AuvikAPIKey).UserName | Should -BeOfType String
+        It "Returns the API key as plain text with -AsPlainText" {
+            $Result = Get-AuvikAPIKey -AsPlainText
+
+            $Result.UserName | Should -Be 'user@example.com'
+            $Result.ApiKey | Should -BeOfType [string]
+            $Result.ApiKey | Should -BeExactly 'fake-api-key'
         }
 
-        It "Parameter - [ -ApiKey ] should return a secure string" {
-            Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
-            (Get-AuvikAPIKey).APIKey | Should -BeOfType SecureString
+        It "Does not warn" {
+            $null = Get-AuvikAPIKey -WarningVariable ApiKeyWarning -WarningAction SilentlyContinue
+            $ApiKeyWarning | Should -BeNullOrEmpty
         }
 
-        It "Using [ -AsPlainText ] should return [ -ApiKey ] as a string" {
-            Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey "AuvikKey"
-            (Get-AuvikAPIKey -AsPlainText).APIKey | Should -BeOfType String
+        It "Returns the key that was added last" {
+            Add-AuvikAPIKey -Username 'other@example.com' -ApiKey 'other-key'
+
+            $Result = Get-AuvikAPIKey -AsPlainText
+            $Result.UserName | Should -Be 'other@example.com'
+            $Result.ApiKey | Should -Be 'other-key'
         }
 
-        It "Using [ -AsPlainText ] should return the API key entered" {
-            Add-AuvikApiKey -Username 'Celerium@Celerium.org' -ApiKey '12345'
-            (Get-AuvikApiKey -AsPlainText).ApiKey | Should -Be '12345'
+    }
+
+    Context "[ Get-AuvikAPIKey ] when the API key is not set" {
+
+        It "Warns & returns nothing" {
+            $Result = Get-AuvikAPIKey -WarningVariable ApiKeyWarning -WarningAction SilentlyContinue
+
+            $Result | Should -BeNullOrEmpty
+            "$ApiKeyWarning" | Should -Match 'key is not set'
         }
 
-        It "If [ -ApiKey ] is empty it should throw a warning" {
-            Remove-AuvikAPIKey
-            Get-AuvikAPIKey -WarningAction SilentlyContinue -WarningVariable APIKeyWarning
-            [bool]$APIKeyWarning | Should -BeTrue
+        It "Warns & returns nothing with -AsPlainText" {
+            $Result = Get-AuvikAPIKey -AsPlainText -WarningVariable ApiKeyWarning -WarningAction SilentlyContinue
+
+            $Result | Should -BeNullOrEmpty
+            "$ApiKeyWarning" | Should -Match 'key is not set'
         }
 
     }
