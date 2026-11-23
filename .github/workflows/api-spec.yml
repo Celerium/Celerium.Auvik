@@ -1,0 +1,67 @@
+name: API spec
+
+# Compares docs/Auvik-v1.json with the online Auvik v1 OpenAPI spec every week
+# When the specs are different the latest spec is downloaded, the public functions are regenerated,
+# & a pull request is opened so that the changes can be reviewed & tested
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+
+  compare:
+    name: Compare the local spec to the online spec
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Compare the specs
+        id: compare
+        run: |
+          $Report = ./build/Compare-AuvikSpec.ps1 -WarningAction SilentlyContinue
+          $Report | Format-List | Out-String | Write-Output
+
+          "differs=$($Report.Differs.ToString().ToLowerInvariant())" | Add-Content -Path $env:GITHUB_OUTPUT
+
+          @(
+              '## Auvik API spec comparison'
+              ''
+              "- Local version: $($Report.LocalVersion) ($($Report.LocalEndpointCount) endpoints)"
+              "- Online version: $($Report.OnlineVersion) ($($Report.OnlineEndpointCount) endpoints)"
+              "- Endpoints added: $($Report.EndpointsAdded -join ', ')"
+              "- Endpoints removed: $($Report.EndpointsRemoved -join ', ')"
+              "- Endpoints changed: $($Report.EndpointsChanged -join ', ')"
+              "- Changed values: $($Report.ChangeCount)"
+          ) | Add-Content -Path $env:GITHUB_STEP_SUMMARY
+
+      - name: Download the latest spec & regenerate the public functions
+        if: steps.compare.outputs.differs == 'true'
+        run: |
+          ./build/Get-AuvikSpec.ps1
+          ./build/New-PublicFunctions.ps1
+
+      - name: Create a pull request
+        if: steps.compare.outputs.differs == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: auvik-api-spec-update
+          commit-message: 'feat: update the module to the latest Auvik v1 API spec'
+          title: 'Update the module to the latest Auvik v1 API spec'
+          body: |
+            The online Auvik v1 OpenAPI spec is different than `docs/Auvik-v1.json`.
+
+            This pull request was created by the `API spec` workflow, it contains the latest spec & the regenerated public functions, manifest, & `docs/endpoints.csv`.
+            Review the changes & the test results before merging.
+          labels: api-spec

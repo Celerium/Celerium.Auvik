@@ -9,6 +9,9 @@ function Add-AuvikAPIKey {
 
         The Auvik API username & API keys are generated via the Auvik portal at Admin > Integrations
 
+        The Auvik API uses basic authentication where the username is the email address of the
+        Auvik user & the password is the API key
+
     .PARAMETER Username
         Defines your API username
 
@@ -25,17 +28,19 @@ function Add-AuvikAPIKey {
         Add-AuvikAPIKey -Username 'Celerium@Celerium.org'
 
         The Auvik API will use the string entered into the [ -Username ] parameter as the
-        username & will then prompt to enter in the secret key
+        username & will then prompt to enter in the API key
 
     .EXAMPLE
-        'Celerium@Celerium.org' | Add-AuvikAPIKey
+        Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey '12345'
 
-        The Auvik API will use the string entered as the secret key & will prompt to enter in the public key
+        The Auvik API will use the strings entered into the [ -Username ] & [ -ApiKey ] parameters
+        to authenticate
 
     .EXAMPLE
-        Add-AuvikAPIKey -EncryptedStandardAPIKeyFilePath 'C:\path\to\encrypted\key.txt' -EncryptedStandardAESKeyPath 'C:\path\to\decipher\key.txt'
+        Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKeySecureString (Read-Host -AsSecureString)
 
-        Decrypts the AES API key and stores it in the global variable
+        The Auvik API will use the string entered into the [ -Username ] parameter as the
+        username & the SecureString as the API key
 
     .NOTES
         N\A
@@ -44,19 +49,18 @@ function Add-AuvikAPIKey {
         https://celerium.github.io/Celerium.Auvik/site/Internal/Add-AuvikAPIKey.html
 #>
 
-    [cmdletbinding(DefaultParameterSetName = 'AsPlainText')]
-    [alias('Set-AuvikAPIKey')]
-    Param (
+    [CmdletBinding(DefaultParameterSetName = 'AsPlainText')]
+    param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'AsPlainText')]
-        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'SecureString')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'SecureString')]
         [ValidateNotNullOrEmpty()]
         [string]$Username,
 
-        [Parameter(Mandatory = $false, ValueFromPipeline = $true, ParameterSetName = 'AsPlainText')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'AsPlainText')]
         [ValidateNotNullOrEmpty()]
         [string]$ApiKey,
 
-        [Parameter(Mandatory = $false, ValueFromPipeline = $true, ParameterSetName = 'SecureString')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'SecureString')]
         [ValidateNotNullOrEmpty()]
         [securestring]$ApiKeySecureString
     )
@@ -65,31 +69,32 @@ function Add-AuvikAPIKey {
 
     process {
 
-        Set-Variable -Name "AuvikModuleUserName" -Value $Username -Option ReadOnly -Scope global -Force
+        Set-Variable -Name 'AuvikModuleUserName' -Value $Username -Option ReadOnly -Scope Global -Force
 
         switch ($PSCmdlet.ParameterSetName) {
 
             'AsPlainText' {
 
                 if ($ApiKey) {
-                    $SecureString = ConvertTo-SecureString $ApiKey -AsPlainText -Force
-
-                    Set-Variable -Name "AuvikModuleApiKey" -Value $SecureString -Option ReadOnly -Scope global -Force
+                    $SecureString = ConvertTo-SecureString -String $ApiKey -AsPlainText -Force
                 }
                 else {
-                    Write-Output "Please enter your API key:"
+                    Write-Output 'Please enter your API key:'
                     $SecureString = Read-Host -AsSecureString
-
-                    Set-Variable -Name "AuvikModuleApiKey" -Value $SecureString -Option ReadOnly -Scope global -Force
                 }
+
+                Set-Variable -Name 'AuvikModuleApiKey' -Value $SecureString -Option ReadOnly -Scope Global -Force
 
             }
 
-            'SecureString' { Set-Variable -Name "AuvikModuleApiKey" -Value $ApiKeySecureString -Option ReadOnly -Scope global -Force }
+            'SecureString' { Set-Variable -Name 'AuvikModuleApiKey' -Value $ApiKeySecureString -Option ReadOnly -Scope Global -Force }
 
         }
 
     }
 
     end {}
+
 }
+
+Set-Alias -Name 'Set-AuvikAPIKey' -Value 'Add-AuvikAPIKey'

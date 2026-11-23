@@ -2,7 +2,7 @@
 .NOTES
     Copyright 1990-2024 Celerium
 
-    NAME: Invoke-PesterTests.ps1
+    NAME: Invoke-pesterTests.ps1
     Type: PowerShell
 
         AUTHOR:  David Schulte
@@ -19,7 +19,7 @@
 .DESCRIPTION
     Invoke Pester tests against all functions in a module
 
-.PARAMETER moduleName
+.PARAMETER ModuleName
     The name of the local module to import
 
     Default value: Celerium.Auvik
@@ -33,7 +33,14 @@
 .PARAMETER ExcludeTag
     Tags associated to test to skip
 
-.PARAMETER buildTarget
+    Default value: Live, Online
+
+    The 'Live' tests make real GET requests against an Auvik tenant and require the
+    AUVIK_USERNAME, AUVIK_API_KEY, & AUVIK_SITE_NAME environment variables. The requests are
+    limited to the tenant (site) with the display name defined by AUVIK_SITE_NAME
+    The 'Online' tests require internet access (the GitHub pages documentation & the online Auvik OpenAPI spec)
+
+.PARAMETER BuildTarget
     Which version of the module to run tests against
 
     Allowed values:
@@ -49,7 +56,7 @@
 
 
 .EXAMPLE
-    .\Invoke-PesterTests -moduleName Celerium.Auvik -Version 1.2.3
+    .\Invoke-pesterTests -ModuleName Celerium.Auvik -Version 1.2.3
 
     Runs various pester tests against all functions in the module
     and outputs the results to the console.
@@ -57,10 +64,10 @@
     An XML of the tests is also output to the build directory
 
 .INPUTS
-    N\A
+    N/A
 
 .OUTPUTS
-    N\A
+    N/A
 
 .LINK
     https://celerium.org
@@ -71,7 +78,6 @@
                                         Code
 ############################################################################################>
 #Requires -Version 5.1
-#Requires -Modules @{ ModuleName='Pester'; ModuleVersion='5.5.0' }
 
 #Region     [ Parameters ]
 
@@ -79,25 +85,25 @@
 param (
     [Parameter(Mandatory = $false)]
     [ValidateNotNullOrEmpty()]
-    [string]$moduleName = 'Celerium.Auvik',
+    [string]$ModuleName = 'Celerium.Auvik',
 
     [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
-    [string]$version,
+    [string]$Version,
 
     [Parameter(Mandatory=$false)]
     [string[]]$IncludeTag = @(),
 
     [Parameter(Mandatory=$false)]
-    [string[]]$ExcludeTag = 'PLACEHOLDER',
+    [string[]]$ExcludeTag = @('Live', 'Online'),
 
     [Parameter(Mandatory=$false)]
     [ValidateSet('built','notBuilt')]
-    [string]$buildTarget = 'notBuilt',
+    [string]$BuildTarget = 'notBuilt',
 
     [Parameter(Mandatory=$false)]
     [ValidateSet('Detailed', 'Diagnostic', 'Minimal', 'None', 'Normal')]
-    [string]$output = 'Normal'
+    [string]$Output = 'Normal'
 )
 
 #EndRegion  [ Parameters ]
@@ -106,21 +112,12 @@ param (
 
 try {
 
-    if ($IsWindows -or $PSEdition -eq 'Desktop') {
-        $rootPath = "$( $PSCommandPath.Substring(0, $PSCommandPath.IndexOf('\build', [System.StringComparison]::OrdinalIgnoreCase)) )"
-    }
-    else{
-        $rootPath = "$( $PSCommandPath.Substring(0, $PSCommandPath.IndexOf('/build', [System.StringComparison]::OrdinalIgnoreCase)) )"
-    }
+    # Not a #Requires statement because that prevents the exit code from reaching the caller when run with -File
+    Import-Module -Name Pester -MinimumVersion 6.0.0 -ErrorAction Stop
 
-    switch ($buildTarget) {
-        'built'     { $modulePath = Join-Path -Path $rootPath -ChildPath "\build\$moduleName\$version" }
-        'notBuilt'  { $modulePath = Join-Path -Path $rootPath -ChildPath "$moduleName" }
-    }
+    $RootPath = Split-Path -Path $PSScriptRoot -Parent
 
-    $testPath = Join-Path -Path $rootPath -ChildPath "tests"
-
-    #$withoutAuth = $( [bool]$Username -eq $false -or [bool]$ApiKey -eq $false )
+    $TestPath = Join-Path -Path $RootPath -ChildPath "tests"
 
 }
 catch {
@@ -132,17 +129,17 @@ catch {
 
 #Region     [ Pester Configuration ]
 
-$pesterContainer_params = @{
-    'moduleName'        = $moduleName;
-    'version'           = $Version;
-    'buildTarget'       = $buildTarget
+$PesterContainerParams = @{
+    'ModuleName'        = $ModuleName;
+    'Version'           = $Version;
+    'BuildTarget'       = $BuildTarget
 }
-    $pester_Container = New-PesterContainer -Path $testPath -Data $pesterContainer_params
+    $PesterContainer = New-PesterContainer -Path $TestPath -Data $PesterContainerParams
 
-$pester_Options = @{
+$PesterOptions = @{
 
     Run = @{
-        Container = $pester_Container
+        Container = $PesterContainer
         PassThru = $true
     }
 
@@ -154,7 +151,7 @@ $pester_Options = @{
     TestResult = @{
         Enabled = $true
         OutputFormat = 'NUnitXml'
-        OutputPath = Join-Path -Path . -ChildPath "build\$($moduleName)_$($buildTarget)_Results.xml"
+        OutputPath = Join-Path -Path (Join-Path -Path $RootPath -ChildPath 'build') -ChildPath "$($ModuleName)_$($BuildTarget)_Results.xml"
         OutputEncoding = 'UTF8'
     }
 
@@ -163,19 +160,24 @@ $pester_Options = @{
     }
 
     Output = @{
-        Verbosity = $output
+        Verbosity = $Output
     }
 
 }
 
-    $pester_Configuration = New-PesterConfiguration -Hashtable $pester_Options
+    $PesterConfiguration = New-PesterConfiguration -Hashtable $PesterOptions
 
 #EndRegion  [ Pester Configuration ]
 
 #Region     [ Pester Invoke ]
 
-$pester_Results = Invoke-Pester -Configuration $pester_Configuration
-    Set-Variable -Name Invoke_PesterResults -Value $pester_Results -Scope Global -Force
+$PesterResults = Invoke-Pester -Configuration $PesterConfiguration
+    Set-Variable -Name Invoke_PesterResults -Value $PesterResults -Scope Global -Force
+
+# Fail the calling process (CI) when any test or container fails
+if ($PesterResults.FailedCount -gt 0 -or $PesterResults.FailedContainersCount -gt 0 -or $PesterResults.FailedBlocksCount -gt 0) {
+    exit 1
+}
 
 #EndRegion  [ Pester Invoke ]
 

@@ -1,11 +1,11 @@
 blank_issues_enabled: true
 contact_links:
-  - name: Project Documentation
+  - name: Project documentation
     url: https://celerium.github.io/Celerium.Auvik/
-    about: Read through the generated documentation
-  - name: Vendor Documentation
+    about: Browse the project's guides and reference documentation
+  - name: Vendor documentation
     url: https://auvikapi.us1.my.auvik.com/docs
-    about: Read through the vendors documentation
-  - name: Celerium.org
+    about: Browse the vendor's API documentation
+  - name: Website
     url: https://celerium.org
-    about: Website were I publish more information related to this project.
+    about: Check my website

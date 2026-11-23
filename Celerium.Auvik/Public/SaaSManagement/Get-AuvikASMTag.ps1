@@ -1,127 +1,139 @@
 function Get-AuvikASMTag {
-    <#
-        .SYNOPSIS
-            Get Auvik ASM tag information
+<#
+    .SYNOPSIS
+        Read Multiple ASM Tags' Info
 
-        .DESCRIPTION
-            The Get-AuvikASMTag cmdlet gets multiple ASM applications' info
-            to retrieve the information related to the SaaS applications discovered
-            within an ASM client deployment
+    .DESCRIPTION
+        The Get-AuvikASMTag cmdlet invokes the GET method of the /asm/tag/info endpoint (Read Multiple ASM Tags' Info)
 
-        .PARAMETER FilterClientId
-            Filter by client ID
+        Use the Read Multiple ASM Tags' Info API to retrieve information about tags configured within an ASM client.
 
-        .PARAMETER FilterApplicationId
-            Filter by application ID
+    .PARAMETER FilterClientId
+        Filter by client ID.
 
-        .PARAMETER PageFirst
-            For paginated responses, the first N elements will be returned
-            Used in combination with page[after]
+    .PARAMETER FilterApplicationId
+        Filter by application ID.
 
-            Default Value: 100
+    .PARAMETER PageFirst
+        For paginated responses, the first N elements will be returned. Used in combination with page[after].
 
-        .PARAMETER PageAfter
-            Cursor after which elements will be returned as a page
-            The page size is provided by page[first]
+        Default value: 100
 
-        .PARAMETER PageLast
-            For paginated responses, the last N services will be returned
-            Used in combination with page[before]
+    .PARAMETER PageAfter
+        Cursor after which elements will be returned as a page. The page size is provided by page[first].
 
-            Default Value: 100
+    .PARAMETER PageLast
+        For paginated responses, the last N services will be returned. Used in combination with page[before].
 
-        .PARAMETER PageBefore
-            Cursor before which elements will be returned as a page
-            The page size is provided by page[last]
+        Default value: 100
 
-        .PARAMETER AllResults
-            Returns all items from an endpoint
+    .PARAMETER PageBefore
+        Cursor before which elements will be returned as a page. The page size is provided by page[last].
 
-            Highly recommended to only use with filters to reduce API errors\timeouts
+    .PARAMETER AllResults
+        Returns all items from the endpoint by following the pagination links
 
-        .EXAMPLE
-            Get-AuvikASMTag
+        When using this parameter there is no need to use the PageFirst, PageAfter, PageLast, or PageBefore parameters
 
-            Get Auvik ASM tag information
+        Highly recommended to only use with filters to reduce API errors & timeouts
 
-        .EXAMPLE
-            Get-AuvikASMTag -PageFirst 1000 -AllResults
+    .EXAMPLE
+        Get-AuvikASMTag -FilterClientId 'Example'
 
-            Get Auvik ASM tag information for all devices found by Auvik
+        Returns the result of the /asm/tag/info endpoint
 
-        .NOTES
-        N\A
+    .EXAMPLE
+        Get-AuvikASMTag -FilterClientId 'Example' -PageFirst 10
 
-        .LINK
-            https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html
-    #>
+        Returns the result of the /asm/tag/info endpoint limited to the defined number of items
 
-        [CmdletBinding(DefaultParameterSetName = 'Index')]
-        Param (
-            [Parameter( Mandatory = $false, ValueFromPipeline = $true)]
-            [ValidateNotNullOrEmpty()]
-            [string]$FilterClientId,
+    .EXAMPLE
+        Get-AuvikASMTag -FilterClientId 'Example' -AllResults
 
-            [Parameter( Mandatory = $false, ValueFromPipeline = $true)]
-            [ValidateNotNullOrEmpty()]
-            [string]$FilterApplicationId,
+        Returns every item from the /asm/tag/info endpoint by following the pagination links
 
-            [Parameter( Mandatory = $false)]
-            [ValidateRange(1, [int64]::MaxValue)]
-            [int64]$PageFirst,
+    .INPUTS
+        None
 
-            [Parameter( Mandatory = $false)]
-            [ValidateNotNullOrEmpty()]
-            [string]$PageAfter,
+    .OUTPUTS
+        System.Management.Automation.PSCustomObject
 
-            [Parameter( Mandatory = $false)]
-            [ValidateRange(1, [int64]::MaxValue)]
-            [int64]$PageLast,
+    .NOTES
+        Endpoint : GET /asm/tag/info
+        The Auvik API user needs the role permissions that are required by the endpoint
 
-            [Parameter( Mandatory = $false)]
-            [ValidateNotNullOrEmpty()]
-            [string]$PageBefore,
+    .LINK
+        https://celerium.github.io/Celerium.Auvik/site/SaaSManagement/Get-AuvikASMTag.html
+#>
 
-            [Parameter( Mandatory = $false)]
-            [switch]$AllResults
-        )
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$FilterClientId,
 
-        begin {
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string]$FilterApplicationId,
 
-            $FunctionName       = $MyInvocation.InvocationName
-            $ParameterName      = $functionName + '_Parameters'      -replace '-','_'
-            $QueryParameterName = $functionName + '_ParametersQuery' -replace '-','_'
+        [Parameter(Mandatory = $false)]
+        [ValidateRange(1, [int64]::MaxValue)]
+        [int64]$PageFirst,
 
-        }
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string]$PageAfter,
 
-        process {
+        [Parameter(Mandatory = $false)]
+        [ValidateRange(1, [int64]::MaxValue)]
+        [int64]$PageLast,
 
-            Write-Verbose "[ $($MyInvocation.MyCommand.Name) ] - Running the [ $($PSCmdlet.ParameterSetName) ] ParameterSet"
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string]$PageBefore,
 
-            $ResourceUri = "/asm/tag/info"
+        [Parameter(Mandatory = $false)]
+        [switch]$AllResults
+    )
 
-            $UriParameters = @{}
+    begin {
 
-            #Region     [ Parameter Translation ]
-
-            if ($PSCmdlet.ParameterSetName -eq 'Index') {
-                if ($FilterClientId)        { $UriParameters['filter[clientId]']        = $FilterClientId }
-                if ($FilterApplicationId)   { $UriParameters['filter[applicationId]']   = $FilterApplicationId }
-                if ($PageFirst)             { $UriParameters['page[first]']             = $PageFirst }
-                if ($PageAfter)             { $UriParameters['page[after]']             = $PageAfter }
-                if ($PageLast)              { $UriParameters['page[last]']              = $PageLast }
-                if ($PageBefore)            { $UriParameters['page[before]']            = $PageBefore }
-            }
-
-            #EndRegion  [ Parameter Translation ]
-
-            Set-Variable -Name $ParameterName -Value $PSBoundParameters -Scope Global -Force -Confirm:$false
-            Set-Variable -Name $QueryParameterName -Value $UriParameters -Scope Global -Force -Confirm:$false
-
-            return Invoke-AuvikRequest -Method GET -ResourceUri $ResourceUri -UriFilter $UriParameters -AllResults:$AllResults
-
-        }
-
-        end {}
+        $FunctionName       = $MyInvocation.InvocationName
+        $ParameterName      = ($FunctionName -replace '-', '') + 'Parameters'
+        $QueryParameterName = $ParameterName + 'Query'
 
     }
+
+    process {
+
+        Write-Verbose "[ $($MyInvocation.MyCommand.Name) ] - Running the [ $($PSCmdlet.ParameterSetName) ] ParameterSet"
+
+        $ResourceUri = '/asm/tag/info'
+        $NameMap = @{
+            FilterClientId      = 'filter[clientId]'
+            FilterApplicationId = 'filter[applicationId]'
+            PageFirst           = 'page[first]'
+            PageAfter           = 'page[after]'
+            PageLast            = 'page[last]'
+            PageBefore          = 'page[before]'
+        }
+
+        $UriParameters = Get-AuvikUriParameter -BoundParameter $PSBoundParameters -NameMap $NameMap
+
+        $InvokeParams = @{
+            Method      = 'GET'
+            ResourceUri = $ResourceUri
+            UriFilter   = $UriParameters
+            AllResults  = $AllResults
+        }
+
+        Set-Variable -Name $ParameterName -Value $PSBoundParameters -Scope Global -Force -Confirm:$false -WhatIf:$false
+        Set-Variable -Name $QueryParameterName -Value $UriParameters -Scope Global -Force -Confirm:$false -WhatIf:$false
+
+        return Invoke-AuvikRequest @InvokeParams
+
+    }
+
+    end {}
+
+}

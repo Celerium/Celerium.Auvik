@@ -1,121 +1,173 @@
 ---
-external help file: Celerium.Auvik-help.xml
+document type: cmdlet
+external help file: Celerium.Auvik-Help.xml
 grand_parent: Internal
+HelpUri: https://celerium.github.io/Celerium.Auvik/site/Internal/Add-AuvikAPIKey.html
+Locale: en-US
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/Internal/Add-AuvikAPIKey.html
-parent: POST
-schema: 2.0.0
+parent: PUT
+PlatyPS schema version: 2024-05-01
 title: Add-AuvikAPIKey
 ---
 
 # Add-AuvikAPIKey
 
 ## SYNOPSIS
+
 Sets the API username and API key used to authenticate API calls
 
 ## SYNTAX
 
 ### AsPlainText (Default)
-```powershell
-Add-AuvikAPIKey -Username <String> [-ApiKey <String>] [<CommonParameters>]
+
+```
+Add-AuvikAPIKey -Username <string> [-ApiKey <string>]
 ```
 
 ### SecureString
-```powershell
-Add-AuvikAPIKey -Username <String> [-ApiKeySecureString <SecureString>] [<CommonParameters>]
+
+```
+Add-AuvikAPIKey -Username <string> [-ApiKeySecureString <securestring>]
 ```
 
+## ALIASES
+
+This cmdlet has the following aliases,
+  - Set-AuvikAPIKey
+
 ## DESCRIPTION
+
 The Add-AuvikAPIKey cmdlet sets the API username and API key used to
 authenticate all API calls made to Auvik
 
-The Auvik API username & API keys are generated via the Auvik portal at Admin \> Integrations
+The Auvik API username & API keys are generated via the Auvik portal at Admin > Integrations
+
+The Auvik API uses basic authentication where the username is the email address of the
+Auvik user & the password is the API key
 
 ## EXAMPLES
 
 ### EXAMPLE 1
+
 ```powershell
 Add-AuvikAPIKey -Username 'Celerium@Celerium.org'
 ```
 
-The Auvik API will use the string entered into the \[ -Username \] parameter as the
-username & will then prompt to enter in the secret key
+The Auvik API will use the string entered into the [ -Username ] parameter as the
+username & will then prompt to enter in the API key
 
 ### EXAMPLE 2
-```
-'Celerium@Celerium.org' | Add-AuvikAPIKey
+
+```powershell
+Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKey '12345'
 ```
 
-The Auvik API will use the string entered as the secret key & will prompt to enter in the public key
+The Auvik API will use the strings entered into the [ -Username ] & [ -ApiKey ] parameters
+to authenticate
 
 ### EXAMPLE 3
+
 ```powershell
-Add-AuvikAPIKey -EncryptedStandardAPIKeyFilePath 'C:\path\to\encrypted\key.txt' -EncryptedStandardAESKeyPath 'C:\path\to\decipher\key.txt'
+Add-AuvikAPIKey -Username 'Celerium@Celerium.org' -ApiKeySecureString (Read-Host -AsSecureString)
 ```
 
-Decrypts the AES API key and stores it in the global variable
+The Auvik API will use the string entered into the [ -Username ] parameter as the
+username & the SecureString as the API key
 
 ## PARAMETERS
 
-### -Username
-Defines your API username
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
 ### -ApiKey
+
 Plain text API key
 
 If not defined the cmdlet will prompt you to enter the API key which
 will be stored as a SecureString
 
 ```yaml
-Type: String
-Parameter Sets: AsPlainText
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: AsPlainText
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -ApiKeySecureString
+
 Input a SecureString object containing the API key
 
 ```yaml
-Type: SecureString
-Parameter Sets: SecureString
-Aliases:
+Type: System.Security.SecureString
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: SecureString
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
 
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
+### -Username
+
+Defines your API username
+
+```yaml
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: SecureString
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+- Name: AsPlainText
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: true
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
+-ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
+
+### System.String
+
+{{ Fill in the Description }}
 
 ## OUTPUTS
 
 ## NOTES
+
 N\A
+
 
 ## RELATED LINKS
 
-[https://celerium.github.io/Celerium.Auvik/site/Internal/Add-AuvikAPIKey.html](https://celerium.github.io/Celerium.Auvik/site/Internal/Add-AuvikAPIKey.html)
-
+- [](https://celerium.github.io/Celerium.Auvik/site/Internal/Add-AuvikAPIKey.html)

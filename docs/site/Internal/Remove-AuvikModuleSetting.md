@@ -1,25 +1,36 @@
 ---
-external help file: Celerium.Auvik-help.xml
+document type: cmdlet
+external help file: Celerium.Auvik-Help.xml
 grand_parent: Internal
+HelpUri: https://celerium.github.io/Celerium.Auvik/site/Internal/Remove-AuvikModuleSetting.html
+Locale: en-US
 Module Name: Celerium.Auvik
-online version: https://celerium.github.io/Celerium.Auvik/site/Internal/Remove-AuvikModuleSetting.html
 parent: DELETE
-schema: 2.0.0
+PlatyPS schema version: 2024-05-01
 title: Remove-AuvikModuleSetting
 ---
 
 # Remove-AuvikModuleSetting
 
 ## SYNOPSIS
+
 Removes the stored Auvik configuration folder
 
 ## SYNTAX
 
-```powershell
-Remove-AuvikModuleSetting [-AuvikConfigPath <String>] [-AndVariables] [-WhatIf] [-Confirm] [<CommonParameters>]
+### Destroy (Default)
+
+```
+Remove-AuvikModuleSetting [-AuvikConfigPath <string>] [-AndVariables] [-WhatIf] [-Confirm]
 ```
 
+## ALIASES
+
+This cmdlet has the following aliases,
+  - None
+
 ## DESCRIPTION
+
 The Remove-AuvikModuleSetting cmdlet removes the Auvik folder and its files
 This cmdlet also has the option to remove sensitive Auvik variables as well
 
@@ -29,6 +40,7 @@ By default configuration files are stored in the following location and will be 
 ## EXAMPLES
 
 ### EXAMPLE 1
+
 ```powershell
 Remove-AuvikModuleSetting
 ```
@@ -39,6 +51,7 @@ The default location of the Auvik configuration folder is:
     $env:USERPROFILE\Celerium.Auvik
 
 ### EXAMPLE 2
+
 ```powershell
 Remove-AuvikModuleSetting -AuvikConfigPath C:\Celerium.Auvik -AndVariables
 ```
@@ -51,83 +64,113 @@ The location of the Auvik configuration folder in this example is:
 
 ## PARAMETERS
 
+### -AndVariables
+
+Define if sensitive Auvik variables should be removed as well
+
+By default the variables are not removed
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: Destroy
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
 ### -AuvikConfigPath
+
 Define the location of the Auvik configuration folder
 
 By default the configuration folder is located at:
     $env:USERPROFILE\Celerium.Auvik
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: $(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) )
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AndVariables
-Define if sensitive Auvik variables should be removed as well
-
-By default the variables are not removed
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+Type: System.String
+DefaultValue: $(Join-Path -Path $home -ChildPath $(if ($IsWindows -or $PSEdition -eq 'Desktop') {"Celerium.Auvik"}else{".Celerium.Auvik"}) )
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: Destroy
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### -Confirm
+
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: ''
+SupportsWildcards: false
+Aliases:
+- cf
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
 
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+### -WhatIf
+
+Runs the command in a mode that only reports what would happen without performing the actions.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: ''
+SupportsWildcards: false
+Aliases:
+- wi
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutBuffer, -OutVariable, -PipelineVariable,
+-ProgressAction, -Verbose, -WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ## OUTPUTS
 
 ## NOTES
+
 N\A
+
 
 ## RELATED LINKS
 
-[https://celerium.github.io/Celerium.Auvik/site/Internal/Remove-AuvikModuleSetting.html](https://celerium.github.io/Celerium.Auvik/site/Internal/Remove-AuvikModuleSetting.html)
-
+- [](https://celerium.github.io/Celerium.Auvik/site/Internal/Remove-AuvikModuleSetting.html)

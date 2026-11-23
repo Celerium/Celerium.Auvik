@@ -1,6 +1,6 @@
 <#
 .NOTES
-    Copyright 1990-2024 Celerium
+    Copyright 1990-2027 Celerium
 
     NAME: Invoke-HelpContent.ps1
     Type: PowerShell
@@ -8,7 +8,7 @@
         AUTHOR:  David Schulte
         DATE:    2022-11-26
         EMAIL:   celerium@celerium.org
-        Updated: 2023-09-16
+        Updated: 2026-11-21
 
     TODO:
 
@@ -19,28 +19,29 @@
     The Invoke-HelpContent script calls the Update-HelpContent function to
     update module markdown help files
 
-.PARAMETER moduleName
+    The help files are created with the Microsoft.PowerShell.PlatyPS module
+
+.PARAMETER ModuleName
     The name of the module to update help docs for
 
-.PARAMETER githubPageUri
+.PARAMETER GithubPageUri
     The github project url to inject into help docs
 
 .EXAMPLE
     .\Invoke-HelpContent.ps1
-        -moduleName Celerium.Auvik
-        -helpDocsPath "C:\Celerium\Projects\Celerium.Auvik\docs"
-        -csvFilePath "C:\Celerium\Projects\Celerium.Auvik\docs\Endpoints.csv"
-        -githubPageUri "https://celerium.github.io/Celerium.Auvik"
 
-    Updates markdown docs and external help files
+    Updates the markdown docs (docs\site), the module page, & the external help (docs\en-US)
 
-    No progress information is sent to the console while the script is running.
+.EXAMPLE
+    .\Invoke-HelpContent.ps1 -Verbose
+
+    Updates the markdown docs & shows the progress
 
 .INPUTS
-    N\A
+    N/A
 
 .OUTPUTS
-    N\A
+    N/A
 
 .LINK
     https://celerium.org
@@ -51,7 +52,7 @@
                                         Code
 ############################################################################################>
 #Requires -Version 5.1
-#Requires -Modules @{ ModuleName="platyPS"; ModuleVersion="0.14.2" }
+#Requires -Modules @{ ModuleName="Microsoft.PowerShell.PlatyPS"; ModuleVersion="1.0.0" }
 
 #Region  [ Parameters ]
 
@@ -59,11 +60,11 @@
     param (
         [Parameter(Mandatory=$false)]
         [ValidateNotNullOrEmpty()]
-        [String]$moduleName = 'Celerium.Auvik',
+        [string]$ModuleName = 'Celerium.Auvik',
 
         [Parameter(Mandatory=$false)]
         [ValidateNotNullOrEmpty()]
-        [String]$githubPageUri = "https://celerium.github.io/Celerium.Auvik"
+        [string]$GithubPageUri = "https://celerium.github.io/Celerium.Auvik"
     )
 
 #EndRegion  [ Parameters ]
@@ -82,21 +83,16 @@ $StartDate = Get-Date
 
 try {
 
-    if ($IsWindows -or $PSEdition -eq 'Desktop') {
-        $rootPath = "$( $PSCommandPath.Substring(0, $PSCommandPath.IndexOf('\build', [System.StringComparison]::OrdinalIgnoreCase)) )"
-    }
-    else{
-        $rootPath = "$( $PSCommandPath.Substring(0, $PSCommandPath.IndexOf('/build', [System.StringComparison]::OrdinalIgnoreCase)) )"
-    }
+    $RootPath = Split-Path -Path $PSScriptRoot -Parent
 
-    Import-Module $( Join-Path -Path $rootPath -ChildPath 'build\Update-HelpContent.ps1' ) -Force -Verbose:$false
+    . (Join-Path -Path $PSScriptRoot -ChildPath 'Update-HelpContent.ps1')
 
     $Parameters = @{
-        moduleName      = $moduleName
-        helpDocsPath    = Join-Path -Path $rootPath -ChildPath 'docs'
-        csvFilePath     = Join-Path -Path $rootPath -ChildPath 'docs\Endpoints.csv'
-        githubPageUri   = $githubPageUri
-        verbose         = $true
+        ModuleName      = $ModuleName
+        HelpDocsPath    = Join-Path -Path $RootPath -ChildPath 'docs'
+        CsvFilePath     = Join-Path -Path (Join-Path -Path $RootPath -ChildPath 'docs') -ChildPath 'endpoints.csv'
+        GithubPageUri   = $GithubPageUri
+        Verbose         = $true
     }
 
     Update-HelpContent @Parameters
