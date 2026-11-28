@@ -494,7 +494,7 @@ $ApiVersion = "$($Spec.info.version)"
 if ($ApiVersion -ne 'v1') { throw "Only the Auvik v1 API is supported, the spec is version [ $ApiVersion ]" }
 
 # Private functions, they can not be reused as public function names
-$PrivateFiles       = @(Sort-Ordinal -Items @(Get-ChildItem -Path $PrivatePath -Filter '*.ps1' -Recurse) -Key { $_.FullName -replace '\\', '/' })
+$PrivateFiles       = @(Get-ChildItem -Path $PrivatePath -Filter '*.ps1' -Recurse | Sort-Object -Property { $_.FullName -replace '\\', '/' } -Culture ([cultureinfo]::InvariantCulture))
 $PrivateFunctions   = foreach ($File in $PrivateFiles) {
     $Ast = [System.Management.Automation.Language.Parser]::ParseFile($File.FullName, [ref]$null, [ref]$null)
     $Defined = $Ast.EndBlock.Statements | Where-Object { $_ -is [System.Management.Automation.Language.FunctionDefinitionAst] }
